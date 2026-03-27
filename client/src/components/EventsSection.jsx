@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import { fetchEvents } from '../services/api';
 
 const EventsSection = () => {
   const [activeCategory, setActiveCategory] = useState('All');
