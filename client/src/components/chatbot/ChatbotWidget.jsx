@@ -18,6 +18,7 @@ import clubImage from '../../assets/images/club.png';
 import facilitiesImage from '../../assets/images/facilities.png';
 import graduationImage from '../../assets/images/graduation.png';
 import libraryImage from '../../assets/images/library.png';
+import { useTheme } from '../../context/ThemeContext';
 import './ChatbotWidget.css';
 
 const INITIAL_MESSAGE = {
@@ -388,6 +389,8 @@ const ChatMessageChart = ({ chart }) => {
 
 const ChatbotWidget = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [input, setInput] = useState('');
@@ -499,9 +502,9 @@ const ChatbotWidget = () => {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed left-4 md:left-6 bottom-6 z-50 flex items-center gap-3 p-2 md:pr-6 rounded-full font-bold text-[13px] uppercase tracking-widest text-white bg-[#111111] border border-black/20 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.3)] transition-all hover:bg-black hover:scale-105 group"
+        className={`fixed left-4 md:left-6 bottom-6 z-50 flex items-center gap-3 p-2 md:pr-6 rounded-full font-bold text-[13px] uppercase tracking-widest border shadow-[0_12px_40px_-10px_rgba(0,0,0,0.3)] transition-all hover:scale-105 group ${isDark ? 'text-white bg-[#111827] border-white/15 hover:bg-[#0f172a]' : 'text-white bg-[#111111] border-black/20 hover:bg-black'}`}
       >
-        <div className="flex items-center justify-center w-10 h-10 bg-white text-[#111111] rounded-full shadow-md group-hover:rotate-12 transition-transform">
+        <div className={`flex items-center justify-center w-10 h-10 rounded-full shadow-md group-hover:rotate-12 transition-transform ${isDark ? 'bg-slate-200 text-[#111111]' : 'bg-white text-[#111111]'}`}>
           <MessageCircle size={20} />
         </div>
         <span className="hidden md:inline">BMSIT Assistant</span>
@@ -514,10 +517,10 @@ const ChatbotWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed z-[100] right-0 bottom-0 top-0 left-0 md:top-auto md:left-auto md:right-8 md:bottom-8 md:w-[1000px] md:h-[700px] bg-white/60 backdrop-blur-3xl border border-white/80 shadow-[0_24px_60px_-10px_rgba(0,0,0,0.15)] md:rounded-[40px] flex flex-col md:flex-row overflow-hidden"
+            className={`fixed z-[100] right-0 bottom-0 top-0 left-0 sm:top-auto sm:right-auto sm:left-6 sm:bottom-24 sm:w-[420px] sm:h-[650px] border shadow-[0_24px_60px_-10px_rgba(0,0,0,0.28)] sm:rounded-[28px] flex flex-col overflow-hidden ${isDark ? 'bg-[#0f172a]/95 backdrop-blur-2xl border-white/10' : 'bg-white/75 backdrop-blur-3xl border-white/80'}`}
           >
             {/* Left Panel - Hidden on Mobile */}
-            <div className="hidden md:flex flex-col w-[320px] bg-white/40 border-r border-white/60 p-6 md:p-8 shrink-0">
+            <div className="hidden">
               <div className="flex items-center gap-3 mb-8 shrink-0">
                 <div className="p-3 bg-[#111111] rounded-2xl text-[#FB6D39] shadow-md">
                   <Sparkles size={20} />
@@ -559,21 +562,21 @@ const ChatbotWidget = () => {
             </div>
 
             {/* Right Panel - Chat Area */}
-            <div className="flex-1 flex flex-col min-h-0 bg-white/20 p-4 md:p-8">
+            <div className={`flex-1 flex flex-col min-h-0 p-4 ${isDark ? 'bg-[#0b1220]/75' : 'bg-white/25'}`}>
               {/* Topbar */}
-              <div className="flex items-center justify-between bg-white/60 border border-white/80 p-4 rounded-3xl shadow-sm mb-6 shrink-0">
+              <div className={`flex items-center justify-between p-4 rounded-2xl shadow-sm mb-4 shrink-0 border ${isDark ? 'bg-[#1e293b]/85 border-white/10' : 'bg-white/60 border-white/80'}`}>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#111111] rounded-full flex items-center justify-center text-[#FB6D39] shadow-md border-2 border-white">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-[#FB6D39] shadow-md border-2 ${isDark ? 'bg-[#0b1220] border-slate-500/60' : 'bg-[#111111] border-white'}`}>
                     <Bot size={24} />
                   </div>
                   <div>
-                    <h4 className="font-serif font-bold text-lg text-[#111111] leading-tight">BMSIT&M Guide</h4>
-                    <p className="text-xs text-gray-500 font-medium tracking-wide">Online & Ready to Help</p>
+                    <h4 className={`font-serif font-bold text-lg leading-tight ${isDark ? 'text-slate-100' : 'text-[#111111]'}`}>BMSIT&M Guide</h4>
+                    <p className={`text-xs font-medium tracking-wide ${isDark ? 'text-slate-300' : 'text-gray-500'}`}>Online & Ready to Help</p>
                   </div>
                 </div>
                 <button 
                   type="button" 
-                  className="w-10 h-10 flex items-center justify-center bg-white/80 hover:bg-[#111111] text-gray-600 hover:text-white rounded-full transition-colors border border-white shadow-sm"
+                  className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors border shadow-sm ${isDark ? 'bg-white/10 hover:bg-white/20 text-slate-300 border-white/10' : 'bg-white/80 hover:bg-[#111111] text-gray-600 hover:text-white border-white'}`}
                   onClick={() => setIsOpen(false)}
                 >
                   <X size={18} />
@@ -591,8 +594,8 @@ const ChatbotWidget = () => {
                   >
                     <div className={`px-5 py-3.5 rounded-3xl shadow-sm text-[14px] leading-relaxed ${
                       message.role === 'user' 
-                        ? 'bg-[#111111] text-white rounded-br-sm' 
-                        : 'bg-white/80 border border-white text-[#111111] rounded-bl-sm'
+                        ? (isDark ? 'bg-[#2563eb] text-white rounded-br-sm' : 'bg-[#111111] text-white rounded-br-sm')
+                        : (isDark ? 'bg-[#1e293b] border border-white/10 text-slate-100 rounded-bl-sm' : 'bg-white/80 border border-white text-[#111111] rounded-bl-sm')
                     }`}>
                       <p className="whitespace-pre-wrap">{message.content}</p>
                       {message.images?.length ? (
@@ -623,14 +626,14 @@ const ChatbotWidget = () => {
                       ) : null}
                     </div>
                     {getDisplaySources(message.sources).length ? (
-                      <div className="text-[10px] text-gray-500 mt-2 mx-2 px-3 py-1.5 bg-white/40 border border-white/60 rounded-full inline-block">
-                        <span className="font-bold text-[#111111]">Sources:</span> {getDisplaySources(message.sources).join(', ')}
+                      <div className={`text-[10px] mt-2 mx-2 px-3 py-1.5 rounded-full inline-block border ${isDark ? 'text-slate-300 bg-white/10 border-white/10' : 'text-gray-500 bg-white/40 border-white/60'}`}>
+                        <span className={`font-bold ${isDark ? 'text-white' : 'text-[#111111]'}`}>Sources:</span> {getDisplaySources(message.sources).join(', ')}
                       </div>
                     ) : null}
                   </motion.div>
                 ))}
                 {isTyping && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="self-start items-start flex bg-white/80 border border-white rounded-3xl rounded-bl-sm px-5 py-4 shadow-sm">
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={`self-start items-start flex rounded-3xl rounded-bl-sm px-5 py-4 shadow-sm border ${isDark ? 'bg-[#1e293b] border-white/10' : 'bg-white/80 border-white'}`}>
                     <div className="flex gap-1.5 items-center justify-center h-4">
                       <span className="w-1.5 h-1.5 bg-[#FB6D39] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                       <span className="w-1.5 h-1.5 bg-[#FB6D39] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -647,7 +650,7 @@ const ChatbotWidget = () => {
                   <button 
                     key={text}
                     type="button" 
-                    className="whitespace-nowrap px-5 py-2.5 bg-white/60 hover:bg-white border border-white/80 rounded-full text-xs font-bold text-[#111111] hover:text-[#FB6D39] transition-colors shadow-sm"
+                    className={`whitespace-nowrap px-5 py-2.5 rounded-full text-xs font-bold transition-colors shadow-sm border ${isDark ? 'bg-white/10 hover:bg-white/20 border-white/10 text-slate-100 hover:text-[#FB6D39]' : 'bg-white/60 hover:bg-white border-white/80 text-[#111111] hover:text-[#FB6D39]'}`}
                     onClick={() => sendMessage(text)}
                   >
                     {text}
@@ -657,14 +660,14 @@ const ChatbotWidget = () => {
 
               {/* Input Area */}
               <form 
-                className="shrink-0 flex items-center gap-2 bg-white/80 border border-white p-2.5 rounded-full shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]"
+                className={`shrink-0 flex items-center gap-2 p-2.5 rounded-full shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)] border ${isDark ? 'bg-[#1e293b] border-white/10' : 'bg-white/80 border-white'}`}
                 onSubmit={onSubmit}
               >
                 <div className="w-10 h-10 flex items-center justify-center text-gray-400">
                   <Sparkles size={18} className="text-[#FB6D39]" />
                 </div>
                 <input
-                  className="flex-1 bg-transparent border-0 outline-none text-[#111111] text-[14px] placeholder:text-gray-400 px-2"
+                  className={`flex-1 bg-transparent border-0 outline-none text-[14px] px-2 ${isDark ? 'text-slate-100 placeholder:text-slate-400' : 'text-[#111111] placeholder:text-gray-400'}`}
                   value={input}
                   onChange={(event) => setInput(event.target.value)}
                   placeholder="Ask me anything about BMSIT&M..."
@@ -672,7 +675,7 @@ const ChatbotWidget = () => {
                 <button 
                   type="submit" 
                   disabled={isTyping || !input.trim()}
-                  className="w-10 h-10 flex items-center justify-center bg-[#111111] text-white rounded-full shadow-md disabled:opacity-50 hover:bg-[#FB6D39] transition-colors shrink-0"
+                  className={`w-10 h-10 flex items-center justify-center text-white rounded-full shadow-md disabled:opacity-50 transition-colors shrink-0 ${isDark ? 'bg-[#2563eb] hover:bg-[#1d4ed8]' : 'bg-[#111111] hover:bg-[#FB6D39]'}`}
                 >
                   <Send size={16} className="ml-1" />
                 </button>

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -32,9 +33,11 @@ import Forum from './pages/student/Forum';
 import Clubs from './pages/student/Clubs';
 import Notices from './pages/student/Notices';
 import Profile from './pages/student/Profile';
+import { useLanguage } from './context/LanguageContext';
 
 function App() {
   const location = useLocation();
+  const { language, applyLanguage } = useLanguage();
   const hideNavFooter =
     location.pathname === '/portal' ||
     location.pathname === '/campus-tour' ||
@@ -44,8 +47,13 @@ function App() {
   // Remove padding on Home page so the Hero section flushes to the top
   const isHome = location.pathname === '/';
 
+  useEffect(() => {
+    applyLanguage(language);
+  }, [location.pathname, language, applyLanguage]);
+
   return (
     <div className="min-h-screen flex flex-col font-sans relative">
+      <div id="google_translate_element" />
       <div className="fixed inset-0 bg-dashboard -z-10" />
       {!hideNavFooter && <Navbar />}
       <main className={hideNavFooter || isHome ? 'flex-grow' : 'flex-grow pt-20 md:pt-24'}>

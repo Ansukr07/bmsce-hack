@@ -1,31 +1,138 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Phone, Mail, MapPin, BadgeIndianRupee, GraduationCap, Building2 } from 'lucide-react';
+import {
+  BadgeIndianRupee,
+  CheckCircle2,
+  FileText,
+  GraduationCap,
+  Microscope,
+  Phone,
+} from 'lucide-react';
 
-const eligibility = [
-  { title: "Undergraduate (B.E.)", reqs: "Passed 2nd PUC or 12th with Physics & Mathematics and Chemistry/Bio/CS/Electronics, securing ≥45% aggregate in optional subjects. Management quota requires a minimum of 60%." },
-  { title: "M.Tech Programs", reqs: "Graduates with B.E./B.Tech (or equivalent) degree with ≥50% aggregate in relevant subjects are eligible for admission." },
-  { title: "MCA", reqs: "Graduates with ≥50% aggregate marks (45% for SC/ST) with Mathematics/Statistics/CS as an elective. Entrance exam (PGCET/KEA) is required." },
-  { title: "Ph.D. & Research", reqs: "Full-Time and Part-Time applicants eligible. Distance-mode engineering graduates not eligible. M.Sc Engg Research requires B.E./B.Tech ≥60%." }
+const ugRoutes = [
+  'KCET / Diploma CET (KEA) / AICTE J&K',
+  'COMEDK (Consortium of Medical, Engineering and Dental Colleges of Karnataka)',
+  'Management Quota through BMS Educational Trust (forms usually issued in June/July)',
 ];
 
-const feesUG = [
-  { name: "Computer Science & Engineering", fee: "₹7,50,000" },
-  { name: "Artificial Intelligence & ML", fee: "₹6,00,000" },
-  { name: "Computer Science & Business", fee: "₹5,00,000" },
-  { name: "Electronics & Communication", fee: "₹5,00,000" },
-  { name: "Mechanical Engineering", fee: "₹2,00,000" },
-  { name: "Civil Engineering", fee: "₹2,00,000" },
-  { name: "Electrical & Electronics Engg", fee: "₹2,00,000" }
+const ugCETDocs = [
+  'KEA admission order (4 copies)',
+  'SSLC / 10th marks card (DOB proof)',
+  '2nd PUC / 12th marks card',
+  'Study certificate (total 7 years)',
+  'Caste certificate for reserved category and income certificate for SNQ (mandatory)',
+  'Transfer certificate',
+  'Migration certificate for non-Karnataka / non-PU Board students',
+  'Special category originals (Rural, Kannada Medium, NCC, Sports, PH, Defence, etc.)',
+  'Hyderabad Karnataka originals (Annexure A and B)',
+  '2 recent passport photos',
+  'Aadhaar copy and additional required documents',
+  'Soft copy scan in pen drive: each doc/photo/sign in JPEG, <2MB, 200 DPI',
 ];
 
-const feesPG = [
-  { name: "Master of Business Admin (MBA)", fee: "₹2,75,000" },
-  { name: "Master of Computer Apps (MCA)", fee: "₹2,75,000" },
-  { name: "M.Tech (VLSI & Embedded Systems)", fee: "₹2,50,000" },
-  { name: "M.Tech (Cyber Security)", fee: "₹1,50,000" },
-  { name: "M.Tech (CSE)", fee: "₹1,25,000" }
+const ugComedkDocs = [
+  'COMEDK seat allotment letter + fee receipt (4 copies)',
+  'For management seats: provisional allotment letter + fee receipt (4 copies)',
+  'Candidate and parent name must match SSLC / 10th records',
+  'SSLC / 10th marks card',
+  '2nd PUC / 12th marks card',
+  'Study certificate + caste certificate if qualifying marks are below 45%',
+  'Transfer certificate',
+  'Migration certificate (non-Karnataka / non-PU Board)',
+  'Hyderabad Karnataka originals (Annexure A and B)',
+  'Current-year CET / COMEDK / JEE rank card for management quota',
+  '2 recent passport photos',
+  'Aadhaar copy + additional required documents',
+  'Soft copy scan in pen drive: each doc/photo/sign in JPEG, <2MB, 200 DPI',
 ];
+
+const ugManagementDocs = [
+  'Allotment order + endorsement letter from BMSET',
+  'Trust fee payment pink receipt copy',
+  '12th marks card (original + 2 xerox copies)',
+  '10th marks card (original + 2 xerox copies)',
+  'Transfer certificate',
+  'Migration certificate (if not PUC background)',
+  'Study certificate from last institution (original + 2 xerox copies)',
+  'CET / COMEDK / JEE rank card xerox (2 copies)',
+  'Parent PAN card xerox',
+  'Student Aadhaar copy',
+  '3 latest passport size photos',
+];
+
+const ugPioGulfDocs = [
+  'Allotment order + endorsement letter from ICD',
+  'ICD fee payment receipt copy',
+  '12th marks card (original + 2 xerox copies)',
+  '10th marks card (original + 2 xerox copies)',
+  'Transfer certificate + migration certificate',
+  'Study certificate from last institution',
+  'Citizenship card / passport copy',
+  'Parents and student passport + visa copies (Gulf quota)',
+  'Employment certification (Gulf quota)',
+  'NRI certificate from embassy (Gulf quota)',
+  '3 latest passport size photos',
+];
+
+const ugPmsssDocs = [
+  'PMSSS admission order',
+  '12th marks card (original + 2 xerox copies)',
+  '10th marks card (original + 2 xerox copies)',
+  'Transfer certificate',
+  'Migration certificate',
+  'Study certificate from last institution',
+  'Student Aadhaar copy',
+  '3 latest passport size photos',
+  'Original income certificate',
+];
+
+const researchCenters = [
+  'Mechanical Engineering',
+  'Mathematics',
+  'Electronics & Communication Engineering',
+  'Electrical & Electronics Engineering',
+  'Computer Science & Engineering',
+  'Information Science & Engineering',
+  'Electronics & Telecommunication Engineering',
+  'Master of Computer Applications',
+  'Physics',
+  'Chemistry',
+];
+
+const mscResearchEligibility = [
+  'B.E. / B.Tech with at least 60% aggregate (10% relaxation for SC/ST and notified categories)',
+  'Teaching/research staff in AICTE-recognized colleges/polytechnics with minimum 1 year experience and sponsorship',
+  'Government/quasi-government/public/private industry employees with minimum 1 year experience and sponsorship',
+  'National fellowship awardees (for example CSIR) with B.E. / B.Tech and minimum 1 year experience',
+  'NRI/FN/PIO candidates with VTU-recognized UG equivalence and English proficiency (TOEFL/IELTS where applicable)',
+  'Candidate must qualify GATE/equivalent (within preceding 5 years) or University Research Aptitude Test (valid 3 years)',
+];
+
+const SectionTitle = ({ icon: Icon, title, subtitle }) => (
+  <div className="mb-10">
+    <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#111111] mb-4 flex items-center gap-3 uppercase tracking-tight">
+      <Icon className="w-8 h-8 text-[#FB6D39]" />
+      {title}
+    </h2>
+    <p className="text-sm font-bold text-[#FB6D39] uppercase tracking-[0.18em] border-l-4 border-[#FB6D39] pl-4 max-w-4xl">
+      {subtitle}
+    </p>
+  </div>
+);
+
+const BulletCard = ({ title, items }) => (
+  <div className="bg-white/65 backdrop-blur-2xl p-6 md:p-8 rounded-[28px] border border-white/80 shadow-sm">
+    <h3 className="text-xl md:text-2xl font-serif font-bold text-[#111111] mb-4">{title}</h3>
+    <ul className="space-y-2 text-[#4b5563] text-sm md:text-base leading-relaxed">
+      {items.map((item) => (
+        <li key={item} className="flex items-start gap-2">
+          <CheckCircle2 className="w-4 h-4 text-[#FB6D39] mt-1 shrink-0" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 const Admissions = () => {
   useEffect(() => {
@@ -33,171 +140,188 @@ const Admissions = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen relative font-sans text-[#111111]">
-      
-      {/* Hero Section */}
-      <section className="relative w-full text-[#111111] pt-24 pb-32 px-6 lg:px-16 overflow-hidden rounded-bl-[80px]">
-        <div className="max-w-7xl mx-auto relative z-10 flex flex-col lg:flex-row gap-16 items-center">
-          <div className="lg:w-[60%]">
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-5xl md:text-7xl font-serif font-bold uppercase leading-tight mb-8"
-            >
-              Admissions <br/><span className="text-[#FB6D39]">2026-27</span>
-            </motion.h1>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="w-24 h-1 bg-[#FB6D39] mb-8" 
+    <div className="w-full min-h-screen text-[#111111]">
+      <section className="pt-24 pb-20 px-6 lg:px-16">
+        <div className="max-w-7xl mx-auto">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-7xl font-serif font-bold uppercase leading-tight"
+          >
+            Admissions Guide
+            <br />
+            <span className="text-[#FB6D39]">Undergraduate, PG & Research</span>
+          </motion.h1>
+          <p className="mt-6 max-w-4xl text-[#6B6B6B] text-base md:text-lg leading-relaxed">
+            Comprehensive admissions information for BMSIT&M including eligibility, application routes, quota-wise document checklists, and research programme requirements.
+          </p>
+        </div>
+      </section>
+
+      <section className="pb-16 px-6 lg:px-16">
+        <div className="max-w-7xl mx-auto space-y-16">
+          <div>
+            <SectionTitle
+              icon={GraduationCap}
+              title="Undergraduate Programmes"
+              subtitle="Eligibility criteria, admission routes, and first-year B.E. document checklists."
             />
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-lg md:text-xl font-medium text-[#6B6B6B] leading-relaxed max-w-2xl font-serif italic"
-            >
-              "A Personalized Academic Experience."
-            </motion.p>
-          </div>
-          
-          <div className="lg:w-[40%] flex flex-col gap-6 w-full">
-            <div className="bg-white/60 backdrop-blur-3xl p-8 md:p-12 rounded-[40px] border border-white/80 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.05)]">
-              <h3 className="text-3xl font-serif mb-4 flex items-center gap-4 text-[#111111]"><GraduationCap className="w-8 h-8 text-[#FB6D39]" /> Join BMSIT&M</h3>
-              <p className="text-[#6B6B6B] leading-relaxed font-sans">
-                Explore our undergraduate and postgraduate programmes, designed to foster exceptional engineering and scientific talent.
-              </p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <BulletCard
+                title="Eligibility Criteria"
+                items={[
+                  '2nd PUC / 12th pass with Physics and Mathematics as compulsory subjects and one optional subject (Chemistry / Biotechnology / Computer Science / Biology / Electronics).',
+                  'Minimum 45% aggregate marks in optional subjects with English as one language for engineering admissions.',
+                  'For Management Quota at BMSIT&M, expected minimum marks are 60% as per current management norms.',
+                ]}
+              />
+
+              <BulletCard
+                title="Application Routes"
+                items={ugRoutes}
+              />
             </div>
           </div>
+
+          <div>
+            <SectionTitle
+              icon={FileText}
+              title="UG Document Checklist"
+              subtitle="Bring originals and required copies as per your quota at the time of admission."
+            />
+
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+              <BulletCard title="CET Quota" items={ugCETDocs} />
+              <BulletCard title="COMEDK Quota" items={ugComedkDocs} />
+              <BulletCard title="Management Quota" items={ugManagementDocs} />
+              <BulletCard title="PIO / Gulf Quota" items={ugPioGulfDocs} />
+            </div>
+
+            <div className="mt-6">
+              <BulletCard title="PMSSS Quota" items={ugPmsssDocs} />
+            </div>
+
+            <p className="mt-4 text-sm text-gray-500 italic">
+              Note: Keep sufficient attested copies of certificates. Originals are generally returned only after approval of admission from VTU, Belagavi.
+            </p>
+          </div>
+
+          <div>
+            <SectionTitle
+              icon={BadgeIndianRupee}
+              title="PG Eligibility"
+              subtitle="Master of Technology and Master of Computer Applications admission requirements."
+            />
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <BulletCard
+                title="M.Tech Eligibility"
+                items={[
+                  'Bachelor degree (B.E. / B.Tech) with not less than 50% aggregate.',
+                  'Candidate who has passed one specified pre-university subject with 50% marks is eligible as per applicable norms.',
+                  'Apply through: PGCET (KEA) / GATE / AICTE J&K / PGET (COMEDK).',
+                ]}
+              />
+              <BulletCard
+                title="MCA Eligibility"
+                items={[
+                  'Bachelor degree with not less than 50% aggregate marks (45% for SC/ST).',
+                  'Must have Mathematics / Statistics / Computer Science / Programming / Applications / Business Statistics as optional/elective, or equivalent qualifying path.',
+                  'Entrance pathway applies; for government seats and VTU-affiliated admissions, PGCET process is used.',
+                  'Apply through: PGCET (KEA).',
+                ]}
+              />
+            </div>
+          </div>
+
+          <div>
+            <SectionTitle
+              icon={Microscope}
+              title="Research Programmes"
+              subtitle="Ph.D and M.Sc. (Engineering by Research) structure, centers, and minimum qualifications."
+            />
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <BulletCard
+                title="Ph.D Categories"
+                items={[
+                  'Full-Time',
+                  'Part-Time (in-service candidates with minimum 1 year experience after UG)',
+                  'Full-Time/Part-Time (Special) for NRI/FN/PIO with English proficiency and thesis submission in English',
+                  'Dual Degree upgradation path from M.Sc.(Engg.) by Research / M.Tech as applicable',
+                  'Distance-mode PG in Engineering/Science is not eligible (MBA/MCA distance mode may be considered as per UGC/AICTE norms).',
+                ]}
+              />
+              <BulletCard
+                title="Recognized Research Centers"
+                items={researchCenters}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+              <BulletCard
+                title="Minimum Qualification - Faculty of Engineering"
+                items={[
+                  'Master degree in Engineering/Technology (or equivalent) with minimum CGPA 6.75/10.',
+                  'Or first class at either Bachelor or Master level in Engineering/Technology.',
+                  'M.Tech upgradation to integrated M.Tech + Ph.D may be considered with outstanding merit (minimum CGPA 7.75/10 or 70%) and committee approval.',
+                ]}
+              />
+              <BulletCard
+                title="Minimum Qualification - Faculty of Science"
+                items={[
+                  'M.Sc in Physics/Chemistry/Mathematics/Nano-Technology/Library Science/Physical Education or MCA from recognized university.',
+                  'Minimum CGPA 6.75/10 or first class at either Bachelor or Master level.',
+                  'Relaxation up to 5% or equivalent grade for SC/ST/Category-I/Physically challenged and notified reserved categories.',
+                ]}
+              />
+            </div>
+
+            <div className="mt-6">
+              <BulletCard
+                title="M.Sc. (Engineering) by Research - Eligibility"
+                items={mscResearchEligibility}
+              />
+            </div>
+          </div>
+
+          <div>
+            <SectionTitle
+              icon={Phone}
+              title="Admissions Contacts"
+              subtitle="Reach the right office for UG/PG management admissions and support."
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <BulletCard
+                title="Admissions Office"
+                items={[
+                  'Director (Admn): 080-26611636',
+                  'Admissions Enquiry: 080-26146800 / 080-26146856',
+                  'Email: mgmt.admissions@bmsce.ac.in',
+                ]}
+              />
+              <BulletCard
+                title="Campus Office"
+                items={[
+                  'BMSIT Office: 080-68730444',
+                  'Fee Office: 080-26186828',
+                  'Principal: principal@bmsit.in',
+                ]}
+              />
+              <BulletCard
+                title="Hostel and Helplines"
+                items={[
+                  'Hostel: 9741590336 / 9739947120 / 8792347320',
+                  'Women Helpline: 080-68730452',
+                  'Address: Doddaballapur Main Road, Avalahalli, Yelahanka, Bengaluru - 560119',
+                ]}
+              />
+            </div>
+          </div>
         </div>
       </section>
-
-      {/* Eligibility Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-16 w-full relative z-10">
-            <div className="mb-16">
-                <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#111111] mb-6 uppercase tracking-tight">Minimum Qualifications</h2>
-                <p className="text-sm font-bold text-[#FB6D39] uppercase tracking-widest border-l-4 border-[#FB6D39] pl-6 max-w-2xl">
-                    Ensure you meet the essential eligibility requirements before proceeding with your application.
-                </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {eligibility.map((item, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="bg-white/60 backdrop-blur-2xl p-8 md:p-10 rounded-[32px] border border-white/80 hover:border-[#FB6D39] transition-colors shadow-sm"
-                >
-                  <h3 className="text-2xl font-serif font-bold mb-4 text-[#111111] flex items-center gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-[#FB6D39]" />
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {item.reqs}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-            <p className="text-xs text-gray-400 mt-8 italic">*Relaxation of 5% in minimum requirements applies for reserved categories as per government norms.</p>
-        </div>
-      </section>
-
-      {/* Management Quota Fees */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-16 w-full flex flex-col lg:flex-row gap-16 relative z-10">
-            <div className="lg:w-1/3">
-                <div className="sticky top-32">
-                    <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#111111] mb-6 uppercase tracking-tight">Management Quota Fees</h2>
-                    <p className="text-sm font-bold text-[#FB6D39] uppercase tracking-widest border-l-4 border-[#FB6D39] pl-6 mb-8">
-                        Fee structure per annum for the 2026-27 academic session under the direct management quota.
-                    </p>
-                    <div className="bg-white/60 backdrop-blur-3xl text-[#111111] p-8 rounded-[32px] shadow-[0_12px_40px_-10px_rgba(0,0,0,0.05)] border border-white/80">
-                        <BadgeIndianRupee className="w-12 h-12 text-[#FB6D39] mb-6" />
-                        <h4 className="text-2xl font-serif mb-2">Notice</h4>
-                        <p className="text-[#6B6B6B] leading-relaxed font-light text-sm">
-                            Fees mentioned are applicable per annum. Additional university, hostel, and examination fees are not included in this listing.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div className="lg:w-2/3">
-                <div className="bg-white/60 backdrop-blur-3xl rounded-[40px] p-8 md:p-12 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.05)] border border-white/80">
-                    <h3 className="text-2xl font-serif font-bold text-[#111111] mb-8 pb-4 border-b border-gray-100">Undergraduate (B.E.)</h3>
-                    <div className="space-y-4 mb-12">
-                        {feesUG.map((item, idx) => (
-                            <div key={idx} className="flex justify-between items-center p-4 hover:bg-gray-50 rounded-xl transition-colors">
-                                <span className="font-medium text-gray-700">{item.name}</span>
-                                <span className="font-bold text-[#FB6D39]">{item.fee}</span>
-                            </div>
-                        ))}
-                    </div>
-
-                    <h3 className="text-2xl font-serif font-bold text-[#1b1d0e] mb-8 pb-4 border-b border-gray-100">Postgraduate (PG)</h3>
-                    <div className="space-y-4">
-                        {feesPG.map((item, idx) => (
-                            <div key={idx} className="flex justify-between items-center p-4 hover:bg-gray-50 rounded-xl transition-colors">
-                                <span className="font-medium text-gray-700">{item.name}</span>
-                                <span className="font-bold text-[#FB6D39]">{item.fee}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-      </section>
-
-      {/* Helpline & Contacts */}
-      <section className="py-24 relative overflow-hidden border-t border-white/40">
-        <div className="max-w-7xl mx-auto px-6 lg:px-16 w-full relative z-10">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-16 uppercase tracking-tight text-[#111111] text-center">Important Contacts</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                {/* Admissions */}
-                <div className="bg-white/60 backdrop-blur-3xl border border-white/80 p-8 rounded-[32px] hover:border-[#FB6D39] hover:shadow-xl transition-all">
-                    <Building2 className="w-8 h-8 text-[#FB6D39] mb-6" />
-                    <h3 className="text-xl font-bold uppercase tracking-widest text-[#111111] mb-4">Admissions Enquiries</h3>
-                    <p className="text-lg mb-2">080-26146800</p>
-                    <p className="text-lg mb-4">080-26146856</p>
-                    <p className="text-sm text-gray-400">Trust Office: 080-26611636</p>
-                    <p className="text-sm text-gray-400">Email: mgmt.admissions@bmsce.ac.in</p>
-                </div>
-
-                {/* General Office & Fees */}
-                <div className="bg-white/60 backdrop-blur-3xl border border-white/80 p-8 rounded-[32px] hover:border-[#FB6D39] hover:shadow-xl transition-all">
-                    <Phone className="w-8 h-8 text-[#FB6D39] mb-6" />
-                    <h3 className="text-xl font-bold uppercase tracking-widest text-[#111111] mb-4">Campus & Fees</h3>
-                    <p className="text-lg mb-2">BMSIT Office: 080-68730444</p>
-                    <p className="text-lg mb-4">Fee Office: 080-26186828</p>
-                    <p className="text-sm text-gray-400">Principal: principal@bmsit.in</p>
-                </div>
-
-                {/* Women's Helpline & Hostels */}
-                <div className="bg-white/60 backdrop-blur-3xl border border-white/80 p-8 rounded-[32px] hover:border-[#FB6D39] hover:shadow-xl transition-all">
-                    <Phone className="w-8 h-8 text-[#FB6D39] mb-6" />
-                    <h3 className="text-xl font-bold uppercase tracking-widest text-[#111111] mb-4">Hostel & Helplines</h3>
-                    <p className="text-lg mb-2 text-[#FB6D39] font-bold">Women's Helpline (24x7):</p>
-                    <p className="text-lg mb-4">080-68730452</p>
-                    <p className="text-sm text-gray-400 mb-1">Hostel Office:</p>
-                    <p className="text-sm text-gray-400">9741590336 / 9739947120</p>
-                </div>
-
-            </div>
-
-            {/* Address Footer */}
-            <div className="mt-16 text-center border-t border-[#FB6D39]/20 pt-16">
-                <p className="text-xl font-serif text-[#111111] font-bold">BMS Institute of Technology & Management</p>
-                <p className="text-gray-400 mt-2">Doddaballapur Main Road, Avalahalli, Yelahanka, Bengaluru – 560119</p>
-            </div>
-        </div>
-      </section>
-
     </div>
   );
 };
