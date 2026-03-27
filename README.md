@@ -33,6 +33,10 @@ A premium, editorial-driven institutional website designed for **BMS Institute o
 ### 5. Dynamic Academic Hub
 *   Interactive department cards with deep-dive modal system for "Programs" and "Department" templates.
 
+### 6. Accessibility and Personalization
+*   **Instant Language Translation:** A dedicated dropdown enables one-click language translation across the interface.
+*   **Theme Preferences:** Built-in Light Mode and Dark Mode toggle for personalized viewing comfort.
+
 ---
 
 ## 🚀 Future Innovations & Ideas 

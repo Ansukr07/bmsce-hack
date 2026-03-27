@@ -28,12 +28,14 @@ export const adminData = {
         name: 'LATE SRI. B.M. SREENIVASAIAH',
         title: 'Founder, B.M.S. Educational Trust',
         subtitle: 'Dharmaprakasha Rajakarya Prasakta',
+        image: '/pictures/founders/bm-sreenivasaiah.jpg',
       },
       {
         type: 'profile',
         name: 'LATE SRI. B. S. NARAYAN',
         title: 'Donor Trustee, B.M.S. Educational Trust',
         subtitle: '',
+        image: '/pictures/founders/bs-narayan.jpg',
       },
       {
         type: 'paragraph',
@@ -182,18 +184,18 @@ export const adminData = {
   hods: {
     title: 'Head of Departments',
     content: [
-      { type: 'profile_card', name: 'Dr. Madhu M C', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. A Shobha Rani', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. Satish Kumar T', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. Prashant A Athavale', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. Anupama H S', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. Vishwa Kirana S', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. G Aruna', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. M Sridevi', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. Balbadra Kishore', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. Chetan A.S', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. Dhananjaya N', title: 'HOD' },
-      { type: 'profile_card', name: 'Dr. Ramakrishnappa T', title: 'HOD' }
+      { type: 'profile_card', name: 'Dr. Madhu M C', title: 'Head, Department of Mechanical Engineering' },
+      { type: 'profile_card', name: 'Dr. A Shobha Rani', title: 'Head, Department of Electronics and Communication Engineering' },
+      { type: 'profile_card', name: 'Dr. Satish Kumar T', title: 'Head, Department of Computer Science and Engineering' },
+      { type: 'profile_card', name: 'Dr. Prashant A Athavale', title: 'Head, Department of Electrical and Electronics Engineering' },
+      { type: 'profile_card', name: 'Dr. Anupama H S', title: 'Head, Department of Artificial Intelligence & Machine Learning' },
+      { type: 'profile_card', name: 'Dr. Vishwa Kirana S', title: 'Head, Department of Computer Science and Business Systems' },
+      { type: 'profile_card', name: 'Dr. G Aruna', title: 'Head, Department of Civil Engineering' },
+      { type: 'profile_card', name: 'Dr. M Sridevi', title: 'Head, Master of Computer Applications' },
+      { type: 'profile_card', name: 'Dr. Balbadra Kishore', title: 'Head, Master of Business Administration' },
+      { type: 'profile_card', name: 'Dr. Chetan A.S', title: 'Head, Department of Mathematics' },
+      { type: 'profile_card', name: 'Dr. Dhananjaya N', title: 'Head, Department of Physics' },
+      { type: 'profile_card', name: 'Dr. Ramakrishnappa T', title: 'Head, Department of Chemistry' }
     ]
   },
   section_heads: {

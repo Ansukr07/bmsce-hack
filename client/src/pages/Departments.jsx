@@ -74,9 +74,9 @@ const Departments = () => {
   );
 
   return (
-    <div className="w-full min-h-screen font-sans bg-[#F8FAFC] pb-32">
-      {/* Header Section */}
-      <section className="pt-24 pb-20 px-6 lg:px-16 bg-white border-b border-gray-100">
+    <div className="w-full min-h-screen font-sans bg-transparent pb-32">
+        {/* Header Section */}
+        <section className="pt-24 pb-20 px-6 lg:px-16 bg-transparent border-b border-gray-100">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 10 }}

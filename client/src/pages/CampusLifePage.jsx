@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 const CampusLifePage = () => {
   return (
-    <div className="w-full min-h-screen relative font-sans text-[#111111] bg-[#fafafa]">
+    <div className="w-full min-h-screen relative font-sans text-[#111111] bg-transparent">
       
       <main className="pt-32 pb-24 px-4 sm:px-6 lg:px-16 max-w-7xl mx-auto space-y-32 relative z-10">
         

@@ -23,7 +23,7 @@ const DepartmentTemplate = ({ meta, data, showBackLink = true, onBack }) => {
   const accent = meta.color;
 
   return (
-    <div className="w-full font-sans text-[#111111] bg-white">
+    <div className="w-full font-sans text-[#111111] bg-transparent">
       {/* Back Link */}
       {showBackLink && (
         <div className="max-w-7xl mx-auto px-6 lg:px-16 pt-6">

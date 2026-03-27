@@ -40,7 +40,17 @@ const ContentRenderer = ({ content, isGrid }) => {
         }
         if (block.type === 'profile') {
           return (
-            <div key={i} className={`bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col gap-3 ${isGrid ? 'col-span-1 md:col-span-2' : ''}`}>
+            <div key={i} className={`bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col gap-5 ${isGrid ? 'col-span-1 md:col-span-2' : ''}`}>
+              {block.image && (
+                <div className="w-full flex justify-center sm:justify-start">
+                  <img
+                    src={block.image}
+                    alt={block.name}
+                    className="w-44 h-52 object-cover rounded-2xl border border-gray-100 shadow-sm"
+                    loading="lazy"
+                  />
+                </div>
+              )}
               <h4 className="text-xl font-bold text-[#111111]">{block.name}</h4>
               <div>
                 <p className="text-sm font-bold uppercase tracking-widest text-[#FB6D39]">{block.title}</p>
@@ -97,10 +107,10 @@ const AboutPage = () => {
   const isGridContent = ['hods', 'deans', 'section_heads', 'office_admin', 'governors', 'officials'].includes(activeTab);
 
   return (
-    <div className="w-full min-h-screen bg-[#F8FAFC] font-sans pb-24">
+    <div className={`w-full min-h-screen ${activeTab === 'founders' ? 'bg-[#F8FAFC]' : 'bg-transparent'} font-sans pb-24`}>
       
       {/* Hero Header */}
-      <section className="relative px-6 py-16 bg-white border-b border-gray-100 overflow-hidden">
+      <section className={`relative px-6 py-16 ${activeTab === 'founders' ? 'bg-white' : 'bg-transparent'} border-b border-gray-100 overflow-hidden`}>
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 border border-gray-100 rounded-full mb-6">
             <Building className="w-4 h-4 text-[#FB6D39]" />
