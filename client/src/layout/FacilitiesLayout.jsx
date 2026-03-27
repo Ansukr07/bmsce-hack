@@ -18,7 +18,7 @@ const FacilitiesLayout = ({ children, activeId }) => {
 
   return (
     <div className="w-full min-h-screen bg-[#F8FAFC] font-sans pb-24">
-      
+
       {/* Shared Facilities Hero */}
       <section className="relative px-6 py-16 bg-white border-b border-gray-100 overflow-hidden">
         <div className="max-w-7xl mx-auto relative z-10">
@@ -36,10 +36,10 @@ const FacilitiesLayout = ({ children, activeId }) => {
 
       {/* Main Sidebar Layout */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col lg:flex-row gap-8 lg:gap-12 relative items-start">
-        
+
         {/* Mobile Dropdown */}
         <div className="lg:hidden w-full sticky top-20 z-30 mb-2">
-          <button 
+          <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="w-full bg-white border border-gray-200 rounded-2xl px-5 py-4 flex justify-between items-center shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
           >
@@ -69,11 +69,10 @@ const FacilitiesLayout = ({ children, activeId }) => {
                     setIsMobileMenuOpen(false);
                     navigate(item.path);
                   }}
-                  className={`w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3.5 transition-all duration-200 group ${
-                    isActive 
-                      ? 'bg-[#111111] text-white shadow-md transform scale-[1.02]' 
+                  className={`w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3.5 transition-all duration-200 group ${isActive
+                      ? 'bg-[#111111] text-white shadow-md transform scale-[1.02]'
                       : 'text-[#6B6B6B] hover:bg-gray-50 hover:text-[#111111]'
-                  }`}
+                    }`}
                 >
                   <div className={`p-2 rounded-xl transition-colors ${isActive ? 'bg-white/10' : 'bg-gray-100 group-hover:bg-gray-200'}`}>
                     <Icon className={`w-4 h-4 ${isActive ? 'text-[#FB6D39]' : 'text-gray-500 group-hover:text-[#111111]'}`} />
@@ -93,7 +92,7 @@ const FacilitiesLayout = ({ children, activeId }) => {
             <motion.div
               key={activeId}
               initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, y: 0,  filter: 'blur(0px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: -15, filter: 'blur(4px)' }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
               className="bg-transparent pt-2 lg:pt-0"

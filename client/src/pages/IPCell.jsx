@@ -32,13 +32,18 @@ const IPCell = () => {
         <div className="w-16 h-1 bg-[#FB6D39] rounded-full" />
       </div>
 
-      <div className="bg-gray-50 border border-gray-100 rounded-3xl p-8 mb-12 shadow-sm">
-        <h3 className="text-xl font-bold mb-4 flex items-center gap-3 text-[#111111]">
-          <Shield className="w-6 h-6 text-[#FB6D39]" /> About the IP Cell
-        </h3>
-        <p className="text-[#6B6B6B] leading-relaxed text-sm">
-          The Intellectual Property Cell at BMSIT&M is established to create awareness and facilitate the protection of intellectual property generated through research and innovation. The cell assists faculty, students, and researchers in securing patents, copyrights, and trademarks, fostering a culture of innovation and research excellence across all departments.
-        </p>
+      <div className="flex flex-col md:flex-row gap-8 mb-12">
+        <div className="flex-1 bg-gray-50 border border-gray-100 rounded-3xl p-8 shadow-sm">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-3 text-[#111111]">
+            <Shield className="w-6 h-6 text-[#FB6D39]" /> About the IP Cell
+          </h3>
+          <p className="text-[#6B6B6B] leading-relaxed text-sm">
+            The Intellectual Property Cell at BMSIT&M is established to create awareness and facilitate the protection of intellectual property generated through research and innovation. The cell assists faculty, students, and researchers in securing patents, copyrights, and trademarks, fostering a culture of innovation and research excellence across all departments.
+          </p>
+        </div>
+        <div className="flex-1 h-64 md:h-auto rounded-3xl overflow-hidden shadow-sm">
+          <img src="https://bmsit.ac.in/public/assets/images/gallery/lab/2.JPG" alt="BMSIT Lab" className="w-full h-full object-cover" />
+        </div>
       </div>
 
       {/* Stats */}

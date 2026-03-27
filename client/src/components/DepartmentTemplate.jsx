@@ -340,9 +340,9 @@ const DepartmentTemplate = ({ meta, data, showBackLink = true, onBack }) => {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {[
-                      { title: "Smart India Hackathon Winners", desc: "Students secured 1st prize of ₹1 Lakh at the national level hardware edition.", img: "https://images.unsplash.com/photo-1504384305419-f02755aed259?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-                      { title: "Research Grant Approval", desc: "Department received a grant of ₹50 Lakhs from DST for advanced robotics research.", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-                      { title: "Best Paper Award", desc: "Faculty members published in IEEE Transactions and received the best paper award at ICAC.", img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
+                      { title: "Smart India Hackathon Winners", desc: "Students secured 1st prize of ₹1 Lakh at the national level hardware edition.", img: "https://bmsit.ac.in/public/assets/images/gallery/yugma/1.JPG" },
+                      { title: "Research Grant Approval", desc: "Department received a grant of ₹50 Lakhs from DST for advanced robotics research.", img: "https://bmsit.ac.in/public/assets/images/gallery/lab/1.JPG" },
+                      { title: "Best Paper Award", desc: "Faculty members published in IEEE Transactions and received the best paper award at ICAC.", img: "https://bmsit.ac.in/public/assets/images/gallery/facility/3.JPG" }
                     ].map((achieve, i) => (
                       <div key={i} className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm group hover:shadow-md transition-all">
                         <div className="h-48 overflow-hidden">
@@ -371,13 +371,13 @@ const DepartmentTemplate = ({ meta, data, showBackLink = true, onBack }) => {
                   </div>
                   <div className="grid grid-cols-1 gap-6">
                     {[
-                      { name: "Tech Symposium 2024", type: "Technical Event", date: "August 2024", desc: "Annual technical fest featuring coding competitions, project exhibitions, and industry expert talks." },
-                      { name: "Alumni Meet & Connect", type: "Networking", date: "September 2024", desc: "An interactive session where notable alumni guided current students on industry expectations." },
-                      { name: "Industrial Visit to ISRO", type: "Field Trip", date: "October 2024", desc: "Students visited the satellite tracking center to understand real-world aerospace operations." },
+                      { name: "Tech Symposium 2024", type: "Technical Event", date: "August 2024", desc: "Annual technical fest featuring coding competitions, project exhibitions, and industry expert talks.", img: "https://bmsit.ac.in/public/assets/images/gallery/utsaha/1.JPG" },
+                      { name: "Alumni Meet & Connect", type: "Networking", date: "September 2024", desc: "An interactive session where notable alumni guided current students on industry expectations.", img: "https://bmsit.ac.in/public/assets/images/gallery/facility/2.JPG" },
+                      { name: "Industrial Visit to ISRO", type: "Field Trip", date: "October 2024", desc: "Students visited the satellite tracking center to understand real-world aerospace operations.", img: "https://bmsit.ac.in/public/assets/images/gallery/facility/10.JPG" },
                     ].map((act, i) => (
                       <div key={i} className="flex flex-col md:flex-row gap-6 p-6 bg-white border border-gray-100 rounded-3xl shadow-sm hover:border-[#FB6D39] transition-colors">
-                        <div className="w-full md:w-48 h-32 bg-gray-100 rounded-2xl flex items-center justify-center shrink-0">
-                          <Activity className="w-8 h-8 text-gray-300" />
+                        <div className="w-full md:w-48 h-32 bg-gray-100 rounded-2xl flex items-center justify-center shrink-0 overflow-hidden">
+                          <img src={act.img} alt={act.name} className="w-full h-full object-cover" />
                         </div>
                         <div>
                           <div className="flex items-center gap-3 mb-2">

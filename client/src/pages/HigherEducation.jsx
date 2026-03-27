@@ -31,13 +31,18 @@ const HigherEducation = () => {
         <div className="w-16 h-1 bg-[#FB6D39] rounded-full" />
       </div>
 
-      <div className="bg-gray-50 border border-gray-100 rounded-3xl p-8 mb-12 shadow-sm">
-        <h3 className="text-xl font-bold mb-4 flex items-center gap-3 text-[#111111]">
-          <GraduationCap className="w-6 h-6 text-[#FB6D39]" /> About the Center
-        </h3>
-        <p className="text-[#6B6B6B] leading-relaxed text-sm">
-          The Higher Education Center at BMSIT&M is dedicated to guiding students towards advanced academic pursuits. It offers support for competitive exam preparation, facilitates international university collaborations, and promotes a research-driven culture. The center serves as a launchpad for students aspiring for postgraduate studies, doctoral programs, and global academic careers.
-        </p>
+      <div className="flex flex-col md:flex-row gap-8 mb-12">
+        <div className="flex-1 bg-gray-50 border border-gray-100 rounded-3xl p-8 shadow-sm">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-3 text-[#111111]">
+            <GraduationCap className="w-6 h-6 text-[#FB6D39]" /> About the Center
+          </h3>
+          <p className="text-[#6B6B6B] leading-relaxed text-sm">
+            The Higher Education Center at BMSIT&M is dedicated to guiding students towards advanced academic pursuits. It offers support for competitive exam preparation, facilitates international university collaborations, and promotes a research-driven culture. The center serves as a launchpad for students aspiring for postgraduate studies, doctoral programs, and global academic careers.
+          </p>
+        </div>
+        <div className="flex-1 h-64 md:h-auto rounded-3xl overflow-hidden shadow-sm">
+          <img src="https://bmsit.ac.in/public/assets/images/gallery/facility/1.JPG" alt="BMSIT Library" className="w-full h-full object-cover" />
+        </div>
       </div>
 
       {/* PG Programs Table */}

@@ -32,13 +32,18 @@ const BICEP = () => {
         <div className="w-16 h-1 bg-[#FB6D39] rounded-full" />
       </div>
 
-      <div className="bg-gray-50 border border-gray-100 rounded-3xl p-8 mb-12 shadow-sm">
-        <h3 className="text-xl font-bold mb-4 flex items-center gap-3 text-[#111111]">
-          <Tent className="w-6 h-6 text-[#FB6D39]" /> About BICEP
-        </h3>
-        <p className="text-[#6B6B6B] leading-relaxed text-sm">
-          The BMSIT&M Incubation Centre for Entrepreneurship and Placement (BICEP) is a dedicated platform to promote entrepreneurship among students and faculty. It provides end-to-end support for aspiring entrepreneurs — from ideation and prototyping to business planning and market entry — nurturing the next generation of innovators aligned with India's Startup India and Atmanirbhar Bharat initiatives.
-        </p>
+      <div className="flex flex-col md:flex-row gap-8 mb-12">
+        <div className="flex-1 bg-gray-50 border border-gray-100 rounded-3xl p-8 shadow-sm">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-3 text-[#111111]">
+            <Tent className="w-6 h-6 text-[#FB6D39]" /> About BICEP
+          </h3>
+          <p className="text-[#6B6B6B] leading-relaxed text-sm">
+            The BMSIT&M Incubation Centre for Entrepreneurship and Placement (BICEP) is a dedicated platform to promote entrepreneurship among students and faculty. It provides end-to-end support for aspiring entrepreneurs — from ideation and prototyping to business planning and market entry — nurturing the next generation of innovators aligned with India's Startup India and Atmanirbhar Bharat initiatives.
+          </p>
+        </div>
+        <div className="flex-1 h-64 md:h-auto rounded-3xl overflow-hidden shadow-sm">
+          <img src="https://bmsit.ac.in/public/assets/images/gallery/facility/9.JPG" alt="BMSIT Campus" className="w-full h-full object-cover" />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
