@@ -78,6 +78,21 @@ const ChatbotWidget = () => {
 
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
+
+    const localAnswer = getLocalReadyAnswer(trimmed);
+    if (localAnswer) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `assistant-local-${Date.now()}`,
+          role: 'assistant',
+          content: localAnswer,
+        },
+      ]);
+      setSuggestions(FALLBACK_SUGGESTIONS);
+      return;
+    }
+
     setIsTyping(true);
 
     try {
@@ -93,20 +108,6 @@ const ChatbotWidget = () => {
         setSuggestions(response.suggestions);
       }
     } catch (error) {
-      const localAnswer = getLocalReadyAnswer(trimmed);
-      if (localAnswer) {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `assistant-local-${Date.now()}`,
-            role: 'assistant',
-            content: localAnswer,
-          },
-        ]);
-        setSuggestions(FALLBACK_SUGGESTIONS);
-        return;
-      }
-
       setMessages((prev) => [
         ...prev,
         {
