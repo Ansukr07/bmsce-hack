@@ -7,6 +7,7 @@ import CampusLife from '../components/CampusLife';
 import Research from '../components/Research';
 import Testimonials from '../components/Testimonials';
 import EventsSection from '../components/EventsSection';
+import ChatbotWidget from '../components/chatbot/ChatbotWidget';
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       <Research />
       <Testimonials />
       <EventsSection />
+      <ChatbotWidget />
     </>
   );
 };

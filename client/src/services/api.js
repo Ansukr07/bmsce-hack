@@ -10,5 +10,9 @@ export const fetchPrograms = () => api.get('/programs');
 export const fetchEvents = () => api.get('/events');
 export const fetchFaculty = () => api.get('/faculty');
 export const fetchTestimonials = () => api.get('/testimonials');
+export const askChatbot = async (message) => {
+  const response = await api.post('/chatbot/query', { message });
+  return response.data;
+};
 
 export default api;
