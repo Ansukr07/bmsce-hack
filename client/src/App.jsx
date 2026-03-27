@@ -19,6 +19,7 @@ import IPCell from './pages/IPCell';
 import HigherEducation from './pages/HigherEducation';
 import ResearchPage from './pages/ResearchPage';
 import PaperDetail from './pages/PaperDetail';
+import CampusLifePage from './pages/CampusLifePage';
 
 import StudentLayout from './components/StudentLayout';
 import Dashboard from './pages/student/Dashboard';
@@ -66,6 +67,7 @@ function App() {
           <Route path="/higher-education" element={<HigherEducation />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/research/paper/:id" element={<PaperDetail />} />
+          <Route path="/campus-life" element={<CampusLifePage />} />
 
           {/* Teacher Portal Routes */}
           <Route path="/teacher-dashboard/*" element={<TeacherDashboard />} />

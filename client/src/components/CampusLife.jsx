@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 import clubImg from '../assets/images/club.png';
 import facilitiesImg from '../assets/images/facilities.png';
@@ -27,9 +28,9 @@ const CampusLife = () => {
               Experience a rich environment that fosters creativity, collaboration, and personal growth. From high-tech laboratories to thriving cultural centers, we provide an ecosystem where ideas flourish.
             </p>
             <div>
-              <button className="text-[#111111] font-semibold font-sans uppercase tracking-widest text-sm pb-2 border-b-2 border-transparent hover:border-[#111111] transition-colors">
-                Explore Amenities
-              </button>
+              <Link to="/campus-life" className="text-[#111111] font-semibold font-sans uppercase tracking-widest text-sm pb-2 border-b-2 border-transparent hover:border-[#111111] transition-colors">
+                Explore Campus Life
+              </Link>
             </div>
           </div>
 
