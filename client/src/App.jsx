@@ -10,6 +10,9 @@ import DepartmentPage from './pages/DepartmentPage';
 import Academics from './pages/Academics';
 import TeacherDashboard from './pages/teacher-dashboard/TeacherDashboard';
 import CampusTour from './pages/CampusTour';
+import NetworkInfrastructure from './pages/NetworkInfrastructure';
+import IdeaLab from './pages/IdeaLab';
+import EStudio from './pages/EStudio';
 
 import StudentLayout from './components/StudentLayout';
 import Dashboard from './pages/student/Dashboard';
@@ -48,6 +51,9 @@ function App() {
           <Route path="/departments/:slug" element={<DepartmentPage />} />
           <Route path="/academics" element={<Academics />} />
           <Route path="/campus-tour" element={<CampusTour />} />
+          <Route path="/network-infrastructure" element={<NetworkInfrastructure />} />
+          <Route path="/idea-lab" element={<IdeaLab />} />
+          <Route path="/e-studio" element={<EStudio />} />
 
           {/* Teacher Portal Routes */}
           <Route path="/teacher-dashboard/*" element={<TeacherDashboard />} />
