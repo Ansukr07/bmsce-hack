@@ -108,8 +108,3 @@ client/
 ```
 
 ---
-
-## 🏆 Submission for Battle Codeathon
-*   **Repository:** [GitHub Link](https://github.com/Ansukr07/bmsce-hack.git)
-*   **Theme:** Advanced Educational Portfolio & Institutional Digital Experience
-*   **Focus:** Innovation, Immersive Design, and Mobile UX Excellence.
