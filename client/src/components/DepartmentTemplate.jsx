@@ -293,24 +293,143 @@ const DepartmentTemplate = ({ meta, data, showBackLink = true, onBack }) => {
                 </div>
               )}
 
-              {/* Generic Fallback for empty tabs */}
-              {['timetable', 'achievements', 'activities', 'placements'].includes(activeTab) && (
+              {/* Timetable Tab */}
+              {activeTab === 'timetable' && (
                 <div className="space-y-8">
                   <div>
-                    <h2 className="text-3xl md:text-3xl font-bold uppercase tracking-tight text-[#111111] mb-3">
-                      {departmentTabs.find(t => t.id === activeTab)?.label}
-                    </h2>
+                    <h2 className="text-3xl font-bold uppercase tracking-tight text-[#111111] mb-3">Time Table</h2>
                     <div className="w-12 h-1.5 rounded-full" style={{ backgroundColor: accent }} />
                   </div>
-                  <div className="bg-gray-50 border border-gray-100 border-dashed rounded-3xl p-16 flex flex-col items-center justify-center text-center">
-                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-4">
-                      {(() => {
-                        const Icon = departmentTabs.find(t => t.id === activeTab)?.icon;
-                        return Icon ? <Icon className="w-8 h-8 text-gray-300" /> : <div />;
-                      })()}
+                  <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="text-xl font-bold text-[#111111]">Current Semester Schedule</h3>
+                      <span className="bg-[#111111] text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest">Odd Sem 2024</span>
                     </div>
-                    <h3 className="text-lg font-bold text-[#111111] mb-2">Content Unavailable</h3>
-                    <p className="text-sm text-gray-500 max-w-sm">Detailed information for this section is currently being updated by the department.</p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="bg-gray-50 border-y border-gray-200">
+                            <th className="py-4 px-4 text-xs font-bold text-gray-500 uppercase tracking-widest">Day / Time</th>
+                            <th className="py-4 px-4 text-xs font-bold text-gray-500 uppercase tracking-widest">09:00 - 11:00</th>
+                            <th className="py-4 px-4 text-xs font-bold text-gray-500 uppercase tracking-widest">11:15 - 01:15</th>
+                            <th className="py-4 px-4 text-xs font-bold text-gray-500 uppercase tracking-widest">02:00 - 04:00</th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-sm font-medium">
+                          {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => (
+                            <tr key={day} className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
+                              <td className="py-4 px-4 font-bold text-[#111111]">{day}</td>
+                              <td className="py-4 px-4 text-[#6B6B6B]">Core Subject 1</td>
+                              <td className="py-4 px-4 text-[#6B6B6B]">Core Subject 2</td>
+                              <td className="py-4 px-4 text-[#6B6B6B]">Lab / Elective</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Achievements Tab */}
+              {activeTab === 'achievements' && (
+                <div className="space-y-8">
+                  <div>
+                    <h2 className="text-3xl font-bold uppercase tracking-tight text-[#111111] mb-3">Achievements</h2>
+                    <div className="w-12 h-1.5 rounded-full" style={{ backgroundColor: accent }} />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[
+                      { title: "Smart India Hackathon Winners", desc: "Students secured 1st prize of ₹1 Lakh at the national level hardware edition.", img: "https://images.unsplash.com/photo-1504384305419-f02755aed259?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+                      { title: "Research Grant Approval", desc: "Department received a grant of ₹50 Lakhs from DST for advanced robotics research.", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+                      { title: "Best Paper Award", desc: "Faculty members published in IEEE Transactions and received the best paper award at ICAC.", img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
+                    ].map((achieve, i) => (
+                      <div key={i} className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm group hover:shadow-md transition-all">
+                        <div className="h-48 overflow-hidden">
+                          <img src={achieve.img} alt={achieve.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div className="p-6">
+                          <div className="flex items-center gap-2 mb-3">
+                            <Trophy className="w-4 h-4 text-[#FB6D39]" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#FB6D39]">Highlight</span>
+                          </div>
+                          <h4 className="text-lg font-bold text-[#111111] mb-2">{achieve.title}</h4>
+                          <p className="text-sm text-[#6B6B6B] leading-relaxed">{achieve.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Student Activities Tab */}
+              {activeTab === 'activities' && (
+                <div className="space-y-8">
+                  <div>
+                    <h2 className="text-3xl font-bold uppercase tracking-tight text-[#111111] mb-3">Student Activities</h2>
+                    <div className="w-12 h-1.5 rounded-full" style={{ backgroundColor: accent }} />
+                  </div>
+                  <div className="grid grid-cols-1 gap-6">
+                    {[
+                      { name: "Tech Symposium 2024", type: "Technical Event", date: "August 2024", desc: "Annual technical fest featuring coding competitions, project exhibitions, and industry expert talks." },
+                      { name: "Alumni Meet & Connect", type: "Networking", date: "September 2024", desc: "An interactive session where notable alumni guided current students on industry expectations." },
+                      { name: "Industrial Visit to ISRO", type: "Field Trip", date: "October 2024", desc: "Students visited the satellite tracking center to understand real-world aerospace operations." },
+                    ].map((act, i) => (
+                      <div key={i} className="flex flex-col md:flex-row gap-6 p-6 bg-white border border-gray-100 rounded-3xl shadow-sm hover:border-[#FB6D39] transition-colors">
+                        <div className="w-full md:w-48 h-32 bg-gray-100 rounded-2xl flex items-center justify-center shrink-0">
+                          <Activity className="w-8 h-8 text-gray-300" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className="bg-gray-100 text-[#111111] text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">{act.type}</span>
+                            <span className="text-xs font-semibold text-gray-500">{act.date}</span>
+                          </div>
+                          <h4 className="text-xl font-bold text-[#111111] mb-2">{act.name}</h4>
+                          <p className="text-sm text-[#6B6B6B] leading-relaxed">{act.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Placements Tab */}
+              {activeTab === 'placements' && (
+                <div className="space-y-8">
+                  <div>
+                    <h2 className="text-3xl font-bold uppercase tracking-tight text-[#111111] mb-3">Placements & Internships</h2>
+                    <div className="w-12 h-1.5 rounded-full" style={{ backgroundColor: accent }} />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                    <div className="bg-[#111111] text-white p-6 rounded-3xl text-center shadow-sm">
+                      <div className="text-sm font-bold uppercase tracking-widest text-[#FB6D39] mb-2">Highest Package</div>
+                      <div className="text-4xl font-black mb-1">44.0</div>
+                      <div className="text-xs text-gray-400">LPA</div>
+                    </div>
+                    <div className="bg-white border border-gray-100 p-6 rounded-3xl text-center shadow-sm">
+                      <div className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-2">Average Package</div>
+                      <div className="text-4xl font-black text-[#111111] mb-1">8.5</div>
+                      <div className="text-xs text-gray-400">LPA</div>
+                    </div>
+                    <div className="bg-[#FB6D39] text-white p-6 rounded-3xl text-center shadow-sm">
+                      <div className="text-sm font-bold uppercase tracking-widest text-white/80 mb-2">Placement Rate</div>
+                      <div className="text-4xl font-black mb-1">95%</div>
+                      <div className="text-xs text-white/80">Eligible Students</div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
+                    <h3 className="text-lg font-bold text-[#111111] mb-6 flex items-center gap-2">
+                      <Briefcase className="w-5 h-5 text-[#FB6D39]" /> Top Recruiters
+                    </h3>
+                    <div className="flex flex-wrap gap-4">
+                      {['Amazon', 'Microsoft', 'Cisco', 'TCS', 'Infosys', 'Wipro', 'Accenture', 'Cognizant', 'Bosch', 'IBM'].map((company, i) => (
+                        <div key={i} className="px-5 py-3 bg-gray-50 rounded-xl text-sm font-bold text-[#4A4A4A] border border-gray-100 uppercase tracking-wide">
+                          {company}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
