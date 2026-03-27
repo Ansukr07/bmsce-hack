@@ -16,10 +16,6 @@ const FacilitiesLayout = ({ children, activeId }) => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [activeId]);
-
   return (
     <div className="w-full min-h-screen bg-[#F8FAFC] font-sans pb-24">
       
