@@ -27,21 +27,21 @@ const Navbar = () => {
     <>
       {/* FULL-WIDTH ULTRAGLASS TOP NAVBAR (Stitch MCP Synthetix Terminal Design) */}
       <nav className={`fixed top-0 left-0 w-full z-50 backdrop-blur-2xl border-b shadow-[0_4px_40px_rgba(0,0,0,0.08)] ${isDark ? 'bg-[#0f172a]/85 border-white/10' : 'bg-white/70 border-black/[0.06]'}`}>
-        <div className="w-full max-w-[1600px] mx-auto flex items-center justify-between px-6 lg:px-12 h-20">
+        <div className="w-full max-w-[1600px] mx-auto flex flex-nowrap items-center justify-between px-6 lg:px-12 h-20 gap-4">
           
           {/* Logo Section */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex shrink-0 items-center gap-3 group whitespace-nowrap">
             <img src={logo} alt="Logo" className="h-8 group-hover:opacity-80 transition-opacity" />
             <span className={`font-bold text-xl tracking-tight leading-none font-serif hidden sm:block ${isDark ? 'text-white' : 'text-[#0a0a0a]'}`}>BMSIT&M</span>
           </Link>
 
           {/* Core Desktop Links */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex min-w-0 flex-1 items-center justify-center gap-5 xl:gap-7 whitespace-nowrap">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`relative transition-colors font-medium text-[13px] tracking-wide group ${isDark ? 'text-slate-300 hover:text-white' : 'text-gray-600 hover:text-[#0a0a0a]'}`}
+                className={`relative transition-colors font-medium text-[13px] tracking-wide group whitespace-nowrap ${isDark ? 'text-slate-300 hover:text-white' : 'text-gray-600 hover:text-[#0a0a0a]'}`}
               >
                 {link.name}
                 <span className={`absolute -bottom-1.5 left-0 w-0 h-[1.5px] transition-all duration-300 group-hover:w-full ${isDark ? 'bg-white' : 'bg-[#0a0a0a]'}`}></span>
@@ -50,11 +50,11 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex shrink-0 items-center gap-3 xl:gap-4 whitespace-nowrap">
             <button
               type="button"
               onClick={toggleTheme}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest transition-all shadow-sm border ${isDark ? 'bg-[#1e293b] text-white border-white/20 hover:bg-[#273449]' : 'bg-white text-[#0a0a0a] border-black/15 hover:border-black/35'}`}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest transition-all shadow-sm border whitespace-nowrap ${isDark ? 'bg-[#1e293b] text-white border-white/20 hover:bg-[#273449]' : 'bg-white text-[#0a0a0a] border-black/15 hover:border-black/35'}`}
               aria-label="Toggle dark mode"
             >
               {isDark ? <Sun size={13} /> : <Moon size={13} />}
@@ -66,7 +66,7 @@ const Navbar = () => {
                 value={language}
                 onChange={(event) => setLanguage(event.target.value)}
                 aria-label="Select language"
-                className={`appearance-none pr-8 pl-3 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest transition-all shadow-sm border ${isDark ? 'text-white bg-[#1e293b] border-white/20 hover:bg-[#273449]' : 'text-[#0a0a0a] bg-white border-black/15 hover:border-black/35'}`}
+                className={`appearance-none pr-8 pl-3 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest transition-all shadow-sm border whitespace-nowrap ${isDark ? 'text-white bg-[#1e293b] border-white/20 hover:bg-[#273449]' : 'text-[#0a0a0a] bg-white border-black/15 hover:border-black/35'}`}
               >
                 {languageOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -80,9 +80,9 @@ const Navbar = () => {
             {/* Black 3D Tour Button */}
             <button
               onClick={() => window.open('/college360/Tour.html', '_blank')}
-              className="px-5 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest text-white bg-[#0a0a0a] hover:bg-black transition-all shadow-sm"
+              className="px-5 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest text-white bg-[#0a0a0a] hover:bg-black transition-all shadow-sm whitespace-nowrap"
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 whitespace-nowrap">
                 <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                 {t('nav.tour3d')}
               </span>
@@ -90,7 +90,7 @@ const Navbar = () => {
 
             {/* Login Dropdown */}
             <div className="relative group">
-              <div className="px-6 py-2 bg-[#0a0a0a] text-white text-[13px] font-bold rounded-full hover:bg-gray-800 transition-all shadow-sm cursor-pointer">
+              <div className="px-6 py-2 bg-[#0a0a0a] text-white text-[13px] font-bold rounded-full hover:bg-gray-800 transition-all shadow-sm cursor-pointer whitespace-nowrap">
                 {t('nav.login')}
               </div>
               
