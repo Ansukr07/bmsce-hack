@@ -18,6 +18,7 @@ app.use('/api/programs', require('./routes/programRoutes'));
 app.use('/api/events', require('./routes/eventRoutes'));
 app.use('/api/faculty', require('./routes/facultyRoutes'));
 app.use('/api/testimonials', require('./routes/testimonialRoutes'));
+app.use('/api/chatbot', require('./routes/chatbotRoutes'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -29,9 +30,18 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/college_db';
 
-mongoose.connect(MONGO_URI)
+const startServer = () => {
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+};
+
+mongoose
+  .connect(MONGO_URI)
   .then(() => {
     console.log('MongoDB Connected');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    startServer();
   })
-  .catch(err => console.log('DB Connection Error: ', err.message));
+  .catch((err) => {
+    console.log('DB Connection Error: ', err.message);
+    console.log('Starting server without database-backed collections.');
+    startServer();
+  });
