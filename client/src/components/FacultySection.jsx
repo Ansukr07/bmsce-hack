@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 const FacultySection = () => {
   // Fallback data
   const fallbackFaculty = [
-    { id: '1', name: 'Dr. Sarah Jenkins', department: 'Computer Science', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80', description: 'Specializes in Machine Learning and AI Ethics.' },
-    { id: '2', name: 'Prof. Michael Chen', department: 'Physics', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80', description: 'Quantum computing researcher with 20+ years experience.' },
-    { id: '3', name: 'Dr. Emily Carter', department: 'Biomedical Engineering', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80', description: 'Pioneer in neuro-prosthetics.' },
+    { id: '1', name: 'Dr. Anupama H S', department: 'AI & Machine Learning', image: '/pictures/teachers/dranupama.jpg', description: 'Expert in Artificial Intelligence and Machine Learning with a focus on sustainable tech.' },
+    { id: '2', name: 'Dr. Satish Kumar T', department: 'Computer Science', image: '/pictures/teachers/3154.JPG', description: 'Leading research in high-performance computing and robust software architectures.' },
+    { id: '3', name: 'Dr. Jayadeva G S', department: 'Electronics & Comm.', image: '/pictures/teachers/6436.JPG', description: 'Pioneer in VLSI design and advanced communication systems.' },
   ];
 
   const [faculty, setFaculty] = useState(fallbackFaculty);
