@@ -27,12 +27,15 @@ function App() {
     location.pathname === '/portal' ||
     location.pathname.startsWith('/student') ||
     location.pathname.startsWith('/teacher-dashboard');
+    
+  // Remove padding on Home page so the Hero section flushes to the top
+  const isHome = location.pathname === '/';
 
   return (
     <div className="min-h-screen flex flex-col font-sans relative">
       <div className="fixed inset-0 bg-dashboard -z-10" />
       {!hideNavFooter && <Navbar />}
-      <main className={hideNavFooter ? 'flex-grow' : 'flex-grow pt-20 md:pt-24'}>
+      <main className={hideNavFooter || isHome ? 'flex-grow' : 'flex-grow pt-20 md:pt-24'}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
