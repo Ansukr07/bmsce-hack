@@ -18,6 +18,36 @@ const FALLBACK_SUGGESTIONS = [
   'Campus facilities and clubs',
 ];
 
+const LOCAL_READY_ANSWERS = [
+  {
+    patterns: [/admission criteria for engineering/i, /admissions eligibility for ug and pg/i, /admission criteria/i],
+    content:
+      'Admissions at BMSIT&M (quick guide):\n- UG (B.E.): 12th/PUC with Physics and Mathematics plus one optional science subject; typical minimum around 45%.\n- PG (M.Tech): B.E./B.Tech (or equivalent) with at least 50% aggregate in relevant subjects.\n- PG (MCA): Graduate degree with at least 50% (45% for SC/ST) with applicable background.\n- Final eligibility/cutoffs may vary each cycle; verify with admissions office.',
+  },
+  {
+    patterns: [/top departments and specializations/i, /top departments and programs/i, /academic departments/i],
+    content:
+      'Top departments and programs (overview):\n- Computer Science & Engineering (CSE)\n- Information Science & Engineering (ISE)\n- Electronics & Communication Engineering (ECE)\n- Mechanical Engineering\n- Civil Engineering\n- AI/ML and emerging technology tracks (as offered in current cycle).',
+  },
+  {
+    patterns: [/placement support and recruiters/i, /placement and internship details/i, /placements stats/i],
+    content:
+      'Placement and internship support:\n- Training for aptitude, coding, communication, and interviews.\n- Internship support through industry tie-ups and department guidance.\n- Recruiter participation varies by year and branch.\n- Check latest official placement report for current statistics.',
+  },
+  {
+    patterns: [/campus facilities and clubs/i, /campus facilities and student clubs/i, /campus life/i],
+    content:
+      'Campus facilities and student life:\n- Library with digital access and circulation/reference services.\n- Department labs and project spaces.\n- Technical, cultural, and social clubs.\n- Sports and college-level events throughout the semester.',
+  },
+];
+
+const getLocalReadyAnswer = (message) => {
+  const matched = LOCAL_READY_ANSWERS.find((entry) =>
+    entry.patterns.some((pattern) => pattern.test(message))
+  );
+  return matched ? matched.content : null;
+};
+
 const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
@@ -63,6 +93,20 @@ const ChatbotWidget = () => {
         setSuggestions(response.suggestions);
       }
     } catch (error) {
+      const localAnswer = getLocalReadyAnswer(trimmed);
+      if (localAnswer) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `assistant-local-${Date.now()}`,
+            role: 'assistant',
+            content: localAnswer,
+          },
+        ]);
+        setSuggestions(FALLBACK_SUGGESTIONS);
+        return;
+      }
+
       setMessages((prev) => [
         ...prev,
         {
