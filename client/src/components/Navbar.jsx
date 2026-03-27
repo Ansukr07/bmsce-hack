@@ -28,11 +28,10 @@ const Navbar = () => {
       {/* FULL-WIDTH ULTRAGLASS TOP NAVBAR (Stitch MCP Synthetix Terminal Design) */}
       <nav className={`fixed top-0 left-0 w-full z-50 backdrop-blur-2xl border-b shadow-[0_4px_40px_rgba(0,0,0,0.08)] ${isDark ? 'bg-[#0f172a]/85 border-white/10' : 'bg-white/70 border-black/[0.06]'}`}>
         <div className="w-full max-w-[1600px] mx-auto flex flex-nowrap items-center justify-between px-6 lg:px-12 h-20 gap-4">
-          
+
           {/* Logo Section */}
           <Link to="/" className="flex shrink-0 items-center gap-3 group whitespace-nowrap">
             <img src={logo} alt="Logo" className="h-8 group-hover:opacity-80 transition-opacity" />
-            <span className={`font-bold text-xl tracking-tight leading-none font-serif hidden sm:block ${isDark ? 'text-white' : 'text-[#0a0a0a]'}`}>BMSIT&M</span>
           </Link>
 
           {/* Core Desktop Links */}
@@ -93,7 +92,7 @@ const Navbar = () => {
               <div className="px-6 py-2 bg-[#0a0a0a] text-white text-[13px] font-bold rounded-full hover:bg-gray-800 transition-all shadow-sm cursor-pointer whitespace-nowrap">
                 {t('nav.login')}
               </div>
-              
+
               {/* Dropdown Menu */}
               <div className="absolute right-0 top-[calc(100%+8px)] w-48 bg-white/90 backdrop-blur-2xl rounded-2xl border border-black/10 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl origin-top-right transform group-hover:scale-100 scale-95">
                 <Link to="/login?role=staff" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
@@ -117,7 +116,7 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -158,7 +157,7 @@ const Navbar = () => {
                   ))}
                 </select>
               </div>
-              
+
               <div className="grid grid-cols-3 gap-1.5">
                 {navLinks.map((link) => {
                   return (
