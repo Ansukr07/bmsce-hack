@@ -1,6 +1,6 @@
 import { useMemo, useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, MessageCircle, Send, X, Sparkles, Paperclip, Mic, Copy, Plus } from 'lucide-react';
+import { Bot, MessageCircle, Send, X, Sparkles, GraduationCap } from 'lucide-react';
 import { askChatbot } from '../../services/api';
 import './ChatbotWidget.css';
 
@@ -86,122 +86,159 @@ const ChatbotWidget = () => {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="chat-launcher"
-        aria-label="Open college assistant"
+        className="fixed right-6 bottom-6 z-50 flex items-center gap-3 px-2 py-2 pr-6 rounded-full font-bold text-[13px] uppercase tracking-widest text-[#111111] bg-white/80 backdrop-blur-xl border border-white shadow-[0_12px_40px_-10px_rgba(0,0,0,0.15)] transition-all hover:bg-white hover:scale-105 group"
       >
-        <MessageCircle size={20} />
-        <span>Chat Assistant</span>
+        <div className="flex items-center justify-center w-10 h-10 bg-[#FB6D39] text-white rounded-full shadow-md group-hover:rotate-12 transition-transform">
+          <MessageCircle size={20} />
+        </div>
+        <span>BMSIT Assistant</span>
       </button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.section
-            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.98 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="chat-shell"
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed z-[100] right-0 bottom-0 top-0 left-0 md:top-auto md:left-auto md:right-8 md:bottom-8 md:w-[1000px] md:h-[700px] bg-white/60 backdrop-blur-3xl border border-white/80 shadow-[0_24px_60px_-10px_rgba(0,0,0,0.15)] md:rounded-[40px] flex flex-col md:flex-row overflow-hidden"
           >
-            <div className="chat-panel-left">
-              <div className="chat-brand-row">
-                <button type="button" className="ghost-icon">
-                  <Sparkles size={16} />
-                </button>
-                <h3>Chat Results</h3>
-              </div>
-
-              <p className="chat-subtitle">Today</p>
-
-              <div className="chat-history-card featured">
-                <div className="chat-history-top">
-                  <span className="badge">College Assistant</span>
-                  <button type="button" className="ghost-icon small">
-                    <Copy size={14} />
-                  </button>
+            {/* Left Panel - Hidden on Mobile */}
+            <div className="hidden md:flex flex-col w-[320px] bg-white/40 border-r border-white/60 p-6 md:p-8 shrink-0">
+              <div className="flex items-center gap-3 mb-8 shrink-0">
+                <div className="p-3 bg-[#111111] rounded-2xl text-[#FB6D39] shadow-md">
+                  <Sparkles size={20} />
                 </div>
-                <p className="history-title">College Information</p>
-                <p className="history-meta">Admissions, academics, placements, and campus life</p>
+                <h3 className="text-2xl font-serif font-bold text-[#111111]">Assistant</h3>
               </div>
 
-              <p className="chat-subtitle">Quick Suggestions</p>
-              <div className="chat-suggestion-list">
-                {suggestions.slice(0, 4).map((suggestion) => (
-                  <button
-                    key={suggestion}
-                    type="button"
-                    className="history-pill"
-                    onClick={() => sendMessage(suggestion)}
-                  >
-                    {suggestion}
-                  </button>
-                ))}
-              </div>
+              <div className="flex-1 overflow-y-auto pr-2 space-y-6 scrollbar-hide">
+                <div>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 pl-1">Session</p>
+                  <div className="bg-white/60 border border-white rounded-[20px] p-4 shadow-sm relative overflow-hidden group cursor-default">
+                    <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                      <GraduationCap size={40} />
+                    </div>
+                    <div className="flex justify-between items-start mb-2 relative z-10">
+                      <span className="text-[10px] font-bold bg-[#FB6D39]/10 text-[#FB6D39] px-2 py-1 rounded-full uppercase tracking-wider">Campus Guide</span>
+                    </div>
+                    <p className="font-bold text-[#111111] mb-1 relative z-10">General Inquiry</p>
+                    <p className="text-xs text-gray-500 leading-relaxed relative z-10">Admissions, academics, placements, and facilities.</p>
+                  </div>
+                </div>
 
-              <div className="chat-left-footer">
-                <button type="button" className="ghost-icon">
-                  <Plus size={16} />
-                </button>
-                <button type="button" className="ghost-icon">
-                  <Bot size={16} />
-                </button>
+                <div>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 pl-1">Suggested Queries</p>
+                  <div className="flex flex-col gap-2">
+                    {suggestions.slice(0, 4).map((suggestion) => (
+                      <button
+                        key={suggestion}
+                        type="button"
+                        className="text-left text-xs font-medium p-3 bg-white/40 hover:bg-white border border-white/60 rounded-xl text-[#111111] transition-all"
+                        onClick={() => sendMessage(suggestion)}
+                      >
+                        {suggestion}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="chat-panel-right">
-              <div className="chat-topbar">
-                <div className="chat-agent">
-                  <div className="avatar">B</div>
+            {/* Right Panel - Chat Area */}
+            <div className="flex-1 flex flex-col min-h-0 bg-white/20 p-4 md:p-8">
+              {/* Topbar */}
+              <div className="flex items-center justify-between bg-white/60 border border-white/80 p-4 rounded-3xl shadow-sm mb-6 shrink-0">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-[#111111] rounded-full flex items-center justify-center text-[#FB6D39] shadow-md border-2 border-white">
+                    <Bot size={24} />
+                  </div>
                   <div>
-                    <p className="agent-greeting">Hi, welcome!</p>
-                    <h4>BMSIT College Assistant</h4>
+                    <h4 className="font-serif font-bold text-lg text-[#111111] leading-tight">BMSIT&M Guide</h4>
+                    <p className="text-xs text-gray-500 font-medium tracking-wide">Online & Ready to Help</p>
                   </div>
                 </div>
-                <button type="button" className="ghost-icon" onClick={() => setIsOpen(false)}>
-                  <X size={16} />
+                <button 
+                  type="button" 
+                  className="w-10 h-10 flex items-center justify-center bg-white/80 hover:bg-[#111111] text-gray-600 hover:text-white rounded-full transition-colors border border-white shadow-sm"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <X size={18} />
                 </button>
               </div>
 
-              <div className="chat-stream">
+              {/* Chat Stream */}
+              <div className="flex-1 overflow-y-auto mb-6 pr-2 chat-stream flex flex-col gap-4 min-h-0">
                 {visibleMessages.map((message) => (
-                  <article key={message.id} className={`bubble ${message.role}`}>
-                    <p>{message.content}</p>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    key={message.id} 
+                    className={`flex flex-col max-w-[85%] ${message.role === 'user' ? 'self-end items-end' : 'self-start items-start'}`}
+                  >
+                    <div className={`px-5 py-3.5 rounded-3xl shadow-sm text-[14px] leading-relaxed ${
+                      message.role === 'user' 
+                        ? 'bg-[#111111] text-white rounded-br-sm' 
+                        : 'bg-white/80 border border-white text-[#111111] rounded-bl-sm'
+                    }`}>
+                      <p className="whitespace-pre-wrap">{message.content}</p>
+                    </div>
                     {message.sources?.length ? (
-                      <div className="sources">Sources: {message.sources.join(', ')}</div>
+                      <div className="text-[10px] text-gray-500 mt-2 mx-2 px-3 py-1.5 bg-white/40 border border-white/60 rounded-full inline-block">
+                        <span className="font-bold text-[#111111]">Sources:</span> {message.sources.join(', ')}
+                      </div>
                     ) : null}
-                  </article>
+                  </motion.div>
                 ))}
-                {isTyping ? <div className="typing-indicator">Assistant is typing...</div> : null}
+                {isTyping && (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="self-start items-start flex bg-white/80 border border-white rounded-3xl rounded-bl-sm px-5 py-4 shadow-sm">
+                    <div className="flex gap-1.5 items-center justify-center h-4">
+                      <span className="w-1.5 h-1.5 bg-[#FB6D39] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-1.5 h-1.5 bg-[#FB6D39] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-1.5 h-1.5 bg-[#FB6D39] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
+                  </motion.div>
+                )}
                 <div ref={messagesEndRef} />
               </div>
 
-              <div className="chat-action-row">
-                <button type="button" className="action-pill" onClick={() => sendMessage('Show admission contacts')}>
-                  Admissions
-                </button>
-                <button type="button" className="action-pill" onClick={() => sendMessage('Tell me about CSE department')}>
-                  Departments
-                </button>
-                <button type="button" className="action-pill" onClick={() => sendMessage('Placement details')}>
-                  Placements
-                </button>
+              {/* Action Pills */}
+              <div className="flex gap-2 mb-4 overflow-x-auto pb-2 scrollbar-hide shrink-0">
+                {['Admission criteria', 'Academic departments', 'Placements stats', 'Campus life'].map(text => (
+                  <button 
+                    key={text}
+                    type="button" 
+                    className="whitespace-nowrap px-5 py-2.5 bg-white/60 hover:bg-white border border-white/80 rounded-full text-xs font-bold text-[#111111] hover:text-[#FB6D39] transition-colors shadow-sm"
+                    onClick={() => sendMessage(text)}
+                  >
+                    {text}
+                  </button>
+                ))}
               </div>
 
-              <form className="chat-input-row" onSubmit={onSubmit}>
-                <button type="button" className="ghost-icon">
-                  <Paperclip size={16} />
-                </button>
+              {/* Input Area */}
+              <form 
+                className="shrink-0 flex items-center gap-2 bg-white/80 border border-white p-2.5 rounded-full shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]"
+                onSubmit={onSubmit}
+              >
+                <div className="w-10 h-10 flex items-center justify-center text-gray-400">
+                  <Sparkles size={18} className="text-[#FB6D39]" />
+                </div>
                 <input
+                  className="flex-1 bg-transparent border-0 outline-none text-[#111111] text-[14px] placeholder:text-gray-400 px-2"
                   value={input}
                   onChange={(event) => setInput(event.target.value)}
                   placeholder="Ask me anything about BMSIT&M..."
                 />
-                <button type="button" className="ghost-icon">
-                  <Mic size={16} />
-                </button>
-                <button type="submit" className="send-btn" disabled={isTyping || !input.trim()}>
-                  <Send size={15} />
+                <button 
+                  type="submit" 
+                  disabled={isTyping || !input.trim()}
+                  className="w-10 h-10 flex items-center justify-center bg-[#111111] text-white rounded-full shadow-md disabled:opacity-50 hover:bg-[#FB6D39] transition-colors shrink-0"
+                >
+                  <Send size={16} className="ml-1" />
                 </button>
               </form>
+
             </div>
           </motion.section>
         )}
