@@ -7,8 +7,11 @@ const LOADING_MESSAGES = [
   'Finalizing interactive controls...',
 ];
 
+const MIN_LOADING_SCREEN_MS = 2600;
+
 const CampusTour = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMinDurationComplete, setIsMinDurationComplete] = useState(false);
   const [messageIndex, setMessageIndex] = useState(0);
 
   useEffect(() => {
@@ -23,14 +26,24 @@ const CampusTour = () => {
   }, []);
 
   useEffect(() => {
-    if (isLoaded) return undefined;
+    const minDurationTimer = setTimeout(() => {
+      setIsMinDurationComplete(true);
+    }, MIN_LOADING_SCREEN_MS);
+
+    return () => clearTimeout(minDurationTimer);
+  }, []);
+
+  const shouldShowLoader = !isLoaded || !isMinDurationComplete;
+
+  useEffect(() => {
+    if (!shouldShowLoader) return undefined;
 
     const interval = setInterval(() => {
       setMessageIndex((prev) => (prev + 1) % LOADING_MESSAGES.length);
     }, 1400);
 
     return () => clearInterval(interval);
-  }, [isLoaded]);
+  }, [shouldShowLoader]);
 
   const loadingText = useMemo(() => LOADING_MESSAGES[messageIndex], [messageIndex]);
 
@@ -39,13 +52,13 @@ const CampusTour = () => {
       <iframe
         title="College 3D Campus Tour"
         src="/college360/Tour.html"
-        className={`w-full h-full border-0 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`w-full h-full border-0 transition-opacity duration-700 ${shouldShowLoader ? 'opacity-0' : 'opacity-100'}`}
         allow="fullscreen"
         loading="eager"
         onLoad={() => setIsLoaded(true)}
       />
 
-      {!isLoaded && (
+      {shouldShowLoader && (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/80 backdrop-blur-sm">
           <div className="w-[92%] max-w-xl rounded-3xl border border-white/15 bg-white/10 p-6 md:p-8 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)]">
             <div className="relative mb-5 overflow-hidden rounded-2xl border border-white/20">
