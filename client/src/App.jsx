@@ -9,6 +9,7 @@ import Departments from './pages/Departments';
 import DepartmentPage from './pages/DepartmentPage';
 import Academics from './pages/Academics';
 import TeacherDashboard from './pages/teacher-dashboard/TeacherDashboard';
+import CampusTour from './pages/CampusTour';
 
 import StudentLayout from './components/StudentLayout';
 import Dashboard from './pages/student/Dashboard';
@@ -26,14 +27,18 @@ function App() {
   const location = useLocation();
   const hideNavFooter =
     location.pathname === '/portal' ||
+    location.pathname === '/campus-tour' ||
     location.pathname.startsWith('/student') ||
     location.pathname.startsWith('/teacher-dashboard');
+    
+  // Remove padding on Home page so the Hero section flushes to the top
+  const isHome = location.pathname === '/';
 
   return (
     <div className="min-h-screen flex flex-col font-sans relative">
       <div className="fixed inset-0 bg-dashboard -z-10" />
       {!hideNavFooter && <Navbar />}
-      <main className={hideNavFooter ? 'flex-grow' : 'flex-grow pt-20 md:pt-24'}>
+      <main className={hideNavFooter || isHome ? 'flex-grow' : 'flex-grow pt-20 md:pt-24'}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -42,6 +47,7 @@ function App() {
           <Route path="/departments" element={<Departments />} />
           <Route path="/departments/:slug" element={<DepartmentPage />} />
           <Route path="/academics" element={<Academics />} />
+          <Route path="/campus-tour" element={<CampusTour />} />
 
           {/* Teacher Portal Routes */}
           <Route path="/teacher-dashboard/*" element={<TeacherDashboard />} />

@@ -1,55 +1,91 @@
-import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Search, ChevronDown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import landingImg from '../assets/landing.png';
+import logo from '../assets/logobms.png';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image & Soft Gradient */}
-      <div className="absolute inset-0 w-full h-full">
-        <img
-          src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-          alt="BMSIT Campus"
-          className="w-full h-full object-cover object-center opacity-80"
-        />
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#111111]/10 via-[#FB6D39]/5 to-[#B6FA82]/10 backdrop-blur-[2px]" />
-      </div>
+    <div className="min-h-screen bg-white font-sans flex flex-col pb-6">
+      {/* Top Navbar */}
+      <nav className="w-full flex items-center justify-between px-6 lg:px-12 py-4 bg-white z-50">
+        <div className="flex items-center gap-12">
+          {/* Logo */}
+          <Link to="/" className="flex items-center text-[#002147] font-bold text-2xl tracking-tight">
+            <img src={logo} alt="Logo" className="h-10 mr-3 filter brightness-0" />
+            <div className="flex flex-col leading-none">
+              <span className="font-serif">BMSIT&M</span>
+            </div>
+          </Link>
 
-      {/* Glassmorphic Container floating gracefully */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 mt-16 md:mt-24 pb-16">
-        <div className="w-full md:w-[65%] lg:w-[55%]">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="bg-white/60 backdrop-blur-2xl border border-white/80 p-8 md:p-14 lg:p-16 rounded-[32px] shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.12)] transition-all duration-500 relative overflow-hidden group"
-          >
-            {/* Subtle highlight effect on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#B6FA82]/20 via-transparent to-[#FB6D39]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          {/* Left Links */}
+          <div className="hidden lg:flex items-center gap-6 text-[15px] text-gray-700 font-medium">
+            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">About <ChevronDown className="h-3 w-3 text-gray-400" /></div>
+            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">Research <ChevronDown className="h-3 w-3 text-gray-400" /></div>
+            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">Admissions <ChevronDown className="h-3 w-3 text-gray-400" /></div>
+            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">News <ChevronDown className="h-3 w-3 text-gray-400" /></div>
+          </div>
+        </div>
 
-            <div className="relative z-10 space-y-6">
-              <span className="text-[#6B6B6B] font-bold tracking-[0.2em] uppercase text-[11px] block mb-2">Impact your world through study</span>
-              <h1 className="text-4xl md:text-5xl lg:text-[56px] font-serif text-[#111111] leading-[1.05] tracking-tight mb-4 uppercase">
-                BMS INSTITUTE OF<br />
-                TECHNOLOGY AND<br />
-                MANAGEMENT
-              </h1>
-              <div className="w-16 h-[5px] bg-[#FB6D39] rounded-full my-6"></div>
-              <p className="text-[13px] md:text-[15px] font-medium text-[#6B6B6B] leading-relaxed uppercase tracking-[0.1em] max-w-xl">
-                Encourage Students and Faculty to catalyze development of innovation-driven enterprises
-              </p>
-              
-              <div className="pt-6 flex flex-wrap gap-4">
-                <button className="px-8 py-3.5 bg-[#111111] text-white rounded-full hover:bg-[#222222] transition-colors shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 uppercase tracking-widest text-[11px] font-bold duration-300">
-                  Enquire NOW
-                </button>
-                <button className="px-8 py-3.5 bg-white/60 border border-gray-200/50 text-[#111111] rounded-full hover:bg-white hover:text-[#111111] transition-colors shadow-sm hover:shadow-md hover:-translate-y-0.5 uppercase tracking-widest text-[11px] font-bold duration-300">
-                  Circulars
-                </button>
+        {/* Right Side Nav */}
+        <div className="flex items-center gap-8">
+          {/* Right Links */}
+          <div className="hidden xl:flex items-center gap-6 text-[15px] text-gray-700 border-r border-gray-200 pr-8">
+            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">Community <ChevronDown className="h-3 w-3 text-gray-400" /></div>
+            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">Colleges <ChevronDown className="h-3 w-3 text-gray-400" /></div>
+            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">Department <ChevronDown className="h-3 w-3 text-gray-400" /></div>
+          </div>
+
+          {/* Search & Login */}
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center text-gray-400 cursor-text group">
+              <span className="text-[15px] mr-24 group-hover:text-gray-600 transition-colors">Search ..</span>
+              <div className="h-10 w-10 bg-[#002147] rounded-lg flex items-center justify-center text-white cursor-pointer hover:bg-[#00152e] transition-colors shadow-sm">
+                <Search className="h-4 w-4" />
               </div>
             </div>
-          </motion.div>
+            <Link to="/login" className="bg-[#002147] text-white px-8 py-2.5 rounded-lg text-[15px] font-medium hover:bg-[#00152e] transition-colors shadow-sm">
+              Login
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Hero Container */}
+      <div className="flex-1 flex flex-col">
+        <div className="relative w-full flex-1 min-h-[75vh] overflow-hidden bg-white group">
+
+          {/* Campus Tour Button (from incoming commit) */}
+          <button
+            onClick={() => navigate('/campus-tour')}
+            className="absolute top-6 right-6 z-30 pointer-events-auto px-6 py-3 bg-[#FB6D39] text-white rounded-full hover:bg-[#f15f27] transition-colors shadow-[0_8px_20px_rgba(251,109,57,0.28)] hover:shadow-[0_12px_24px_rgba(251,109,57,0.38)] uppercase tracking-widest text-[11px] font-bold duration-300"
+          >
+            Start Virtual 3D Campus Tour
+          </button>
+
+          {/* Giant Typography Effect (Behind the transparent image) */}
+          <div className="absolute inset-0 z-0 flex items-start justify-center pointer-events-none select-none overflow-hidden">
+            <h1
+              className="text-[18vw] xl:text-[22rem] font-serif font-bold tracking-tight text-black whitespace-nowrap leading-none"
+            >
+              BMSIT&M
+            </h1>
+          </div>
+
+          {/* Foreground Image (Transparent PNG rendering over the text, anchored to bottom) */}
+          <div className="absolute inset-0 z-10 pointer-events-none flex items-end justify-center">
+            <img
+              src={landingImg}
+              alt="BMSIT Campus"
+              className="w-full h-full object-contain object-bottom transition-transform duration-1000 group-hover:scale-[1.02]"
+            />
+          </div>
+
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

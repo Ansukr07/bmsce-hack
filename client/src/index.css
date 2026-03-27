@@ -29,12 +29,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Ndot55';
+  src: url('./assets/fonts/Ndot55-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @theme {
   --color-primary: #FB6D39;
   --color-secondary: #B6FA82;
   --color-accent: #111111;
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-ndot: "Ndot55", monospace;
 }
 
 body {
