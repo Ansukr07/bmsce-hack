@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion';
 
+import clubImg from '../assets/images/club.png';
+import facilitiesImg from '../assets/images/facilities.png';
+
 const CampusLife = () => {
   return (
     <section className="py-24 relative overflow-hidden">
@@ -41,7 +44,7 @@ const CampusLife = () => {
             >
               <div className="rounded-[40px] overflow-hidden aspect-[4/5] shadow-2xl relative group bg-gray-100">
                 <img
-                  src="https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                  src={clubImg}
                   alt="Student association"
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                 />
@@ -59,7 +62,7 @@ const CampusLife = () => {
             >
               <div className="rounded-[40px] overflow-hidden aspect-[4/5] shadow-xl relative group bg-gray-100">
                 <img
-                  src="https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                  src={facilitiesImg}
                   alt="Modern Library"
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                 />

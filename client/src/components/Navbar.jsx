@@ -15,6 +15,7 @@ const Navbar = () => {
     { name: 'Departments', path: '/departments' },
     { name: 'Facilities', path: '/facilities' },
     { name: 'Placement', path: '/placement' },
+    { name: 'Publications', path: '/research' },
   ];
 
   return (
@@ -80,14 +81,12 @@ const Navbar = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
-            {/* Orange glowing 3D Tour Button */}
+            {/* Black 3D Tour Button */}
             <button
               onClick={() => navigate('/campus-tour')}
-              className="relative overflow-hidden px-5 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest text-white group"
+              className="px-5 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest text-white bg-[#0a0a0a] hover:bg-black transition-all shadow-sm"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#FB6D39] to-[#ff8f64] transition-all duration-300 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                 3D Tour
               </span>
@@ -135,7 +134,7 @@ const Navbar = () => {
                   setIsOpen(false);
                   navigate('/campus-tour');
                 }}
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-[#FB6D39] to-[#ff8f64] text-[#0a0a0a] font-bold text-xs uppercase tracking-widest shadow-lg"
+                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#0a0a0a] hover:bg-black text-white font-bold text-xs uppercase tracking-widest shadow-lg transition-colors"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                 Virtual 3D Tour

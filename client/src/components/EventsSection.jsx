@@ -1,58 +1,53 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { fetchEvents } from '../services/api';
 
 const EventsSection = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [events, setEvents] = useState([]);
-
-  const fallbackEvents = [
+  const mockEvents = [
     {
       id: 1,
-      title: 'Annual Tech Symposium 2026',
-      date: '2026-04-15T09:00:00Z',
-      category: 'Seminar',
-      description: 'A gathering of minds to discuss the future of AI and sustainable technologies.',
-      location: 'Main Auditorium'
+      title: 'Utsav 2026 - Annual Cultural Fest',
+      date: '2026-04-12T09:00:00Z',
+      category: 'Culture',
+      description: 'The biggest cultural extravaganza of the year featuring music, dance, fashion shows, and celebrity performances.',
+      location: 'Main Campus Ground'
     },
     {
       id: 2,
-      title: 'Spring Art Exhibition',
-      date: '2026-04-20T10:00:00Z',
-      category: 'Arts',
-      description: 'Showcasing the incredible works of our Fine Arts graduating class.',
-      location: 'Creative Arts Center'
+      title: 'Phase Shift - Tech Symposium',
+      date: '2026-05-20T10:00:00Z',
+      category: 'Seminar',
+      description: 'A national-level technical symposium bringing together the brightest minds to showcase AI, Robotics, and IoT innovations.',
+      location: 'CFL Auditorium'
     },
     {
       id: 3,
-      title: 'Inter-College Basketball Finals',
-      date: '2026-05-02T16:00:00Z',
+      title: 'Inter-Departmental Sports Meet',
+      date: '2026-06-05T16:00:00Z',
       category: 'Sports',
-      description: 'Cheer for our team in the highly anticipated championship match.',
+      description: 'Cheer for your department as athletes compete in basketball, football, athletics, and indoor games for the championship cup.',
       location: 'Indoor Stadium'
     },
     {
       id: 4,
-      title: 'Global Cultural Festival',
-      date: '2026-05-10T12:00:00Z',
+      title: 'Kalaakriti - Fine Arts Exhibition',
+      date: '2026-06-15T10:00:00Z',
+      category: 'Arts',
+      description: 'Explore the incredible works of our students, featuring painting, sculpting, and digital arts galleries spanning the campus.',
+      location: 'Creative Arts Center'
+    },
+    {
+      id: 5,
+      title: 'Global Alumni Meet 2026',
+      date: '2026-07-10T18:00:00Z',
       category: 'Culture',
-      description: 'Celebrate diversity with food, music, and performances from around the world.',
-      location: 'Campus Ground'
+      description: 'Reconnect with old friends and expand your professional network at our annual global alumni reunion dinner.',
+      location: 'Narayan Bhavan'
     }
   ];
 
-  useEffect(() => {
-    const loadEvents = async () => {
-      try {
-        const res = await fetchEvents();
-        setEvents(res.data.length > 0 ? res.data : fallbackEvents);
-      } catch (err) {
-        setEvents(fallbackEvents);
-      }
-    };
-    loadEvents();
-  }, []);
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [events, setEvents] = useState(mockEvents);
 
   const categories = ['All', 'Arts', 'Culture', 'Sports', 'Seminar'];
 

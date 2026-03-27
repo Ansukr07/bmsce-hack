@@ -19,7 +19,7 @@ body {
   width: 100%;
 }
 
-nav{
+nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -31,7 +31,7 @@ nav{
   border-bottom: 1px solid #fff;
 }
 
-nav .logo{
+nav .logo {
   padding: 22px;
   height: 80px;
   float: left;
@@ -57,9 +57,144 @@ nav ul li a {
   font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
-  
+
 }
-nav ul li a:hover{
+
+nav ul li a:hover {
   background: rgba(0, 0, 0, 0.7);
   border-radius: 6px;
+}
+
+.glass-btn {
+  /* Removed absolute positioning so it flows in the sidebar flex column */
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: click effect */
+.glass-btn:active {
+  transform: scale(0.98);
+}
+
+/* Tour Sidebar Navigation - Sourced from Stitch MCP 'Archival Monolith' Design */
+.tour-sidebar {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  width: 260px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Scrollbar styling for sidebar */
+.tour-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.tour-sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Clear Glass Category Headers */
+.tour-category-header {
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  padding: 14px 18px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  user-select: none;
+}
+.tour-category-header:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.tour-category-header .arrow {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.8;
+}
+.tour-category-header.open .arrow {
+  transform: rotate(90deg);
+}
+
+/* Recessed Dropdown Container */
+.tour-category-items {
+  max-height: 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3); /* Add subtle darkness inside the drop menu to indicate depth */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.tour-category-items.open {
+  max-height: 500px; /* Large enough to fit inner items */
+}
+
+/* Sub-items (Actual Locations) */
+.tour-nav-item {
+  color: #e2e2e2;
+  padding: 12px 18px 12px 24px;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.05rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.tour-nav-item:last-child {
+  border-bottom: none;
+}
+.tour-nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding-left: 28px; /* Slight indent hover animation */
+}
+.tour-nav-item span.arrow {
+  font-weight: 400;
+  font-size: 14px;
+  opacity: 0.5;
 }

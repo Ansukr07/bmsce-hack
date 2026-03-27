@@ -17,6 +17,8 @@ import EStudio from './pages/EStudio';
 import BICEP from './pages/BICEP';
 import IPCell from './pages/IPCell';
 import HigherEducation from './pages/HigherEducation';
+import ResearchPage from './pages/ResearchPage';
+import PaperDetail from './pages/PaperDetail';
 
 import StudentLayout from './components/StudentLayout';
 import Dashboard from './pages/student/Dashboard';
@@ -37,7 +39,7 @@ function App() {
     location.pathname === '/campus-tour' ||
     location.pathname.startsWith('/student') ||
     location.pathname.startsWith('/teacher-dashboard');
-    
+
   // Remove padding on Home page so the Hero section flushes to the top
   const isHome = location.pathname === '/';
 
@@ -62,6 +64,8 @@ function App() {
           <Route path="/bicep" element={<BICEP />} />
           <Route path="/ip-cell" element={<IPCell />} />
           <Route path="/higher-education" element={<HigherEducation />} />
+          <Route path="/research" element={<ResearchPage />} />
+          <Route path="/research/paper/:id" element={<PaperDetail />} />
 
           {/* Teacher Portal Routes */}
           <Route path="/teacher-dashboard/*" element={<TeacherDashboard />} />
