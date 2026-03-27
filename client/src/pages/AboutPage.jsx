@@ -74,9 +74,10 @@ const ContentRenderer = ({ content, isGrid }) => {
               <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100 shrink-0">
                 <User className="w-6 h-6" />
               </div>
-              <div>
+              <div className="space-y-1.5">
                 <h4 className="font-bold text-[#111111] leading-tight">{block.name}</h4>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#FB6D39] mt-1.5 opacity-90">{block.title}</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-[#FB6D39] opacity-90">{block.title}</p>
+                {block.subtitle && <p className="text-sm text-[#4A4A4A] leading-relaxed">{block.subtitle}</p>}
               </div>
             </div>
           );
@@ -194,8 +195,29 @@ const AboutPage = () => {
                 </h2>
                 <div className="w-12 h-1.5 mt-5 rounded-full bg-[#FB6D39]" />
               </div>
-              
-              <ContentRenderer content={activeData.content} isGrid={isGridContent} />
+
+              {activeTab === 'deans' ? (
+                <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-6 items-start">
+                  <ContentRenderer content={activeData.content} isGrid={false} />
+                  <aside className="bg-white border border-gray-100 rounded-3xl p-4 shadow-sm lg:sticky lg:top-28">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 px-1 pb-3">Leadership Gallery</p>
+                    <div className="grid grid-cols-2 gap-3">
+                      {(activeData.gallery || []).map((photo, idx) => (
+                        <div key={idx} className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50">
+                          <img
+                            src={photo.src}
+                            alt={photo.alt}
+                            className="w-full h-36 object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </aside>
+                </div>
+              ) : (
+                <ContentRenderer content={activeData.content} isGrid={isGridContent} />
+              )}
             </motion.div>
           </AnimatePresence>
         </div>

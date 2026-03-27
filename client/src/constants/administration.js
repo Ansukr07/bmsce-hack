@@ -173,12 +173,50 @@ export const adminData = {
   },
   deans: {
     title: 'Vice Principal & Deans',
+    gallery: [
+      { src: '/pictures/deans/anil-gn.jpg', alt: 'Dr. Anil G N' },
+      { src: '/pictures/deans/satish-kumar-km.jpeg', alt: 'Dr. Satish Kumar K M' },
+      { src: '/pictures/deans/ambika-r.jpeg', alt: 'Dr. Ambika R' },
+      { src: '/pictures/deans/ganesh-p.jpeg', alt: 'Dr. Ganesh P' },
+      { src: '/pictures/deans/seema-singh.jpeg', alt: 'Dr. Seema Singh' },
+    ],
     content: [
-      { type: 'profile_card', name: 'Dr. Anil G N', title: 'Vice Principal' },
-      { type: 'profile_card', name: 'Dr. Satish Kumar K M', title: 'Dean' },
-      { type: 'profile_card', name: 'Dr. Ambika R', title: 'Dean' },
-      { type: 'profile_card', name: 'Dr. Ganesh P', title: 'Dean' },
-      { type: 'profile_card', name: 'Dr. Seema Singh', title: 'Dean' }
+      {
+        type: 'profile_card',
+        name: 'Dr. Anil G N',
+        title: 'Vice Principal',
+        subtitle: 'Professor, Department of Computer Science & Engineering'
+      },
+      {
+        type: 'profile_card',
+        name: 'Dr. Satish Kumar K M',
+        title: 'Dean (Academic Affairs)',
+        subtitle: 'Professor, Department of Mechanical Engineering'
+      },
+      {
+        type: 'profile_card',
+        name: 'Dr. Ambika R',
+        title: 'Dean (Students Welfare)',
+        subtitle: 'Professor, Department of Electronics and Communication Engineering'
+      },
+      {
+        type: 'profile_card',
+        name: 'Dr. Ganesh P',
+        title: 'Dean (Career Guidance)',
+        subtitle: 'Professor, Master of Computer Applications'
+      },
+      {
+        type: 'profile_card',
+        name: 'Dr. Seema Singh',
+        title: 'Dean (Innovation & Entrepreneurship)',
+        subtitle: 'Professor, Department of Electronics and Communication Engineering'
+      },
+      {
+        type: 'profile_card',
+        name: 'Dr. Ganesh P',
+        title: 'Dean (Planning & Development)',
+        subtitle: 'Professor, Master of Computer Applications'
+      }
     ]
   },
   hods: {
