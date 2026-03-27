@@ -1,86 +1,76 @@
-import { Link } from 'react-router-dom';
-import { Search, ChevronDown } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import landingImg from '../assets/landing.png';
-import logo from '../assets/logobms.png';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import frontImg from '../assets/front.jpg';
 
 const Hero = () => {
-  const navigate = useNavigate();
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Scale: starts at 1, goes up aggressively to cover the screen
+  const scale = useTransform(scrollYProgress, [0, 0.5, 0.85, 1], [1, 3, 8, 15]);
+
+  // Sequential Text Opacities (no overlap)
+  const text1Opacity = useTransform(scrollYProgress, [0, 0.15, 0.3], [0, 1, 0]);
+  const text3Opacity = useTransform(scrollYProgress, [0.35, 0.55, 1], [0, 1, 1]);
 
   return (
-    <div className="min-h-screen bg-white font-sans flex flex-col pb-6">
-      {/* Top Navbar */}
-      <nav className="w-full flex items-center justify-between px-6 lg:px-12 py-4 bg-white z-50">
-        <div className="flex items-center gap-12">
-          {/* Logo */}
-          <Link to="/" className="flex items-center text-[#002147] font-bold text-2xl tracking-tight">
-            <img src={logo} alt="Logo" className="h-10 mr-3 filter brightness-0" />
-            <div className="flex flex-col leading-none">
-              <span className="font-serif">BMSIT&M</span>
-            </div>
-          </Link>
+    <div className="bg-[#0a0a0a] text-[#e5e2e1] w-full selection:bg-[#ffb3b5] selection:text-[#0a0a0a]">
+      {/* Scroll Interaction Area */}
+      <div ref={containerRef} className="h-[250vh] relative">
+        <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
 
-          {/* Left Links */}
-          <div className="hidden lg:flex items-center gap-6 text-[15px] text-gray-700 font-medium">
-            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">About <ChevronDown className="h-3 w-3 text-gray-400" /></div>
-            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">Research <ChevronDown className="h-3 w-3 text-gray-400" /></div>
-            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">Admissions <ChevronDown className="h-3 w-3 text-gray-400" /></div>
-            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">News <ChevronDown className="h-3 w-3 text-gray-400" /></div>
-          </div>
-        </div>
-
-        {/* Right Side Nav */}
-        <div className="flex items-center gap-8">
-          {/* Right Links */}
-          <div className="hidden xl:flex items-center gap-6 text-[15px] text-gray-700 border-r border-gray-200 pr-8">
-            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">Community <ChevronDown className="h-3 w-3 text-gray-400" /></div>
-            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">Colleges <ChevronDown className="h-3 w-3 text-gray-400" /></div>
-            <div className="flex items-center gap-1 cursor-pointer hover:text-[#002147] transition-colors">Department <ChevronDown className="h-3 w-3 text-gray-400" /></div>
-          </div>
-
-          {/* Search & Login */}
-          <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center text-gray-400 cursor-text group">
-              <span className="text-[15px] mr-24 group-hover:text-gray-600 transition-colors">Search ..</span>
-              <div className="h-10 w-10 bg-[#002147] rounded-lg flex items-center justify-center text-white cursor-pointer hover:bg-[#00152e] transition-colors shadow-sm">
-                <Search className="h-4 w-4" />
-              </div>
-            </div>
-            <Link to="/login" className="bg-[#002147] text-white px-8 py-2.5 rounded-lg text-[15px] font-medium hover:bg-[#00152e] transition-colors shadow-sm">
-              Login
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Hero Container */}
-      <div className="flex-1 flex flex-col">
-        <div className="relative w-full flex-1 min-h-[75vh] overflow-hidden bg-white group">
-
-          {/* Campus Tour Button (from incoming commit) */}
-          <button
-            onClick={() => navigate('/campus-tour')}
-            className="absolute top-6 right-6 z-30 pointer-events-auto px-6 py-3 bg-[#FB6D39] text-white rounded-full hover:bg-[#f15f27] transition-colors shadow-[0_8px_20px_rgba(251,109,57,0.28)] hover:shadow-[0_12px_24px_rgba(251,109,57,0.38)] uppercase tracking-widest text-[11px] font-bold duration-300"
-          >
-            Start Virtual 3D Campus Tour
-          </button>
-
-          {/* Giant Typography Effect (Behind the transparent image) */}
-          <div className="absolute inset-0 z-0 flex items-start justify-center pointer-events-none select-none overflow-hidden">
-            <h1
-              className="text-[18vw] xl:text-[22rem] font-serif font-bold tracking-tight text-black whitespace-nowrap leading-none"
-            >
-              BMSIT&M
-            </h1>
-          </div>
-
-          {/* Foreground Image (Transparent PNG rendering over the text, anchored to bottom) */}
-          <div className="absolute inset-0 z-10 pointer-events-none flex items-end justify-center">
+          {/* Background */}
+          <div className="absolute inset-0 z-0">
             <img
-              src={landingImg}
+              src={frontImg}
+              className="w-full h-full object-cover"
               alt="BMSIT Campus"
-              className="w-full h-full object-contain object-bottom transition-transform duration-1000 group-hover:scale-[1.02]"
             />
+            <div className="absolute inset-0 bg-[#0a0a0a]/50" />
+          </div>
+
+          {/* Terminal Window Background (Scales) */}
+          <motion.div
+            style={{ scale }}
+            className="relative z-10 w-[90vw] max-w-[1000px] h-[60vh] md:h-[70vh] bg-[#0a0a0a] rounded-xl border border-[#353534] shadow-[0_40px_80px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden origin-center"
+          >
+            {/* Terminal Header */}
+            <div className="h-12 bg-[#131313] flex items-center px-6 border-b border-[#1c1b1b] shrink-0">
+              <div className="flex gap-2">
+                <div className="w-3.5 h-3.5 rounded-full bg-[#ff5f56]"></div>
+                <div className="w-3.5 h-3.5 rounded-full bg-[#ffbd2e]"></div>
+                <div className="w-3.5 h-3.5 rounded-full bg-[#27c93f]"></div>
+              </div>
+              <div className="flex-1 text-center text-xs text-[#a0a0a0] font-ndot tracking-wider" style={{ transform: "scale(1)" }}>save.design</div>
+              <div className="w-14"></div>
+            </div>
+
+            {/* Terminal Body */}
+            <div className="flex-1 bg-[#0a0a0a]"></div>
+          </motion.div>
+
+          {/* Terminal Content (Fixed size, only fades via opacity) */}
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none">
+            <motion.div style={{ opacity: text1Opacity, fontFamily: "'Inter', sans-serif" }} className="absolute text-white text-3xl md:text-5xl tracking-tight">
+              Welcome to
+            </motion.div>
+            <motion.div style={{ opacity: text3Opacity, fontFamily: "'Inter', sans-serif" }} className="absolute text-white text-4xl md:text-6xl lg:text-7xl font-bold text-center px-4 tracking-tight leading-tight">
+              BMS Institute of Technology and Management
+            </motion.div>
+
+            {/* Keep scrolling hint */}
+            <div className="absolute bottom-12 text-xs text-[#a0a0a0] font-ndot flex flex-col items-center gap-2">
+              Keep scrolling
+              <motion.span
+                animate={{ y: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+              >
+                ↓
+              </motion.span>
+            </div>
           </div>
 
         </div>
