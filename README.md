@@ -1,217 +1,110 @@
-# BMSCE Hack
+# BMSIT&M — The Future of Institutional Digital Experience
 
-Modern college website with:
-- React + Vite frontend
-- Node.js + Express backend
-- 3D campus tour
-- Chatbot with ready-made answers for common campus queries
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind-4.2-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.3-0055FF?logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-## Overview
+A premium, editorial-driven institutional website designed for **BMS Institute of Technology and Management**. This project redefines the traditional college portal with a high-end visual language, immersive 3D experiences, and a mobile-first philosophy optimized for the modern student.
 
-This repo contains two deployable apps:
-- `client`: Public website UI (Vercel-friendly)
-- `server`: API backend for programs, events, faculty, testimonials, and chatbot (Railway-friendly)
+---
 
-The chatbot supports suggested prompts and common campus queries with clear, ready-made responses.
+## 🌟 Key Features
 
-## Current Highlights
+### 1. 3D Virtual Campus Tour (360° Immersion)
+*   Experience the campus infrastructure from anywhere in the world.
+*   Interactive panoramas of high-tech labs, libraries, and student hubs.
+*   Seamless integration with a dedicated virtual tour sub-application.
 
-### Chatbot Reliability
-- Suggested/sample prompts return deterministic ready-made answers.
-- Common intents (greeting, admissions, departments, placements, fees, hostel, library, contact) return ready-made responses.
-- Responses can include contextual image cards.
-- Unknown questions receive intent-based page guidance (for example, direct users to `/admissions`, `/academics`, `/placement`, `/campus-life`, `/research`).
+### 2. High-End Editorial UI/UX
+*   **Modern Aesthetics:** Designed with a curated "Placement-Inspired" theme (Background: `#fafafa`, Accent: `#FB6D39`).
+*   **Micro-animations:** Powered by Framer Motion for smooth component transitions and hover effects.
+*   **Typography:** Strategic use of Serif headlines for prestige and Sans-serif body for legibility.
 
-### 3D Campus Tour UX
-- Dedicated route at `/campus-tour`.
-- Immersive loading overlay shown before tour appears.
-- Minimum loading-screen duration to avoid abrupt blank-to-load transitions.
-- Progress text and animated loading bar keep users engaged while 3D assets initialize.
+### 3. Mobile-First Optimization
+*   **Compact Navigation:** A custom 3-column mobile menu grid for fast link access.
+*   **Scroll-Optimization:** Truncated and optimized sections to prevent vertical fatigue on smaller screens.
+-   **Adaptive Components:** All modals, grids, and CTA sections are fine-tuned for touch responsiveness.
 
-### Deployment Readiness
-- Frontend API base uses environment variable `VITE_API_URL` with `/api` fallback.
-- Backend has proper `start` script.
-- Root-level `railway.json` ensures Railway builds/starts from `server` in this monorepo.
+### 4. BMSIT Assistant (Intelligent Bot)
+*   A persistent icon-only chatbot widget for mobile-optimized institutional support.
+*   Fluid overlay system that doesn't obstruct navigation.
 
-## Tech Stack
+### 5. Dynamic Academic Hub
+*   Interactive department cards with deep-dive modal system for "Programs" and "Department" templates.
 
-Frontend:
-- React 19
-- Vite 8
-- Tailwind CSS 4
-- Framer Motion
-- Axios
+---
 
-Backend:
-- Node.js
-- Express 5
-- Mongoose
-- CORS
-- Dotenv
+## 🚀 Future Innovations & Ideas 
 
-## Repository Structure
+To further elevate the institutional digital footprint, we propose the following high-impact features:
 
-```text
-.
-├─ client/
-│  ├─ src/
-│  ├─ public/
-│  │  └─ college360/
-│  └─ package.json
-├─ server/
-│  ├─ controllers/
-│  ├─ routes/
-│  ├─ models/
-│  ├─ data/
-│  ├─ server.js
-│  └─ package.json
-└─ railway.json
-```
+*   **AI-Powered Student Journey Predictor:** An integrated dashboard that analyzes a student's academic progress and research interests to suggest personalized internship and placement opportunities.
+*   **Blockchain-Verified Digital Credentials:** A secure, decentralized portal for students to instantly verify and share their transcripts, degree certificates, and achievement badges with global recruiters.
+*   **AR Indoor Navigation (Wayfinding):** An Augmented Reality layer within the mobile site that helps visitors navigate the campus in real-time using their smartphone cameras.
+*   **Live Research Collaboration Portal:** A "GitHub-style" interface for institutional research where students and faculty can co-author papers and track project milestones in real-time.
+*   **Integrated Smart Fee System:** A frictionless payment gateway integrated with biometric authentication (on-device) for simplified fee and hostel management.
 
-## Local Development
+---
+
+## 🛠️ Tech Stack (Frontend)
+
+*   **Framework:** React 19 (Modern Hooks-only architecture)
+*   **Build Tool:** Vite (For lightning-fast development and optimized production bundles)
+*   **Styling:** Tailwind CSS 4.2 (Utility-first CSS with JIT engine)
+*   **Animations:** Framer Motion (Declarative animations for complex UI states)
+*   **Icons:** Lucide React (Clean, consistent SVG icon set)
+*   **State Management:** React Context API & Modern State Hooks
+
+---
+
+## 💻 Setup Instructions
 
 ### Prerequisites
-- Node.js 18+
-- npm
+-   [Node.js](https://nodejs.org/) (Version 18 or higher recommended)
+-   [npm](https://www.npmjs.com/) (Normally comes with Node.js)
 
-### 1) Clone and install
+### Installation & Local Development
 
-```bash
-git clone https://github.com/Ansukr07/bmsce-hack.git
-cd bmsce-hack
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/Ansukr07/bmsce-hack.git
+    cd bmsce-hack
+    ```
 
-cd client
-npm install
+2.  **Navigate to Client Directory**
+    ```bash
+    cd client
+    ```
 
-cd ../server
-npm install
+3.  **Install Dependencies**
+    ```bash
+    npm install
+    ```
+
+4.  **Start Development Server**
+    ```bash
+    npm run dev
+    ```
+
+5.  **Open in Browser**
+    The app will normally be running at `http://localhost:5173/` (or check the terminal output for the correct port).
+
+---
+
+## 📁 Project Structure
+
+```text
+client/
+├── src/
+│   ├── assets/             # Media, images, and 3D videos
+│   ├── components/         # Reusable UI components (Navbar, Footer, Hero, etc.)
+│   ├── pages/              # Main route components (Home, About, CampusTour)
+│   ├── App.jsx             # Main routing and app lifecycle
+│   └── index.css           # Global design tokens and Tailwind imports
+├── public/
+│   └── college360/         # Standalone 3D Virtual Tour application
+└── package.json            # Dependencies and build scripts
 ```
 
-### 2) Configure environment variables
-
-Server (`server/.env`):
-```env
-MONGO_URI=your_mongodb_atlas_connection_string
-```
-
-Client (`client/.env`, optional for local backend):
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-### 3) Run both apps
-
-Backend:
-```bash
-cd server
-npm start
-```
-
-Frontend:
-```bash
-cd client
-npm run dev
-```
-
-## API Base URL Behavior
-
-In frontend, API base is:
-- `import.meta.env.VITE_API_URL` if provided
-- otherwise `/api`
-
-For production, always set `VITE_API_URL` to your backend domain + `/api`.
-
-Example:
-```env
-VITE_API_URL=https://your-backend-domain/api
-```
-
-## Deployment Guide
-
-### Backend on Railway
-
-1. Create Railway project and service from this repo.
-2. Ensure service is exposed and domain is generated.
-3. `railway.json` already configures build/start for monorepo:
-   - build: `cd server && npm install`
-   - start: `cd server && npm start`
-4. Add Railway Variables:
-   - `MONGO_URI` (required)
-   - `NODE_ENV=production` (recommended)
-
-Test endpoint:
-- `POST https://your-railway-domain/api/chatbot/query`
-
-### Frontend on Vercel
-
-1. Deploy `client` app.
-2. Set environment variable in Vercel:
-   - `VITE_API_URL=https://your-railway-domain/api`
-3. Redeploy.
-
-Without this variable, frontend may call Vercel `/api` and get 404 for chatbot requests.
-
-## Security Notes
-
-- Never commit real credentials in `.env` files.
-- If any MongoDB URI/password was exposed, rotate it immediately in Atlas and update all environments.
-- Keep production secrets only in Railway/Vercel environment variables.
-
-## Useful Commands
-
-Frontend:
-```bash
-cd client
-npm run dev
-npm run build
-npm run preview
-```
-
-Backend:
-```bash
-cd server
-npm start
-```
-
-## Troubleshooting
-
-### Chatbot returns 404 on deployed frontend
-Cause:
-- Frontend calling its own host `/api/...` instead of backend
-
-Fix:
-- Set `VITE_API_URL` on Vercel to Railway backend `/api` URL and redeploy
-
-### Railway build says it cannot detect app
-Cause:
-- Monorepo root detection issue
-
-Fix:
-- Keep `railway.json` at repo root (already included)
-
-### Suggested prompts still fail
-Check:
-- You deployed latest frontend build from `main`
-- Browser cache cleared (hard refresh)
-
-## Additional Ideas
-
-- Add role-based chatbot personalization (student, parent, faculty) with tailored quick actions.
-- Introduce in-chat deep links that open exact sections (for example, admissions eligibility block, placement stats cards).
-- Add multilingual chatbot support (English + Kannada + Hindi) with language auto-detection.
-- Build an AI-powered admission checklist generator based on selected program and category.
-- Add a placement analytics dashboard with year-wise trends and recruiter highlights.
-- Implement push notifications for events, deadlines, and admission milestones.
-- Add downloadable campus-tour snapshots and guided tour paths for labs, library, and hostels.
-- Integrate chatbot conversation analytics to surface unanswered queries and content gaps.
-- Add a lightweight CMS/admin panel for updating FAQ answers and suggested prompts without code changes.
-- Add accessibility enhancements: keyboard-first chatbot controls, high-contrast mode, and screen-reader optimized responses.
-- Add a virtual campus assistant mode that recommends next actions based on the current page context.
-- Add a "compare departments" experience for courses, labs, placements, and research exposure.
-- Add a smart search bar that auto-suggests pages, FAQs, and forms from one input.
-- Add lead-capture forms with counselor callback scheduling for admissions queries.
-- Add alumni spotlight stories with filters by domain, company, and graduation year.
-
-## License
-
-ISC
+---
