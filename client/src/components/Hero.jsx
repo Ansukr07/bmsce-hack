@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Search, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
-import landingImg from '../assets/front.jpg';
+import { Search, ChevronDown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import landingImg from '../assets/landing.png';
 import logo from '../assets/logobms.png';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-white font-sans flex flex-col pb-6">
       {/* Top Navbar */}
@@ -54,6 +57,14 @@ const Hero = () => {
       <div className="flex-1 flex flex-col">
         <div className="relative w-full flex-1 min-h-[75vh] overflow-hidden bg-white group">
 
+          {/* Campus Tour Button (from incoming commit) */}
+          <button
+            onClick={() => navigate('/campus-tour')}
+            className="absolute top-6 right-6 z-30 pointer-events-auto px-6 py-3 bg-[#FB6D39] text-white rounded-full hover:bg-[#f15f27] transition-colors shadow-[0_8px_20px_rgba(251,109,57,0.28)] hover:shadow-[0_12px_24px_rgba(251,109,57,0.38)] uppercase tracking-widest text-[11px] font-bold duration-300"
+          >
+            Start Virtual 3D Campus Tour
+          </button>
+
           {/* Giant Typography Effect (Behind the transparent image) */}
           <div className="absolute inset-0 z-0 flex items-start justify-center pointer-events-none select-none overflow-hidden">
             <h1
@@ -72,7 +83,6 @@ const Hero = () => {
             />
           </div>
 
-          {/* No Bottom Content as requested */}
         </div>
       </div>
     </div>
