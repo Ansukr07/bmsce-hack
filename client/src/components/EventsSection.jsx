@@ -90,7 +90,7 @@ const EventsSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="group flex flex-col md:flex-row items-start md:items-center justify-between py-10 border-b border-gray-200 hover:bg-gray-50 transition-colors px-4 -mx-4 cursor-pointer"
+                className="group flex flex-col md:flex-row items-start md:items-center justify-between py-6 md:py-10 border-b border-gray-200 hover:bg-gray-50 transition-colors px-4 -mx-4 cursor-pointer"
               >
                 <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 w-full md:w-3/4">
                   <div className="min-w-[100px]">

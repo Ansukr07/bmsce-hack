@@ -34,7 +34,7 @@ const FacultySection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: index * 0.15, ease: "easeOut" }}
-              className="group cursor-pointer flex flex-col"
+              className={`group cursor-pointer flex-col ${index > 0 ? 'hidden md:flex' : 'flex'}`}
             >
               <div className="relative overflow-hidden rounded-[40px] mb-8 aspect-[3/4] shadow-[0_12px_40px_-10px_rgba(0,0,0,0.1)] border border-white/50">
                 <img

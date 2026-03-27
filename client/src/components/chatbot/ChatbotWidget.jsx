@@ -86,12 +86,12 @@ const ChatbotWidget = () => {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed left-4 md:left-6 bottom-6 z-50 flex items-center gap-3 px-2 py-2 pr-6 rounded-full font-bold text-[13px] uppercase tracking-widest text-white bg-[#111111] border border-black/20 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.3)] transition-all hover:bg-black hover:scale-105 group"
+        className="fixed left-4 md:left-6 bottom-6 z-50 flex items-center gap-3 p-2 md:pr-6 rounded-full font-bold text-[13px] uppercase tracking-widest text-white bg-[#111111] border border-black/20 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.3)] transition-all hover:bg-black hover:scale-105 group"
       >
         <div className="flex items-center justify-center w-10 h-10 bg-white text-[#111111] rounded-full shadow-md group-hover:rotate-12 transition-transform">
           <MessageCircle size={20} />
         </div>
-        <span>BMSIT Assistant</span>
+        <span className="hidden md:inline">BMSIT Assistant</span>
       </button>
 
       <AnimatePresence>

@@ -143,7 +143,7 @@ const Programs = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="group rounded-[24px] md:rounded-[40px] p-6 md:p-10 flex flex-col min-h-[320px] md:min-h-[420px] transition-all duration-500 bg-white/60 backdrop-blur-2xl text-[#111111] border border-white/50 hover:bg-white hover:border-white/80 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] hover:-translate-y-2 z-0 hover:z-10"
+                  className={`group rounded-[24px] md:rounded-[40px] p-6 md:p-10 flex-col min-h-[320px] md:min-h-[420px] transition-all duration-500 bg-white/60 backdrop-blur-2xl text-[#111111] border border-white/50 hover:bg-white hover:border-white/80 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] hover:-translate-y-2 z-0 hover:z-10 ${idx > 2 ? 'hidden md:flex' : 'flex'}`}
                 >
                   <h3 className="text-xl md:text-2xl lg:text-3xl font-serif leading-tight mb-4 md:mb-6 group-hover:text-[#111111] transition-colors duration-300">
                     {program.name || program.title}
