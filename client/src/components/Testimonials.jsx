@@ -80,7 +80,7 @@ const Testimonials = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, delay: idx * 0.2 }}
-                    className="bg-white rounded-[40px] p-10 lg:p-12 shadow-2xl flex flex-col"
+                    className={`bg-white rounded-[40px] p-10 lg:p-12 shadow-2xl flex-col ${idx > 0 ? 'hidden md:flex' : 'flex'}`}
                   >
                     <p className="text-gray-800 font-sans text-lg lg:text-xl font-medium leading-relaxed mb-10">
                       {t.message}
@@ -99,7 +99,7 @@ const Testimonials = () => {
               </div>
 
               {/* Column 2 - Staggered down slightly on desktop */}
-              <div className="flex flex-col gap-6 md:mt-24">
+              <div className="hidden md:flex flex-col gap-6 md:mt-24">
                 {testimonials.filter((_, i) => i % 2 !== 0).map((t, idx) => (
                   <motion.div
                     key={t.id}

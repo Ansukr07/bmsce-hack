@@ -55,9 +55,7 @@ const FacultySection = () => {
               Learn from distinguished professors and industry leaders who are passionate about teaching and research.
             </p>
           </div>
-          <button className="hidden md:inline-flex px-8 py-3.5 bg-[#111111] text-white rounded-full hover:bg-[#222222] transition-colors shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 uppercase tracking-widest text-[11px] font-bold duration-300">
-            Meet the Faculty
-          </button>
+
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
@@ -68,7 +66,7 @@ const FacultySection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: index * 0.15, ease: "easeOut" }}
-              className="group cursor-pointer flex flex-col"
+              className={`group cursor-pointer flex-col ${index > 0 ? 'hidden md:flex' : 'flex'}`}
             >
               <div className="relative overflow-hidden rounded-[40px] mb-8 aspect-[3/4] shadow-[0_12px_40px_-10px_rgba(0,0,0,0.1)] border border-white/50">
                 <img

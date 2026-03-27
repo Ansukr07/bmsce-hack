@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/logobms.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
 
   const navLinks = [
     { name: 'About', path: '/about' },
@@ -49,7 +48,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-4">
             {/* Black 3D Tour Button */}
             <button
-              onClick={() => navigate('/campus-tour')}
+              onClick={() => window.open('/college360/Tour.html', '_blank')}
               className="px-5 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest text-white bg-[#0a0a0a] hover:bg-black transition-all shadow-sm"
             >
               <span className="flex items-center gap-2">
@@ -78,8 +77,8 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Toggle Button */}
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-white bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-colors">
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-[#0a0a0a] bg-black/5 hover:bg-black/10 rounded-xl border border-black/10 transition-colors">
+            {isOpen ? <X className="h-5 w-5 text-[#0a0a0a]" /> : <Menu className="h-5 w-5 text-[#0a0a0a]" />}
           </button>
         </div>
       </nav>
@@ -92,36 +91,38 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="fixed z-40 top-24 left-4 right-4 bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.8)] rounded-2xl md:hidden overflow-hidden"
+            className="fixed z-40 top-20 left-3 right-3 bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.8)] rounded-2xl md:hidden overflow-hidden"
           >
-            <div className="p-4 space-y-2">
+            <div className="p-3 space-y-1.5">
               <button
                 onClick={() => {
+                  window.open('/college360/Tour.html', '_blank');
                   setIsOpen(false);
-                  navigate('/campus-tour');
                 }}
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#0a0a0a] hover:bg-black text-white font-bold text-xs uppercase tracking-widest shadow-lg transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#0a0a0a] hover:bg-black text-white font-bold text-[10px] uppercase tracking-widest shadow-lg transition-colors"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                Virtual 3D Tour
+                <span className="w-1 h-1 rounded-full bg-white animate-pulse" />
+                3D Campus Tour
               </button>
               
-              <div className="grid grid-cols-2 gap-2 pt-2">
-                {navLinks.map((link) => (
-                  <Link key={link.name} to={link.path} className="px-4 py-3 text-[13px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>
-                    {link.name}
-                  </Link>
-                ))}
+              <div className="grid grid-cols-3 gap-1.5">
+                {navLinks.map((link) => {
+                  return (
+                    <Link key={link.name} to={link.path} className="px-3 py-2 text-[11px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors border border-white/[0.05] text-center" onClick={() => setIsOpen(false)}>
+                      {link.name}
+                    </Link>
+                  );
+                })}
               </div>
 
-              <div className="mt-4 pt-4 border-t border-white/10 px-2 flex flex-col gap-3">
-                <span className="text-[10px] text-[#888] font-bold uppercase tracking-widest pl-2">Portals</span>
-                <div className="flex gap-3">
-                  <Link to="/login?role=staff" className="flex-1 flex justify-center items-center gap-2 py-3 bg-white/5 hover:bg-white/10 transition-colors text-white text-[11px] font-medium tracking-wider rounded-xl border border-white/5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#00dbe9]" /> Staff
+              <div className="mt-1.5 pt-2 border-t border-white/10 px-1 flex flex-col gap-1.5">
+                <span className="text-[9px] text-[#888] font-bold uppercase tracking-widest pl-1">Portals</span>
+                <div className="flex gap-2">
+                  <Link to="/login?role=staff" className="flex-1 flex justify-center items-center gap-1.5 py-2 bg-white/5 hover:bg-white/10 transition-colors text-white text-[10px] font-medium tracking-wider rounded-lg border border-white/5">
+                    <div className="w-1 h-1 rounded-full bg-[#00dbe9]" /> Staff
                   </Link>
-                  <Link to="/login?role=student" className="flex-1 flex justify-center items-center gap-2 py-3 bg-white text-black hover:bg-gray-200 transition-colors text-[11px] font-bold tracking-wider rounded-xl shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#0a0a0a]" /> Student
+                  <Link to="/login?role=student" className="flex-1 flex justify-center items-center gap-1.5 py-2 bg-white text-black hover:bg-gray-200 transition-colors text-[10px] font-bold tracking-wider rounded-lg shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                    <div className="w-1 h-1 rounded-full bg-[#0a0a0a]" /> Student
                   </Link>
                 </div>
               </div>

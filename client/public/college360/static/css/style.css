@@ -198,3 +198,46 @@ nav ul li a:hover {
   font-size: 14px;
   opacity: 0.5;
 }
+
+/* =============================================
+   MOBILE: Hide sidebar nav menu, keep back button
+   ============================================= */
+@media (max-width: 768px) {
+  /* Hide all dynamically injected nav items (categories + sub-items) */
+  .tour-sidebar .tour-category-header,
+  .tour-sidebar .tour-category-items,
+  .tour-sidebar .tour-nav-item {
+    display: none;
+  }
+
+  /* Keep the sidebar visible just for the back button */
+  .tour-sidebar {
+    width: auto;
+    top: 12px;
+    left: 12px;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+    max-height: none;
+  }
+
+  /* Make the back button compact and tidy on mobile */
+  .tour-sidebar .glass-btn {
+    margin: 0;
+    padding: 10px 16px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* Shrink the top nav bar height on mobile */
+  nav {
+    height: 56px;
+    padding: 8px 16px;
+  }
+
+  nav .logo {
+    height: 40px;
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+}
