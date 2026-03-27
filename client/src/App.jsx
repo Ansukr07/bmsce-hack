@@ -34,9 +34,6 @@ import Clubs from './pages/student/Clubs';
 import Notices from './pages/student/Notices';
 import Profile from './pages/student/Profile';
 import { useLanguage } from './context/LanguageContext';
-import campusBg from './assets/images/campus.png';
-import facilitiesBg from './assets/images/facilities.png';
-import classroomBg from './assets/images/classroom.png';
 
 function App() {
   const location = useLocation();
@@ -49,36 +46,14 @@ function App() {
 
   // Remove padding on Home page so the Hero section flushes to the top
   const isHome = location.pathname === '/';
-  const shouldUseCampusBackground =
-    !isHome &&
-    location.pathname !== '/campus-tour' &&
-    location.pathname !== '/portal' &&
-    !location.pathname.startsWith('/student') &&
-    !location.pathname.startsWith('/teacher-dashboard');
 
   useEffect(() => {
     applyLanguage(language);
   }, [location.pathname, language, applyLanguage]);
 
   return (
-    <div className="min-h-screen flex flex-col font-sans relative isolate">
+    <div className="min-h-screen flex flex-col font-sans relative isolate bg-white">
       <div id="google_translate_element" />
-      {isHome ? <div className="fixed inset-0 bg-dashboard -z-10" /> : null}
-      {shouldUseCampusBackground ? (
-        <>
-          <div
-            className="fixed inset-0 pointer-events-none"
-            style={{
-              zIndex: -10,
-              backgroundImage: `url(${campusBg}), url(${facilitiesBg}), url(${classroomBg})`,
-              backgroundPosition: 'center top, left center, right center',
-              backgroundSize: 'cover, 40% auto, 40% auto',
-              backgroundRepeat: 'no-repeat, no-repeat, no-repeat',
-            }}
-          />
-          <div className="fixed inset-0 pointer-events-none bg-[linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.6))] backdrop-blur-[1px]" style={{ zIndex: -5 }} />
-        </>
-      ) : null}
       {!hideNavFooter && <Navbar />}
       <main className={hideNavFooter || isHome ? 'flex-grow' : 'flex-grow pt-20 md:pt-24'}>
         <Routes>
