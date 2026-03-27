@@ -13,6 +13,7 @@ import CampusTour from './pages/CampusTour';
 import NetworkInfrastructure from './pages/NetworkInfrastructure';
 import IdeaLab from './pages/IdeaLab';
 import EStudio from './pages/EStudio';
+import ResearchPage from './pages/ResearchPage';
 
 import StudentLayout from './components/StudentLayout';
 import Dashboard from './pages/student/Dashboard';
@@ -54,6 +55,7 @@ function App() {
           <Route path="/network-infrastructure" element={<NetworkInfrastructure />} />
           <Route path="/idea-lab" element={<IdeaLab />} />
           <Route path="/e-studio" element={<EStudio />} />
+          <Route path="/research" element={<ResearchPage />} />
 
           {/* Teacher Portal Routes */}
           <Route path="/teacher-dashboard/*" element={<TeacherDashboard />} />
