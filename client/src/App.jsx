@@ -8,11 +8,15 @@ import Admissions from './pages/Admissions';
 import Departments from './pages/Departments';
 import DepartmentPage from './pages/DepartmentPage';
 import Academics from './pages/Academics';
+import AboutPage from './pages/AboutPage';
 import TeacherDashboard from './pages/teacher-dashboard/TeacherDashboard';
 import CampusTour from './pages/CampusTour';
 import NetworkInfrastructure from './pages/NetworkInfrastructure';
 import IdeaLab from './pages/IdeaLab';
 import EStudio from './pages/EStudio';
+import BICEP from './pages/BICEP';
+import IPCell from './pages/IPCell';
+import HigherEducation from './pages/HigherEducation';
 import ResearchPage from './pages/ResearchPage';
 import PaperDetail from './pages/PaperDetail';
 import CampusLifePage from './pages/CampusLifePage';
@@ -36,7 +40,7 @@ function App() {
     location.pathname === '/campus-tour' ||
     location.pathname.startsWith('/student') ||
     location.pathname.startsWith('/teacher-dashboard');
-    
+
   // Remove padding on Home page so the Hero section flushes to the top
   const isHome = location.pathname === '/';
 
@@ -50,6 +54,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/placement" element={<Placements />} />
           <Route path="/admissions" element={<Admissions />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/departments" element={<Departments />} />
           <Route path="/departments/:slug" element={<DepartmentPage />} />
           <Route path="/academics" element={<Academics />} />
@@ -57,6 +62,9 @@ function App() {
           <Route path="/network-infrastructure" element={<NetworkInfrastructure />} />
           <Route path="/idea-lab" element={<IdeaLab />} />
           <Route path="/e-studio" element={<EStudio />} />
+          <Route path="/bicep" element={<BICEP />} />
+          <Route path="/ip-cell" element={<IPCell />} />
+          <Route path="/higher-education" element={<HigherEducation />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/research/paper/:id" element={<PaperDetail />} />
           <Route path="/campus-life" element={<CampusLifePage />} />

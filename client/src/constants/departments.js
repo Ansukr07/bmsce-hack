@@ -9,6 +9,8 @@ export const allDepartments = [
   { name: 'Civil Engineering',                            slug: 'civil',      color: '#4F46E5' },
   { name: 'Master of Business Administration (MBA)',      slug: 'mba',        color: '#9333EA' },
   { name: 'Master of Computer Applications (MCA)',        slug: 'mca',        color: '#E11D48' },
+  { name: 'M.Tech in Cyber Security',                     slug: 'cyber-security', color: '#1E293B' },
+  { name: 'M.Tech in VLSI System Design',                 slug: 'vlsi',           color: '#7C3AED' },
 ];
 
 export const departmentData = {
@@ -329,5 +331,71 @@ export const departmentData = {
       { name: 'Prof. Dwarakanath G V', designation: 'Assistant Professor', email: 'dwarakanathgv@bmsit.in' },
     ],
     hod: { name: 'Dr. M Sridevi', email: 'hod_mca@bmsit.in', phone: '080-68730429' },
+  },
+
+  'cyber-security': {
+    fullName: 'M.Tech in Cyber Security',
+    tagline: 'Securing the digital frontier.',
+    established: '2014',
+    accreditation: 'NBA Accredited',
+    vision: 'To be a center of excellence in Cybersecurity, creating experts who can protect global digital infrastructure.',
+    mission: [
+      'Impart advanced knowledge in security protocols and forensics.',
+      'Foster research in cryptographic systems and network security.',
+      'Develop ethical hackers for national security support.',
+    ],
+    stats: [
+      { label: 'Specialized Labs', value: '3' },
+      { label: 'Research Papers', value: '50+' },
+      { label: 'Industry Tie-ups', value: 'Wipro/CISCO' },
+      { label: 'Intake', value: '18' },
+    ],
+    programs: [
+      { degree: 'M.Tech in Cyber Security', level: 'Postgraduate', duration: '2 Years', intake: 18 },
+    ],
+    facilities: [
+      'Cyber Forensics and Digital Security Lab',
+      'Network Security Mock-Drill Center',
+      'Ethical Hacking Workshop Space',
+    ],
+    faculty: [
+      { name: 'Dr. Satish Kumar T', designation: 'Professor & HOD', email: 'hod_cse@bmsit.in' },
+      { name: 'Dr. Anil G N', designation: 'Professor', email: 'anilgn@bmsit.in' },
+      { name: 'Dr. N Rakesh', designation: 'Associate Professor', email: 'nrakesh@bmsit.in' },
+    ],
+    hod: { name: 'Dr. Satish Kumar T', email: 'hod_cse@bmsit.in', phone: '080-68730429' },
+  },
+
+  vlsi: {
+    fullName: 'M.Tech in VLSI System Design',
+    tagline: 'Designing the chips of tomorrow.',
+    established: '2004',
+    accreditation: 'NBA Accredited',
+    vision: 'To excel in VLSI design education and research, fostering innovation in semiconductor technology.',
+    mission: [
+      'Provide hands-on experience with industry-standard EDA tools.',
+      'Encourage research in low-power and high-performance VLSI.',
+      'Collaborate with semiconductor giants for skill development.',
+    ],
+    stats: [
+      { label: 'EDA Tools', value: 'Cadence/Mentor' },
+      { label: 'Chip Tape-outs', value: '2+' },
+      { label: 'Placement Rate', value: '95%' },
+      { label: 'Intake', value: '24' },
+    ],
+    programs: [
+      { degree: 'M.Tech in VLSI System Design', level: 'Postgraduate', duration: '2 Years', intake: 24 },
+    ],
+    facilities: [
+      'Texas Instruments Center of Excellence',
+      'Advanced VLSI Design Lab',
+      'Embedded Systems Integration Lab',
+    ],
+    faculty: [
+      { name: 'Dr. Jayadeva G S', designation: 'Professor & HOD', email: 'hod_ece@bmsit.in' },
+      { name: 'Dr. M C Hanumantharaju', designation: 'Professor', email: 'mchanumantharaju@bmsit.in' },
+      { name: 'Dr. Ambika R', designation: 'Professor', email: 'ambikar@bmsit.in' },
+    ],
+    hod: { name: 'Dr. Jayadeva G S', email: 'hod_ece@bmsit.in', phone: '080-68730429' },
   },
 };

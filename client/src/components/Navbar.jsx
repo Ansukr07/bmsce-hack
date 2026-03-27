@@ -13,7 +13,7 @@ const Navbar = () => {
     { name: 'Admissions', path: '/admissions' },
     { name: 'Academics', path: '/academics' },
     { name: 'Departments', path: '/departments' },
-    { name: 'Facilities', path: '/facilities' },
+    { name: 'Facilities', path: '/network-infrastructure' },
     { name: 'Campus Life', path: '/campus-life' },
     { name: 'Placement', path: '/placement' },
     { name: 'Publications', path: '/research' },
@@ -33,42 +33,16 @@ const Navbar = () => {
 
           {/* Core Desktop Links */}
           <div className="hidden lg:flex items-center space-x-8">
-            {navLinks.map((link) => {
-              if (link.name === 'Facilities') {
-                return (
-                  <div key={link.name} className="relative group/fac">
-                    <span className="cursor-pointer relative text-gray-600 hover:text-[#0a0a0a] transition-colors font-medium text-[13px] tracking-wide group flex items-center gap-1">
-                      {link.name}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70"><path d="m6 9 6 6 6-6"/></svg>
-                      <span className="absolute -bottom-1.5 left-0 w-0 h-[1.5px] bg-[#0a0a0a] transition-all duration-300 group-hover:w-full"></span>
-                    </span>
-                    
-                    <div className="absolute left-0 top-[calc(100%+8px)] w-56 bg-white/90 backdrop-blur-2xl rounded-2xl border border-black/10 py-2 z-50 opacity-0 invisible group-hover/fac:opacity-100 group-hover/fac:visible transition-all duration-300 shadow-xl origin-top-left transform group-hover/fac:scale-100 scale-95">
-                      <Link to="/network-infrastructure" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#FB6D39]" /> Network Infrastructure
-                      </Link>
-                      <Link to="/idea-lab" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#FB6D39]" /> AICTE IDEA Lab
-                      </Link>
-                      <Link to="/e-studio" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#FB6D39]" /> E-Studio
-                      </Link>
-                    </div>
-                  </div>
-                );
-              }
-              
-              return (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className="relative text-gray-600 hover:text-[#0a0a0a] transition-colors font-medium text-[13px] tracking-wide group"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1.5 left-0 w-0 h-[1.5px] bg-[#0a0a0a] transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              );
-            })}
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className="relative text-gray-600 hover:text-[#0a0a0a] transition-colors font-medium text-[13px] tracking-wide group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1.5 left-0 w-0 h-[1.5px] bg-[#0a0a0a] transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            ))}
           </div>
 
           {/* Desktop Actions */}
@@ -134,19 +108,6 @@ const Navbar = () => {
               
               <div className="grid grid-cols-3 gap-1.5">
                 {navLinks.map((link) => {
-                  if (link.name === 'Facilities') {
-                    return (
-                      <div key={link.name} className="col-span-3 flex flex-col gap-1 mt-1 border-t border-white/10 pt-1">
-                        <span className="px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-[#888]">Facilities</span>
-                        <div className="grid grid-cols-3 gap-1">
-                          <Link to="/network-infrastructure" className="px-2 py-2 text-[10px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors border border-white/[0.05] text-center" onClick={() => setIsOpen(false)}>Network</Link>
-                          <Link to="/idea-lab" className="px-2 py-2 text-[10px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors border border-white/[0.05] text-center" onClick={() => setIsOpen(false)}>IDEA Lab</Link>
-                          <Link to="/e-studio" className="px-2 py-2 text-[10px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors border border-white/[0.05] text-center" onClick={() => setIsOpen(false)}>E-Studio</Link>
-                        </div>
-                      </div>
-                    );
-                  }
-                  
                   return (
                     <Link key={link.name} to={link.path} className="px-3 py-2 text-[11px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors border border-white/[0.05] text-center" onClick={() => setIsOpen(false)}>
                       {link.name}

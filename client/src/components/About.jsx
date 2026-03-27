@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
 
-import classroomImg from '../assets/images/classroom.png';
-import campusImg from '../assets/images/campus.png';
-import graduationImg from '../assets/images/graduation.png';
-import libraryImg from '../assets/images/library.png';
 
+
+import imgAcademic from '../assets/campus/academic_block.jpg';
+import imgCampus from '../assets/campus/campus_view.png';
+import imgLibrary from '../assets/campus/library.jpg';
+import imgPathway from '../assets/campus/pathway.png';
 const About = () => {
   return (
     <section className="py-24 relative overflow-hidden px-4 sm:px-6 lg:px-8">
@@ -37,10 +38,10 @@ const About = () => {
         <div className="w-full">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             {[
-              { title: 'Classroom', img: classroomImg },
-              { title: 'Campus', img: campusImg },
-              { title: 'Graduation', img: graduationImg },
-              { title: 'Library', img: libraryImg }
+              { title: 'Academic Block', img: imgAcademic },
+              { title: 'Campus Overview', img: imgCampus },
+              { title: 'Central Library', img: imgLibrary },
+              { title: 'Campus Walk', img: imgPathway }
             ].map((item, idx) => (
               <motion.div
                 key={item.title}
@@ -53,7 +54,7 @@ const About = () => {
                 <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-transparent to-transparent opacity-90" />
                 <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 pr-4">
-                  <span className="text-white/80 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-1 md:mb-2 block">Archive 0{idx + 1}</span>
+                  <span className="text-white/80 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-1 md:mb-2 block"></span>
                   <h4 className="text-white text-lg sm:text-2xl md:text-3xl font-serif italic leading-tight">{item.title}</h4>
                 </div>
               </motion.div>
