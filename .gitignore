@@ -1,0 +1,4 @@
+# Ignore all server environment files
+server/.env
+server/.env.*
+!server/.env.example

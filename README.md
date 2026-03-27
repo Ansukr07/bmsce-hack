@@ -194,7 +194,7 @@ Check:
 - You deployed latest frontend build from `main`
 - Browser cache cleared (hard refresh)
 
-## Additional Ideas (Mandatory)
+## Additional Ideas
 
 - Add role-based chatbot personalization (student, parent, faculty) with tailored quick actions.
 - Introduce in-chat deep links that open exact sections (for example, admissions eligibility block, placement stats cards).
@@ -206,6 +206,11 @@ Check:
 - Integrate chatbot conversation analytics to surface unanswered queries and content gaps.
 - Add a lightweight CMS/admin panel for updating FAQ answers and suggested prompts without code changes.
 - Add accessibility enhancements: keyboard-first chatbot controls, high-contrast mode, and screen-reader optimized responses.
+- Add a virtual campus assistant mode that recommends next actions based on the current page context.
+- Add a "compare departments" experience for courses, labs, placements, and research exposure.
+- Add a smart search bar that auto-suggests pages, FAQs, and forms from one input.
+- Add lead-capture forms with counselor callback scheduling for admissions queries.
+- Add alumni spotlight stories with filters by domain, company, and graduation year.
 
 ## License
 
