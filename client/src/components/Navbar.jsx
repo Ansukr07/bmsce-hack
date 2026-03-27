@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/logobms.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
 
   const navLinks = [
     { name: 'About', path: '/about' },
@@ -49,7 +48,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-4">
             {/* Black 3D Tour Button */}
             <button
-              onClick={() => navigate('/campus-tour')}
+              onClick={() => window.open('/college360/Tour.html', '_blank')}
               className="px-5 py-2 rounded-full font-bold text-[11px] uppercase tracking-widest text-white bg-[#0a0a0a] hover:bg-black transition-all shadow-sm"
             >
               <span className="flex items-center gap-2">
@@ -97,8 +96,8 @@ const Navbar = () => {
             <div className="p-3 space-y-1.5">
               <button
                 onClick={() => {
+                  window.open('/college360/Tour.html', '_blank');
                   setIsOpen(false);
-                  navigate('/campus-tour');
                 }}
                 className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#0a0a0a] hover:bg-black text-white font-bold text-[10px] uppercase tracking-widest shadow-lg transition-colors"
               >
