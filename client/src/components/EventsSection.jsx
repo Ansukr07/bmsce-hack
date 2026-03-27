@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { fetchEvents } from '../services/api';
 
 const EventsSection = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -56,8 +54,8 @@ const EventsSection = () => {
 
   const categories = ['All', 'Arts', 'Culture', 'Sports', 'Seminar'];
 
-  const filteredEvents = activeCategory === 'All' 
-    ? events 
+  const filteredEvents = activeCategory === 'All'
+    ? events
     : events.filter(e => e.category === activeCategory);
 
   return (
@@ -68,17 +66,16 @@ const EventsSection = () => {
             <span className="text-[#FB6D39] font-sans font-semibold tracking-widest uppercase text-[11px] mb-6 block border-l-2 border-[#FB6D39] pl-4">Community</span>
             <h2 className="text-4xl md:text-5xl font-serif text-[#111111] mb-6 uppercase tracking-tight">Upcoming Events</h2>
           </div>
-          
+
           <div className="mt-8 md:mt-0 flex flex-wrap gap-4 justify-end">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`text-sm font-sans font-semibold tracking-wider uppercase pb-1 border-b-2 transition-all duration-300 ${
-                  activeCategory === cat 
-                    ? 'border-black text-black' 
+                className={`text-sm font-sans font-semibold tracking-wider uppercase pb-1 border-b-2 transition-all duration-300 ${activeCategory === cat
+                    ? 'border-black text-black'
                     : 'border-transparent text-gray-400 hover:text-black hover:border-black/30'
-                }`}
+                  }`}
               >
                 {cat}
               </button>
@@ -107,24 +104,24 @@ const EventsSection = () => {
                       {new Date(event.date).toLocaleString('default', { month: 'short' })} '{new Date(event.date).getFullYear().toString().slice(2)}
                     </span>
                   </div>
-                  
+
                   <div>
                     <h3 className="text-2xl md:text-3xl font-serif text-[#111111] mb-2 group-hover:text-[#FB6D39] transition-colors">
                       {event.title}
                     </h3>
                     <p className="text-[#6B6B6B] font-sans text-sm md:text-base pr-4 line-clamp-2 max-w-2xl">
-                        {event.description}
+                      {event.description}
                     </p>
                   </div>
                 </div>
 
                 <div className="mt-6 md:mt-0 flex flex-row md:flex-col items-center justify-between w-full md:w-auto">
-                    <span className="text-[11px] font-sans font-semibold uppercase tracking-widest text-[#6B6B6B] mb-0 md:mb-4">
-                        {event.location}
-                    </span>
-                    <div className="h-12 w-12 rounded-full border border-gray-300 flex items-center justify-center group-hover:bg-[#111111] group-hover:border-[#111111] group-hover:text-white transition-all duration-300">
-                        <ArrowRight className="h-5 w-5 transform -rotate-45" />
-                    </div>
+                  <span className="text-[11px] font-sans font-semibold uppercase tracking-widest text-[#6B6B6B] mb-0 md:mb-4">
+                    {event.location}
+                  </span>
+                  <div className="h-12 w-12 rounded-full border border-gray-300 flex items-center justify-center group-hover:bg-[#111111] group-hover:border-[#111111] group-hover:text-white transition-all duration-300">
+                    <ArrowRight className="h-5 w-5 transform -rotate-45" />
+                  </div>
                 </div>
               </motion.div>
             ))}

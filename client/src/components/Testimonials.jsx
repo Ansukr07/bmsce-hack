@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { fetchTestimonials } from '../services/api';
 
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -53,9 +52,9 @@ const Testimonials = () => {
   return (
     <section className="py-24 lg:py-32 bg-black overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10 w-full">
-        
+
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
-          
+
           {/* Left Title Section - Sticky on large screens */}
           <div className="w-full lg:w-1/3 lg:sticky lg:top-32">
             <h4 className="text-[#FB6D39] font-sans font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-6">

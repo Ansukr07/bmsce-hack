@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { fetchFaculty } from '../services/api';
 
 const FacultySection = () => {
-  const [faculty, setFaculty] = useState([]);
-
   // Fallback data
   const fallbackFaculty = [
     { id: '1', name: 'Dr. Sarah Jenkins', department: 'Computer Science', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80', description: 'Specializes in Machine Learning and AI Ethics.' },
@@ -12,17 +9,7 @@ const FacultySection = () => {
     { id: '3', name: 'Dr. Emily Carter', department: 'Biomedical Engineering', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80', description: 'Pioneer in neuro-prosthetics.' },
   ];
 
-  useEffect(() => {
-    const loadFaculty = async () => {
-      try {
-        const res = await fetchFaculty();
-        setFaculty(res.data.length > 0 ? res.data.slice(0, 3) : fallbackFaculty);
-      } catch (err) {
-        setFaculty(fallbackFaculty);
-      }
-    };
-    loadFaculty();
-  }, []);
+  const [faculty, setFaculty] = useState(fallbackFaculty);
 
   return (
     <section className="py-32 relative px-4 sm:px-6 lg:px-8">
@@ -50,20 +37,20 @@ const FacultySection = () => {
               className="group cursor-pointer flex flex-col"
             >
               <div className="relative overflow-hidden rounded-[40px] mb-8 aspect-[3/4] shadow-[0_12px_40px_-10px_rgba(0,0,0,0.1)] border border-white/50">
-                <img 
-                  src={member.image} 
-                  alt={member.name} 
+                <img
+                  src={member.image}
+                  alt={member.name}
                   className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/90 via-[#111111]/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
-                
+
                 <div className="absolute bottom-0 left-0 w-full p-8 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                   <p className="text-white/90 text-sm md:text-base font-light italic leading-relaxed">
                     "{member.description}"
                   </p>
                 </div>
               </div>
-              
+
               <div className="px-2">
                 <p className="text-[#FB6D39] font-sans uppercase tracking-widest text-[10px] font-bold mb-2">{member.department}</p>
                 <h3 className="text-2xl md:text-3xl font-serif text-[#111111]">{member.name}</h3>
@@ -71,12 +58,12 @@ const FacultySection = () => {
             </motion.div>
           ))}
         </div>
-        
+
         {/* Mobile button */}
         <div className="mt-16 md:hidden text-center">
-            <button className="px-8 py-3.5 bg-[#111111] text-white rounded-full hover:bg-[#222222] transition-colors shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 uppercase tracking-widest text-[11px] font-bold duration-300 w-full">
-              Meet the Faculty
-            </button>
+          <button className="px-8 py-3.5 bg-[#111111] text-white rounded-full hover:bg-[#222222] transition-colors shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 uppercase tracking-widest text-[11px] font-bold duration-300 w-full">
+            Meet the Faculty
+          </button>
         </div>
       </div>
     </section>
