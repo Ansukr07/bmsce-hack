@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import frontImg from '../assets/front.jpg';
 
 const Hero = () => {
+  const navigate = useNavigate();
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -34,6 +36,13 @@ const Hero = () => {
             />
             <div className="absolute inset-0 bg-[#0a0a0a]/50" />
           </div>
+
+          <button
+            onClick={() => navigate('/campus-tour')}
+            className="absolute top-6 right-6 z-30 pointer-events-auto px-6 py-3 bg-[#FB6D39] text-white rounded-full hover:bg-[#f15f27] transition-colors shadow-[0_8px_20px_rgba(251,109,57,0.28)] hover:shadow-[0_12px_24px_rgba(251,109,57,0.38)] uppercase tracking-widest text-[11px] font-bold duration-300"
+          >
+            Start Virtual 3D Campus Tour
+          </button>
 
           {/* Terminal Window Background (Scales) */}
           <motion.div

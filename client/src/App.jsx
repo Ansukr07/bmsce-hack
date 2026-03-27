@@ -8,6 +8,7 @@ import Admissions from './pages/Admissions';
 import Departments from './pages/Departments';
 import Academics from './pages/Academics';
 import TeacherDashboard from './pages/teacher-dashboard/TeacherDashboard';
+import CampusTour from './pages/CampusTour';
 
 import StudentLayout from './components/StudentLayout';
 import Dashboard from './pages/student/Dashboard';
@@ -25,6 +26,7 @@ function App() {
   const location = useLocation();
   const hideNavFooter =
     location.pathname === '/portal' ||
+    location.pathname === '/campus-tour' ||
     location.pathname.startsWith('/student') ||
     location.pathname.startsWith('/teacher-dashboard');
     
@@ -43,6 +45,7 @@ function App() {
           <Route path="/admissions" element={<Admissions />} />
           <Route path="/departments" element={<Departments />} />
           <Route path="/academics" element={<Academics />} />
+          <Route path="/campus-tour" element={<CampusTour />} />
 
           {/* Teacher Portal Routes */}
           <Route path="/teacher-dashboard/*" element={<TeacherDashboard />} />
