@@ -4,6 +4,15 @@ const THEME_STORAGE_KEY = 'bmsit_theme';
 
 const ThemeContext = createContext(null);
 
+const applyThemeToDocument = (nextTheme) => {
+  if (typeof document !== 'undefined') {
+    document.documentElement.setAttribute('data-theme', nextTheme);
+  }
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+  }
+};
+
 const getInitialTheme = () => {
   if (typeof window === 'undefined') {
     return 'light';
@@ -21,18 +30,21 @@ export const ThemeProvider = ({ children }) => {
   const [theme, setThemeState] = useState(getInitialTheme);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-    }
+    applyThemeToDocument(theme);
   }, [theme]);
 
   const setTheme = (nextTheme) => {
-    setThemeState(nextTheme === 'dark' ? 'dark' : 'light');
+    const resolvedTheme = nextTheme === 'dark' ? 'dark' : 'light';
+    applyThemeToDocument(resolvedTheme);
+    setThemeState(resolvedTheme);
   };
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    setThemeState((prev) => {
+      const nextTheme = prev === 'dark' ? 'light' : 'dark';
+      applyThemeToDocument(nextTheme);
+      return nextTheme;
+    });
   };
 
   const value = useMemo(() => ({ theme, setTheme, toggleTheme }), [theme]);

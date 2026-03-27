@@ -27,7 +27,7 @@ const Navbar = () => {
     <>
       {/* FULL-WIDTH ULTRAGLASS TOP NAVBAR (Stitch MCP Synthetix Terminal Design) */}
       <nav className={`fixed top-0 left-0 w-full z-50 backdrop-blur-2xl border-b shadow-[0_4px_40px_rgba(0,0,0,0.08)] ${isDark ? 'bg-[#0f172a]/85 border-white/10' : 'bg-white/70 border-black/[0.06]'}`}>
-        <div className="w-full max-w-[1600px] mx-auto flex flex-nowrap items-center justify-between px-6 lg:px-12 h-20 gap-4">
+        <div className="w-full max-w-[1600px] mx-auto flex items-center px-6 lg:px-12 h-20 gap-4 lg:grid lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-6">
           
           {/* Logo Section */}
           <Link to="/" className="flex shrink-0 items-center gap-3 group whitespace-nowrap">
@@ -36,7 +36,7 @@ const Navbar = () => {
           </Link>
 
           {/* Core Desktop Links */}
-          <div className="hidden lg:flex min-w-0 flex-1 items-center justify-center gap-5 xl:gap-7 whitespace-nowrap">
+          <div className="hidden lg:flex min-w-0 items-center justify-center gap-5 xl:gap-7 whitespace-nowrap">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -50,7 +50,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex shrink-0 items-center gap-3 xl:gap-4 whitespace-nowrap">
+          <div className="hidden md:flex shrink-0 items-center gap-3 xl:gap-4 whitespace-nowrap lg:justify-self-end">
             <button
               type="button"
               onClick={toggleTheme}

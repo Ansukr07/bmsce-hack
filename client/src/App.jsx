@@ -34,6 +34,7 @@ import Clubs from './pages/student/Clubs';
 import Notices from './pages/student/Notices';
 import Profile from './pages/student/Profile';
 import { useLanguage } from './context/LanguageContext';
+import { useTheme } from './context/ThemeContext';
 import campusBg from './assets/images/campus.png';
 import facilitiesBg from './assets/images/facilities.png';
 import classroomBg from './assets/images/classroom.png';
@@ -41,6 +42,8 @@ import classroomBg from './assets/images/classroom.png';
 function App() {
   const location = useLocation();
   const { language, applyLanguage } = useLanguage();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const hideNavFooter =
     location.pathname === '/portal' ||
     location.pathname === '/campus-tour' ||
@@ -76,7 +79,15 @@ function App() {
               backgroundRepeat: 'no-repeat, no-repeat, no-repeat',
             }}
           />
-          <div className="fixed inset-0 pointer-events-none bg-[linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.6))] backdrop-blur-[1px]" style={{ zIndex: -5 }} />
+          <div
+            className="fixed inset-0 pointer-events-none backdrop-blur-[1px]"
+            style={{
+              zIndex: -5,
+              background: isDark
+                ? 'linear-gradient(180deg, rgba(10, 15, 25, 0.72), rgba(13, 18, 28, 0.68))'
+                : 'linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.6))',
+            }}
+          />
         </>
       ) : null}
       {!hideNavFooter && <Navbar />}
