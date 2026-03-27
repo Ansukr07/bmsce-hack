@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const ResearchPage = () => {
   return (
@@ -62,9 +63,9 @@ const ResearchPage = () => {
                   <p className="text-[#c3caac] text-sm leading-[1.6]">{pub.abstract}</p>
                 </div>
                 <div className="mt-8 pt-6 border-t border-[#1c1b1b]">
-                  <button className="text-[#ffffff] text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:text-[#B9F600] transition-colors">
+                  <Link to={`/research/paper/${idx + 1}`} className="text-[#ffffff] text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:text-[#B9F600] transition-colors">
                     Read Paper <span className="text-lg">›</span>
-                  </button>
+                  </Link>
                 </div>
               </motion.div>
             ))}
