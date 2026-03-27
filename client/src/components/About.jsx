@@ -1,5 +1,10 @@
 import { motion } from 'framer-motion';
 
+import classroomImg from '../assets/images/classroom.png';
+import campusImg from '../assets/images/campus.png';
+import graduationImg from '../assets/images/graduation.png';
+import libraryImg from '../assets/images/library.png';
+
 const About = () => {
   return (
     <section className="py-24 relative overflow-hidden px-4 sm:px-6 lg:px-8">
@@ -32,10 +37,10 @@ const About = () => {
         <div className="w-full">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             {[
-              { title: 'Classroom', img: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80' },
-              { title: 'Campus', img: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80' },
-              { title: 'Graduation', img: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80' },
-              { title: 'Library', img: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80' }
+              { title: 'Classroom', img: classroomImg },
+              { title: 'Campus', img: campusImg },
+              { title: 'Graduation', img: graduationImg },
+              { title: 'Library', img: libraryImg }
             ].map((item, idx) => (
               <motion.div
                 key={item.title}
