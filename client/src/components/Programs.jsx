@@ -104,10 +104,18 @@ const Programs = () => {
   };
 
   useEffect(() => {
+    const normalizePrograms = (payload) => {
+      if (Array.isArray(payload)) return payload;
+      if (Array.isArray(payload?.data)) return payload.data;
+      if (Array.isArray(payload?.programs)) return payload.programs;
+      return [];
+    };
+
     const loadPrograms = async () => {
       try {
         const res = await fetchPrograms();
-        setPrograms(res.data.length > 0 ? res.data : fallbackPrograms);
+        const apiPrograms = normalizePrograms(res?.data);
+        setPrograms(apiPrograms.length > 0 ? apiPrograms : fallbackPrograms);
       } catch (err) {
         console.error('Failed to fetch programs:', err);
         setPrograms(fallbackPrograms);
@@ -119,7 +127,7 @@ const Programs = () => {
   }, []);
 
   const tabs = ['Engineering', 'Postgraduate'];
-  const filteredPrograms = programs.filter(p => p.type === activeTab);
+  const filteredPrograms = (Array.isArray(programs) ? programs : []).filter((p) => p.type === activeTab);
 
   const handleOpenModal = (program) => {
     const slug = program.slug || getSlugFromName(program.name || program.title);

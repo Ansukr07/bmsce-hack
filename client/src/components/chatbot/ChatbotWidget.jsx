@@ -1,6 +1,16 @@
 import { useMemo, useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, MessageCircle, Send, X, Sparkles, GraduationCap } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from 'recharts';
 import { askChatbot } from '../../services/api';
 import campusImage from '../../assets/images/campus.png';
 import classroomImage from '../../assets/images/classroom.png';
@@ -20,9 +30,54 @@ const INITIAL_MESSAGE = {
 const FALLBACK_SUGGESTIONS = [
   'Admission criteria for engineering',
   'Top departments and specializations',
-  'Placement support and recruiters',
-  'Campus facilities and clubs',
+  'Management quota fee chart',
+  'Library statistics chart',
 ];
+
+const CHART_DATASETS = {
+  managementFeeUG: {
+    title: 'Management Quota UG Fee Snapshot (Rs. Lakhs / Year)',
+    unit: 'Lakhs',
+    data: [
+      { label: 'Civil', value: 2 },
+      { label: 'EEE', value: 2 },
+      { label: 'ECE', value: 5 },
+      { label: 'CSE', value: 7.5 },
+      { label: 'AI&ML', value: 6 },
+      { label: 'CSBS', value: 5 },
+    ],
+  },
+  librarySnapshot: {
+    title: 'Library Resource Snapshot',
+    unit: 'Count',
+    data: [
+      { label: 'Titles', value: 15738 },
+      { label: 'Volumes', value: 75079 },
+      { label: 'Capacity', value: 223 },
+      { label: 'Digital Systems', value: 20 },
+    ],
+  },
+  cseFacultyStrength: {
+    title: 'CSE Faculty & Research Strength',
+    unit: 'People',
+    data: [
+      { label: 'Faculty', value: 117 },
+      { label: 'Doctorates', value: 43 },
+      { label: 'PhD Pursuing', value: 51 },
+      { label: 'Tech Staff', value: 16 },
+    ],
+  },
+  placementTrend: {
+    title: 'Placement Trend Snapshot (Illustrative Year-Wise)',
+    unit: 'Students Placed',
+    data: [
+      { label: '2022', value: 420 },
+      { label: '2023', value: 465 },
+      { label: '2024', value: 510 },
+      { label: '2025', value: 548 },
+    ],
+  },
+};
 
 const LOCAL_READY_ANSWERS = [
   {
@@ -30,6 +85,8 @@ const LOCAL_READY_ANSWERS = [
     content:
       'Admissions at BMSIT&M (quick guide):\n- UG (B.E.): 12th/PUC with Physics and Mathematics plus one optional science subject; typical minimum around 45%.\n- PG (M.Tech): B.E./B.Tech (or equivalent) with at least 50% aggregate in relevant subjects.\n- PG (MCA): Graduate degree with at least 50% (45% for SC/ST) with applicable background.\n- Final eligibility/cutoffs may vary each cycle; verify with admissions office.',
     images: [graduationImage, classroomImage],
+    chart: CHART_DATASETS.managementFeeUG,
+    sources: ['bmsit.ac.in/admissions', 'BMSIT Management Quota Fee Sheet (2026-27)'],
     suggestions: ['Top departments and specializations', 'Placement support and recruiters'],
   },
   {
@@ -37,6 +94,8 @@ const LOCAL_READY_ANSWERS = [
     content:
       'Top departments and programs (overview):\n- Computer Science & Engineering (CSE)\n- Information Science & Engineering (ISE)\n- Electronics & Communication Engineering (ECE)\n- Mechanical Engineering\n- Civil Engineering\n- AI/ML and emerging technology tracks (as offered in current cycle).',
     images: [classroomImage],
+    chart: CHART_DATASETS.cseFacultyStrength,
+    sources: ['bmsit.ac.in/departments/computer-science-engineering'],
     suggestions: ['Placement support and recruiters', 'Campus facilities and clubs'],
   },
   {
@@ -44,6 +103,8 @@ const LOCAL_READY_ANSWERS = [
     content:
       'Placement and internship support:\n- Training for aptitude, coding, communication, and interviews.\n- Internship support through industry tie-ups and department guidance.\n- Recruiter participation varies by year and branch.\n- Check latest official placement report for current statistics.',
     images: [graduationImage],
+    chart: CHART_DATASETS.placementTrend,
+    sources: ['bmsit.ac.in/placements'],
     suggestions: ['Top departments and specializations', 'Campus facilities and clubs'],
   },
   {
@@ -51,6 +112,8 @@ const LOCAL_READY_ANSWERS = [
     content:
       'Campus facilities and student life:\n- Library with digital access and circulation/reference services.\n- Department labs and project spaces.\n- Technical, cultural, and social clubs.\n- Sports and college-level events throughout the semester.',
     images: [facilitiesImage, clubImage, libraryImage],
+    chart: CHART_DATASETS.librarySnapshot,
+    sources: ['bmsit.ac.in/library'],
     suggestions: ['Admission criteria for engineering', 'How to contact the admissions office'],
   },
   {
@@ -77,6 +140,8 @@ const LOCAL_READY_ANSWERS = [
     content:
       'Fee guidance (indicative):\n- UG management quota fee can vary by branch and year.\n- PG fee slabs vary by program.\n- Please confirm exact current fee structure from official admissions office before payment.',
     images: [graduationImage],
+    chart: CHART_DATASETS.managementFeeUG,
+    sources: ['bmsit.ac.in/admissions'],
     suggestions: ['Admission criteria for engineering', 'How to contact the admissions office'],
   },
   {
@@ -91,7 +156,45 @@ const LOCAL_READY_ANSWERS = [
     content:
       'Library highlights:\n- Library with circulation/reference support and digital resources.\n- Students can access textbooks, journals, and digital content for academics and projects.',
     images: [libraryImage],
+    chart: CHART_DATASETS.librarySnapshot,
+    sources: ['bmsit.ac.in/library'],
     suggestions: ['Campus facilities and clubs', 'Top departments and specializations'],
+  },
+  {
+    patterns: [/fee chart|fees chart|management quota fee chart|fee comparison/i],
+    content:
+      'Here is a quick branch-wise fee comparison chart (management quota UG, annual). For exact latest values and category updates, please verify on official admissions documents.',
+    images: [graduationImage],
+    chart: CHART_DATASETS.managementFeeUG,
+    sources: ['bmsit.ac.in/admissions', 'BMSIT Management Quota Fee Sheet (2026-27)'],
+    suggestions: ['Admission criteria for engineering', 'How to contact the admissions office'],
+  },
+  {
+    patterns: [/library stats|library statistics|library chart/i],
+    content:
+      'Here is a quick library statistics chart from BMSIT resources.',
+    images: [libraryImage],
+    chart: CHART_DATASETS.librarySnapshot,
+    sources: ['bmsit.ac.in/library'],
+    suggestions: ['Campus facilities and clubs', 'Top departments and specializations'],
+  },
+  {
+    patterns: [/cse faculty chart|faculty strength|cse stats/i],
+    content:
+      'Here is a CSE faculty and research strength snapshot based on departmental information.',
+    images: [classroomImage],
+    chart: CHART_DATASETS.cseFacultyStrength,
+    sources: ['bmsit.ac.in/departments/computer-science-engineering'],
+    suggestions: ['Top departments and specializations', 'Placement support and recruiters'],
+  },
+  {
+    patterns: [/placement chart|placements chart|placement graph|recruiter chart|placement trend/i],
+    content:
+      'Here is a placement trend chart for quick reference. Please verify latest branch-wise numbers from official placement updates.',
+    images: [graduationImage],
+    chart: CHART_DATASETS.placementTrend,
+    sources: ['bmsit.ac.in/placements'],
+    suggestions: ['Placement support and recruiters', 'Top departments and specializations'],
   },
 ];
 
@@ -106,6 +209,8 @@ const getLocalReadyAnswer = (message) => {
   return {
     content: matched.content,
     images: matched.images || [],
+    chart: matched.chart || null,
+    sources: matched.sources || [],
     suggestions: matched.suggestions || FALLBACK_SUGGESTIONS,
   };
 };
@@ -221,8 +326,10 @@ const getIntentGuideResponse = (message) => {
   const hintText = (matched.hint || []).map((line) => `- ${line}`).join('\n');
 
   return {
-    content: `Best page for this query: ${matched.pageName} (${matched.path})\n\n${hintText}`,
+    content: `Best page for this query: ${matched.pageName}\n\n${hintText}`,
     images: matched.image ? [matched.image] : [],
+    linkPath: matched.path,
+    linkLabel: `Open ${matched.pageName} Page`,
     suggestions: matched.suggestions,
   };
 };
@@ -237,18 +344,50 @@ const getPageGuidanceFallback = (message) => {
       content:
         'I could not find an exact answer yet. Please head to the About page (/about) or Academics page (/academics) to continue, and you can also try one of the suggested queries.',
       images: [campusImage],
+      linkPath: '/about',
+      linkLabel: 'Open About Page',
       suggestions: FALLBACK_SUGGESTIONS,
     };
   }
 
   return {
-    content: `I could not find an exact answer yet. Please head to the ${matched.pageName} page (${matched.path}) for detailed information.`,
+    content: `I could not find an exact answer yet. Please head to the ${matched.pageName} page for detailed information.`,
     images: matched.image ? [matched.image] : [],
+    linkPath: matched.path,
+    linkLabel: `Open ${matched.pageName} Page`,
     suggestions: matched.suggestions,
   };
 };
 
+const getDisplaySources = (sources = []) =>
+  sources.filter((source) => source && source.toLowerCase() !== 'bmsit.ac.in');
+
+const ChatMessageChart = ({ chart }) => {
+  if (!chart?.data?.length) {
+    return null;
+  }
+
+  return (
+    <div className="mt-3 rounded-xl border border-black/10 bg-white/70 p-3">
+      <p className="text-[11px] font-bold text-[#111111] mb-2">{chart.title}</p>
+      <div className="h-40 w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={chart.data} margin={{ top: 8, right: 8, left: 0, bottom: 6 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.12)" />
+            <XAxis dataKey="label" tick={{ fontSize: 10 }} interval={0} angle={-12} textAnchor="end" height={45} />
+            <YAxis tick={{ fontSize: 10 }} />
+            <Tooltip />
+            <Bar dataKey="value" fill="#FB6D39" radius={[6, 6, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+      {chart.unit ? <p className="text-[10px] text-gray-500 mt-1">Unit: {chart.unit}</p> : null}
+    </div>
+  );
+};
+
 const ChatbotWidget = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [input, setInput] = useState('');
@@ -288,6 +427,8 @@ const ChatbotWidget = () => {
           role: 'assistant',
           content: localAnswer.content,
           images: localAnswer.images,
+          chart: localAnswer.chart,
+          sources: localAnswer.sources,
         },
       ]);
       setSuggestions(localAnswer.suggestions);
@@ -303,6 +444,9 @@ const ChatbotWidget = () => {
           role: 'assistant',
           content: intentGuide.content,
           images: intentGuide.images,
+          sources: intentGuide.sources,
+          linkPath: intentGuide.linkPath,
+          linkLabel: intentGuide.linkLabel,
         },
       ]);
       setSuggestions(intentGuide.suggestions);
@@ -319,6 +463,7 @@ const ChatbotWidget = () => {
         content: response.reply,
         sources: response.sources || [],
         images: response.images || [],
+        chart: response.chart || response.chartData || null,
       };
       setMessages((prev) => [...prev, botMessage]);
       if (response.suggestions?.length) {
@@ -333,6 +478,9 @@ const ChatbotWidget = () => {
           role: 'assistant',
           content: pageGuide.content,
           images: pageGuide.images,
+          sources: pageGuide.sources,
+          linkPath: pageGuide.linkPath,
+          linkLabel: pageGuide.linkLabel,
         },
       ]);
       setSuggestions(pageGuide.suggestions);
@@ -460,10 +608,23 @@ const ChatbotWidget = () => {
                           ))}
                         </div>
                       ) : null}
+                      {message.chart ? <ChatMessageChart chart={message.chart} /> : null}
+                      {message.linkPath ? (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsOpen(false);
+                            navigate(message.linkPath);
+                          }}
+                          className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#111111] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-white hover:bg-black"
+                        >
+                          {message.linkLabel || 'Open Page'}
+                        </button>
+                      ) : null}
                     </div>
-                    {message.sources?.length ? (
+                    {getDisplaySources(message.sources).length ? (
                       <div className="text-[10px] text-gray-500 mt-2 mx-2 px-3 py-1.5 bg-white/40 border border-white/60 rounded-full inline-block">
-                        <span className="font-bold text-[#111111]">Sources:</span> {message.sources.join(', ')}
+                        <span className="font-bold text-[#111111]">Sources:</span> {getDisplaySources(message.sources).join(', ')}
                       </div>
                     ) : null}
                   </motion.div>
