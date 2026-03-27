@@ -15,6 +15,7 @@ import IdeaLab from './pages/IdeaLab';
 import EStudio from './pages/EStudio';
 import ResearchPage from './pages/ResearchPage';
 import PaperDetail from './pages/PaperDetail';
+import CampusLifePage from './pages/CampusLifePage';
 
 import StudentLayout from './components/StudentLayout';
 import Dashboard from './pages/student/Dashboard';
@@ -58,6 +59,7 @@ function App() {
           <Route path="/e-studio" element={<EStudio />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/research/paper/:id" element={<PaperDetail />} />
+          <Route path="/campus-life" element={<CampusLifePage />} />
 
           {/* Teacher Portal Routes */}
           <Route path="/teacher-dashboard/*" element={<TeacherDashboard />} />
