@@ -36,12 +36,12 @@ const Navbar = () => {
           </Link>
 
           {/* Core Desktop Links */}
-          <div className="hidden lg:flex min-w-0 flex-1 items-center justify-center gap-5 xl:gap-7 whitespace-nowrap">
+          <div className="hidden xl:flex min-w-0 flex-1 items-center justify-start 2xl:justify-center px-4 gap-3 xl:gap-5 2xl:gap-7 whitespace-nowrap overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`relative transition-colors font-medium text-[13px] tracking-wide group whitespace-nowrap ${isDark ? 'text-slate-300 hover:text-white' : 'text-gray-600 hover:text-[#0a0a0a]'}`}
+                className={`relative transition-colors font-medium text-[12px] lg:text-[13px] tracking-wide group whitespace-nowrap ${isDark ? 'text-slate-300 hover:text-white' : 'text-gray-600 hover:text-[#0a0a0a]'}`}
               >
                 {link.name}
                 <span className={`absolute -bottom-1.5 left-0 w-0 h-[1.5px] transition-all duration-300 group-hover:w-full ${isDark ? 'bg-white' : 'bg-[#0a0a0a]'}`}></span>
@@ -50,7 +50,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex shrink-0 items-center gap-3 xl:gap-4 whitespace-nowrap">
+          <div className="hidden xl:flex shrink-0 items-center gap-3 xl:gap-4 whitespace-nowrap">
             <button
               type="button"
               onClick={toggleTheme}
@@ -108,7 +108,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Toggle Button */}
-          <button onClick={() => setIsOpen(!isOpen)} className={`md:hidden p-2 rounded-xl border transition-colors ${isDark ? 'text-white bg-white/10 hover:bg-white/20 border-white/20' : 'text-[#0a0a0a] bg-black/5 hover:bg-black/10 border-black/10'}`}>
+          <button onClick={() => setIsOpen(!isOpen)} className={`xl:hidden p-2 rounded-xl border transition-colors ${isDark ? 'text-white bg-white/10 hover:bg-white/20 border-white/20' : 'text-[#0a0a0a] bg-black/5 hover:bg-black/10 border-black/10'}`}>
             {isOpen ? <X className={`h-5 w-5 ${isDark ? 'text-white' : 'text-[#0a0a0a]'}`} /> : <Menu className={`h-5 w-5 ${isDark ? 'text-white' : 'text-[#0a0a0a]'}`} />}
           </button>
         </div>
@@ -122,7 +122,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="fixed z-40 top-20 left-3 right-3 bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.8)] rounded-2xl md:hidden overflow-hidden"
+            className="fixed z-40 top-20 left-3 right-3 bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.8)] rounded-2xl xl:hidden overflow-hidden"
           >
             <div className="p-3 space-y-1.5">
               <button
