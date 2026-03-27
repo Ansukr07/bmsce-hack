@@ -35,7 +35,7 @@ A premium, editorial-driven institutional website designed for **BMS Institute o
 
 ---
 
-## 🚀 Future Innovations & Ideas (Mandatory Hackathon Section)
+## 🚀 Future Innovations & Ideas 
 
 To further elevate the institutional digital footprint, we propose the following high-impact features:
 
