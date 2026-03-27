@@ -9,16 +9,16 @@ import { allDepartments, departmentData } from '../constants/departments';
 // ─────────────────────────────────────────────────────────────────────────────
 const programStats = [
   { name: 'Undergraduate (B.E.)', count: '10 Branches', icon: <GraduationCap className="w-6 h-6" /> },
-  { name: 'Postgraduate (M.Tech)', count: '4 Streams',  icon: <BookOpen className="w-6 h-6" /> },
-  { name: 'Management (MBA)',      count: 'Research Center', icon: <Users className="w-6 h-6" /> },
-  { name: 'Applications (MCA)',    count: 'Top Placements', icon: <Terminal className="w-6 h-6" /> },
+  { name: 'Postgraduate (M.Tech)', count: '4 Streams', icon: <BookOpen className="w-6 h-6" /> },
+  { name: 'Management (MBA)', count: 'Research Center', icon: <Users className="w-6 h-6" /> },
+  { name: 'Applications (MCA)', count: 'Top Placements', icon: <Terminal className="w-6 h-6" /> },
 ];
 
 const highlights = [
-  { title: "NBA Accredited",  desc: "UG program accredited till 2025, reflecting strong academic quality.",     icon: <Award className="w-7 h-7" /> },
-  { title: "117+ Faculty",    desc: "Including 43 Doctorates and 51 currently pursuing Ph.D.",                  icon: <Users className="w-7 h-7" /> },
+  { title: "NBA Accredited", desc: "UG program accredited till 2025, reflecting strong academic quality.", icon: <Award className="w-7 h-7" /> },
+  { title: "117+ Faculty", desc: "Including 43 Doctorates and 51 currently pursuing Ph.D.", icon: <Users className="w-7 h-7" /> },
   { title: "14 Research Centers", desc: "Recognized by VTU, fostering a deep culture of innovation and discovery.", icon: <Cpu className="w-7 h-7" /> },
-  { title: "Top Placements",   desc: "Strong industry links with 25 LPA+ highest packages for top branches.", icon: <CheckCircle2 className="w-7 h-7" /> },
+  { title: "Top Placements", desc: "Strong industry links with 25 LPA+ highest packages for top branches.", icon: <CheckCircle2 className="w-7 h-7" /> },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -92,7 +92,7 @@ const Departments = () => {
 
   return (
     <div className="w-full min-h-screen font-sans bg-[#F8FAFC]">
-      
+
       {/* Hero Section */}
       <section className="relative pt-32 pb-24 px-6 lg:px-16 overflow-hidden bg-white border-b border-gray-100">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#FB6D39]/5 to-transparent pointer-events-none" />
