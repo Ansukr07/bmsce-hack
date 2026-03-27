@@ -38,10 +38,6 @@ const About = () => {
         <div className="w-full">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             {[
-              { title: 'Classroom', img: classroomImg },
-              { title: 'Campus', img: campusImg },
-              { title: 'Graduation', img: graduationImg },
-              { title: 'Library', img: libraryImg }
               { title: 'Academic Block', img: imgAcademic },
               { title: 'Campus Overview', img: imgCampus },
               { title: 'Central Library', img: imgLibrary },
