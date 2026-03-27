@@ -51,6 +51,15 @@ const Navbar = () => {
                       <Link to="/e-studio" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#FB6D39]" /> E-Studio
                       </Link>
+                      <Link to="/bicep" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#FB6D39]" /> BICEP Incubation
+                      </Link>
+                      <Link to="/ip-cell" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#FB6D39]" /> IP Cell
+                      </Link>
+                      <Link to="/higher-education" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#FB6D39]" /> Higher Education
+                      </Link>
                     </div>
                   </div>
                 );
@@ -138,10 +147,13 @@ const Navbar = () => {
                     return (
                       <div key={link.name} className="col-span-2 flex flex-col gap-2 mt-2 border-t border-white/10 pt-2">
                         <span className="px-4 py-1 text-[11px] font-bold uppercase tracking-widest text-[#888]">Facilities</span>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div className="grid grid-cols-2 gap-2">
                           <Link to="/network-infrastructure" className="px-4 py-2.5 text-[12px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>Network Info</Link>
                           <Link to="/idea-lab" className="px-4 py-2.5 text-[12px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>IDEA Lab</Link>
                           <Link to="/e-studio" className="px-4 py-2.5 text-[12px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>E-Studio</Link>
+                          <Link to="/bicep" className="px-4 py-2.5 text-[12px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>BICEP</Link>
+                          <Link to="/ip-cell" className="px-4 py-2.5 text-[12px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>IP Cell</Link>
+                          <Link to="/higher-education" className="px-4 py-2.5 text-[12px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>Higher Ed.</Link>
                         </div>
                       </div>
                     );
