@@ -31,16 +31,42 @@ const Navbar = () => {
 
           {/* Core Desktop Links */}
           <div className="hidden lg:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className="relative text-gray-600 hover:text-[#0a0a0a] transition-colors font-medium text-[13px] tracking-wide group"
-              >
-                {link.name}
-                <span className="absolute -bottom-1.5 left-0 w-0 h-[1.5px] bg-[#0a0a0a] transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              if (link.name === 'Facilities') {
+                return (
+                  <div key={link.name} className="relative group/fac">
+                    <span className="cursor-pointer relative text-gray-600 hover:text-[#0a0a0a] transition-colors font-medium text-[13px] tracking-wide group flex items-center gap-1">
+                      {link.name}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70"><path d="m6 9 6 6 6-6"/></svg>
+                      <span className="absolute -bottom-1.5 left-0 w-0 h-[1.5px] bg-[#0a0a0a] transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                    
+                    <div className="absolute left-0 top-[calc(100%+8px)] w-56 bg-white/90 backdrop-blur-2xl rounded-2xl border border-black/10 py-2 z-50 opacity-0 invisible group-hover/fac:opacity-100 group-hover/fac:visible transition-all duration-300 shadow-xl origin-top-left transform group-hover/fac:scale-100 scale-95">
+                      <Link to="/network-infrastructure" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#FB6D39]" /> Network Infrastructure
+                      </Link>
+                      <Link to="/idea-lab" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#FB6D39]" /> AICTE IDEA Lab
+                      </Link>
+                      <Link to="/e-studio" className="flex items-center gap-3 px-5 py-3 text-[12px] text-gray-600 hover:bg-black/5 hover:text-black transition-colors tracking-wide">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#FB6D39]" /> E-Studio
+                      </Link>
+                    </div>
+                  </div>
+                );
+              }
+              
+              return (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className="relative text-gray-600 hover:text-[#0a0a0a] transition-colors font-medium text-[13px] tracking-wide group"
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1.5 left-0 w-0 h-[1.5px] bg-[#0a0a0a] transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              );
+            })}
           </div>
 
           {/* Desktop Actions */}
@@ -107,11 +133,26 @@ const Navbar = () => {
               </button>
               
               <div className="grid grid-cols-2 gap-2 pt-2">
-                {navLinks.map((link) => (
-                  <Link key={link.name} to={link.path} className="px-4 py-3 text-[13px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>
-                    {link.name}
-                  </Link>
-                ))}
+                {navLinks.map((link) => {
+                  if (link.name === 'Facilities') {
+                    return (
+                      <div key={link.name} className="col-span-2 flex flex-col gap-2 mt-2 border-t border-white/10 pt-2">
+                        <span className="px-4 py-1 text-[11px] font-bold uppercase tracking-widest text-[#888]">Facilities</span>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                          <Link to="/network-infrastructure" className="px-4 py-2.5 text-[12px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>Network Info</Link>
+                          <Link to="/idea-lab" className="px-4 py-2.5 text-[12px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>IDEA Lab</Link>
+                          <Link to="/e-studio" className="px-4 py-2.5 text-[12px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>E-Studio</Link>
+                        </div>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <Link key={link.name} to={link.path} className="px-4 py-3 text-[13px] font-medium tracking-wide text-[#a0a0a0] hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/[0.05]" onClick={() => setIsOpen(false)}>
+                      {link.name}
+                    </Link>
+                  );
+                })}
               </div>
 
               <div className="mt-4 pt-4 border-t border-white/10 px-2 flex flex-col gap-3">
