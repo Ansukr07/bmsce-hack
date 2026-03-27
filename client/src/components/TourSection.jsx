@@ -1,10 +1,34 @@
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import campusImg from '../assets/images/campus.png';
 
 const TourSection = () => {
+  const navigate = useNavigate();
+  const [isLaunchingTour, setIsLaunchingTour] = useState(false);
+
+  const openTourExperience = () => {
+    setIsLaunchingTour(true);
+    setTimeout(() => {
+      navigate('/campus-tour');
+    }, 120);
+  };
+
   return (
-    <section className="py-24 bg-[#fafafa] overflow-hidden">
+    <section className="relative py-24 bg-[#fafafa] overflow-hidden">
+      {isLaunchingTour && (
+        <div className="fixed inset-0 z-[120] bg-black/75 backdrop-blur-sm flex items-center justify-center">
+          <div className="rounded-2xl border border-white/15 bg-white/10 px-6 py-5 text-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+            <p className="text-[11px] uppercase tracking-[0.2em] text-white/75 mb-2">Preparing Tour</p>
+            <div className="flex items-center gap-3">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#FB6D39] shadow-[0_0_0_8px_rgba(251,109,57,0.22)] animate-pulse" />
+              <p className="text-sm font-medium">Launching 3D campus experience...</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           
@@ -25,7 +49,7 @@ const TourSection = () => {
             </p>
             
             <motion.button
-              onClick={() => window.open('/college360/Tour.html', '_blank')}
+              onClick={openTourExperience}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="group flex items-center gap-4 px-8 py-5 bg-[#111111] text-white rounded-full font-bold uppercase tracking-widest text-[11px] lg:text-xs transition-all hover:bg-black shadow-xl"
@@ -57,7 +81,7 @@ const TourSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="relative group cursor-pointer"
-              onClick={() => window.open('/college360/Tour.html', '_blank')}
+              onClick={openTourExperience}
             >
               {/* Image with overlay mask */}
               <div className="rounded-[32px] lg:rounded-[60px] overflow-hidden aspect-video lg:aspect-square relative shadow-2xl border border-white/20">

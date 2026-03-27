@@ -116,6 +116,11 @@ const PAGE_GUIDES = [
     pageName: 'Admissions',
     path: '/admissions',
     image: graduationImage,
+    hint: [
+      'Check UG/PG eligibility and admission process details.',
+      'Verify category-wise fee details and required documents.',
+      'For latest deadlines, use official admissions updates.',
+    ],
     suggestions: ['Admission criteria for engineering', 'How to contact the admissions office'],
   },
   {
@@ -123,6 +128,11 @@ const PAGE_GUIDES = [
     pageName: 'Academics / Departments',
     path: '/academics',
     image: classroomImage,
+    hint: [
+      'Explore department-wise programs and specialization tracks.',
+      'Review curriculum and lab-focused learning areas.',
+      'Use departments section for branch-specific highlights.',
+    ],
     suggestions: ['Top departments and specializations', 'Academic departments'],
   },
   {
@@ -130,6 +140,11 @@ const PAGE_GUIDES = [
     pageName: 'Placements',
     path: '/placement',
     image: graduationImage,
+    hint: [
+      'View placement support process and recruiter participation.',
+      'Check internship and career-readiness activities.',
+      'Use this page for placement-focused updates.',
+    ],
     suggestions: ['Placement support and recruiters', 'Placements stats'],
   },
   {
@@ -137,6 +152,11 @@ const PAGE_GUIDES = [
     pageName: '3D Campus Tour',
     path: '/campus-tour',
     image: campusImage,
+    hint: [
+      'Launch the immersive 360 campus walkthrough.',
+      'Use desktop for smoother interaction with 3D scenes.',
+      'Allow a few seconds for first-time asset loading.',
+    ],
     suggestions: ['Campus life', 'Campus facilities and clubs'],
   },
   {
@@ -144,6 +164,11 @@ const PAGE_GUIDES = [
     pageName: 'Campus Life',
     path: '/campus-life',
     image: facilitiesImage,
+    hint: [
+      'See clubs, events, and extracurricular opportunities.',
+      'Find facilities like labs, library, and activity spaces.',
+      'Use this page for student engagement highlights.',
+    ],
     suggestions: ['Campus facilities and clubs', 'Library details'],
   },
   {
@@ -151,6 +176,11 @@ const PAGE_GUIDES = [
     pageName: 'Research',
     path: '/research',
     image: classroomImage,
+    hint: [
+      'Explore research centers, publications, and innovation initiatives.',
+      'Check project ecosystems like Idea Lab and related cells.',
+      'Use research pages for detailed paper and center info.',
+    ],
     suggestions: ['Research centers', 'Innovation programs'],
   },
   {
@@ -158,6 +188,11 @@ const PAGE_GUIDES = [
     pageName: 'About',
     path: '/about',
     image: campusImage,
+    hint: [
+      'Find institute profile, vision, and leadership overview.',
+      'Use this page for official contact and address details.',
+      'Navigate here for high-level institutional information.',
+    ],
     suggestions: ['How to contact the admissions office', 'About the institute'],
   },
   {
@@ -165,9 +200,32 @@ const PAGE_GUIDES = [
     pageName: 'Student Portal',
     path: '/portal',
     image: classroomImage,
+    hint: [
+      'Access attendance, marks, timetable, and student tasks.',
+      'Use portal routes for notices, profile, and resources.',
+      'Sign in to continue with student-specific services.',
+    ],
     suggestions: ['Student portal help', 'Academic departments'],
   },
 ];
+
+const getIntentGuideResponse = (message) => {
+  const matched = PAGE_GUIDES.find((guide) =>
+    guide.patterns.some((pattern) => pattern.test(message))
+  );
+
+  if (!matched) {
+    return null;
+  }
+
+  const hintText = (matched.hint || []).map((line) => `- ${line}`).join('\n');
+
+  return {
+    content: `Best page for this query: ${matched.pageName} (${matched.path})\n\n${hintText}`,
+    images: matched.image ? [matched.image] : [],
+    suggestions: matched.suggestions,
+  };
+};
 
 const getPageGuidanceFallback = (message) => {
   const matched = PAGE_GUIDES.find((guide) =>
@@ -233,6 +291,21 @@ const ChatbotWidget = () => {
         },
       ]);
       setSuggestions(localAnswer.suggestions);
+      return;
+    }
+
+    const intentGuide = getIntentGuideResponse(trimmed);
+    if (intentGuide) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `assistant-intent-${Date.now()}`,
+          role: 'assistant',
+          content: intentGuide.content,
+          images: intentGuide.images,
+        },
+      ]);
+      setSuggestions(intentGuide.suggestions);
       return;
     }
 
