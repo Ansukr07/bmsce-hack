@@ -1,204 +1,247 @@
-import { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap, Users, Award, Cpu, MapPin, Phone, Mail, CheckCircle2, ChevronRight, BookOpen } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, ArrowRight, ChevronRight, Award, Users, Cpu, CheckCircle2, GraduationCap, BookOpen, Terminal } from 'lucide-react';
+import { allDepartments, departmentData } from '../constants/departments';
 
-const programs = [
-  { degree: "B.E. in Computer Science & Engineering", level: "Undergraduate", duration: "4 Years", intake: 900, description: "Core CS topics including algorithms, databases, networks, AI/ML with heavy emphasis on project-based learning." },
-  { degree: "M.Tech in Computer Science & Engineering", level: "Postgraduate", duration: "2 Years", intake: 18, description: "NBA-accredited PG program focusing on advanced networks, security, AI, and data science. Includes 8-week industry internships." },
-  { degree: "M.Tech in Cyber Security", level: "Postgraduate", duration: "2 Years", intake: 18, description: "Industry-aligned curriculum (EC-Council partner) emphasizing network security, forensics, and modern cyber-defense techniques." },
-  { degree: "M.Tech in VLSI System Design", level: "Postgraduate", duration: "2 Years", intake: 24, description: "In-depth training in chip design and embedded systems using industry-standard EDA tools." }
+// ─────────────────────────────────────────────────────────────────────────────
+// Data for restored sections
+// ─────────────────────────────────────────────────────────────────────────────
+const programStats = [
+  { name: 'Undergraduate (B.E.)', count: '10 Branches', icon: <GraduationCap className="w-6 h-6" /> },
+  { name: 'Postgraduate (M.Tech)', count: '4 Streams',  icon: <BookOpen className="w-6 h-6" /> },
+  { name: 'Management (MBA)',      count: 'Research Center', icon: <Users className="w-6 h-6" /> },
+  { name: 'Applications (MCA)',    count: 'Top Placements', icon: <Terminal className="w-6 h-6" /> },
 ];
 
 const highlights = [
-  { title: "NBA Accredited", desc: "UG program accredited till 2025 reflecting strong academic quality.", icon: <Award className="w-8 h-8" /> },
-  { title: "117+ Faculty", desc: "Including 43 Doctorates and 51 pursuing Ph.D.", icon: <Users className="w-8 h-8" /> },
-  { title: "NVIDIA CoE", desc: "Center of Excellence for AI/ML with dedicated GPU servers.", icon: <Cpu className="w-8 h-8" /> }
+  { title: "NBA Accredited",  desc: "UG program accredited till 2025, reflecting strong academic quality.",     icon: <Award className="w-7 h-7" /> },
+  { title: "117+ Faculty",    desc: "Including 43 Doctorates and 51 currently pursuing Ph.D.",                  icon: <Users className="w-7 h-7" /> },
+  { title: "14 Research Centers", desc: "Recognized by VTU, fostering a deep culture of innovation and discovery.", icon: <Cpu className="w-7 h-7" /> },
+  { title: "Top Placements",   desc: "Strong industry links with 25 LPA+ highest packages for top branches.", icon: <CheckCircle2 className="w-7 h-7" /> },
 ];
 
-const facilities = [
-  "VTU-approved CSE Research Centre (since 2014) with 20+ lakhs in funded projects.",
-  "NVIDIA Center of Excellence for Deep Learning and Graphics.",
-  "BMSIT Incubation Center (BICEP) & Campus Idea Lab.",
-  "High-performance computing and Embedded systems labs.",
-  "Extensive engineering library and online IEEE journals."
-];
+// ─────────────────────────────────────────────────────────────────────────────
+// Sub-component: ProgramCard (matching user image)
+// ─────────────────────────────────────────────────────────────────────────────
+const ProgramCard = ({ level, duration, title, description, intake, color, onClick }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    whileHover={{ y: -5 }}
+    onClick={onClick}
+    className="relative group bg-white rounded-[40px] p-8 pb-10 border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 cursor-pointer flex flex-col min-h-[420px]"
+  >
+    {/* Top Badges */}
+    <div className="flex justify-between items-start mb-8">
+      <span
+        className="text-[11px] font-bold uppercase tracking-[0.15em] pt-1"
+        style={{ color: color }}
+      >
+        {level}
+      </span>
+      <span className="bg-[#111111] text-white text-[11px] font-bold px-5 py-2.5 rounded-full tracking-wider">
+        {duration}
+      </span>
+    </div>
 
+    {/* Title & Description */}
+    <div className="flex-grow">
+      <h3 className="text-[26px] font-bold leading-[1.2] text-[#111111] mb-5 group-hover:text-black transition-colors min-h-[3.6em]">
+        {title}
+      </h3>
+      <p className="text-[#6B6B6B] leading-relaxed text-[15px] font-medium max-w-[95%]">
+        {description}
+      </p>
+    </div>
+
+    {/* Bottom Footer */}
+    <div className="pt-8 border-t border-[#EDEDED] flex justify-between items-end">
+      <div>
+        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#A3A3A3] mb-1.5">
+          Approved Intake
+        </p>
+        <p className="text-3xl font-bold text-[#111111]">
+          {intake} <span className="text-lg font-semibold text-[#6B6B6B] ml-1">Seats</span>
+        </p>
+      </div>
+
+      <div
+        className="w-14 h-14 rounded-full border border-[#E5E5E5] flex items-center justify-center group-hover:bg-[#111111] group-hover:border-[#111111] text-[#111111] group-hover:text-white transition-all duration-300"
+      >
+        <ChevronRight className="w-6 h-6" strokeWidth={2.5} />
+      </div>
+    </div>
+  </motion.div>
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
 const Departments = () => {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showResults, setShowResults] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const filteredItems = allDepartments.filter(dept =>
+    dept.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="w-full min-h-screen relative font-sans text-[#111111]">
+    <div className="w-full min-h-screen font-sans bg-[#F8FAFC]">
       
       {/* Hero Section */}
-      <section className="relative w-full text-[#111111] pt-24 pb-32 px-6 lg:px-16 overflow-hidden rounded-bl-[80px]">
-        <div className="max-w-7xl mx-auto relative z-10 flex flex-col lg:flex-row gap-16 items-center">
-          <div className="lg:w-[60%]">
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-5xl md:text-7xl font-serif font-bold uppercase leading-tight mb-8"
-            >
-              Admissions & <br/><span className="text-[#FB6D39]">Programs</span>
-            </motion.h1>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="w-24 h-1 bg-[#FB6D39] mb-8" 
-            />
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-lg md:text-xl font-medium text-[#6B6B6B] leading-relaxed max-w-2xl font-serif italic"
-            >
-              "To be a centre of excellence in Computer Science and Engineering education and research, nurturing technically competent, ethically responsible, and socially conscious professionals."
-            </motion.p>
-          </div>
-          
-          <div className="lg:w-[40%] flex flex-col gap-6 w-full">
-            <div className="bg-white/60 backdrop-blur-3xl p-8 md:p-12 rounded-[40px] border border-white/80 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.05)]">
-              <h3 className="text-3xl font-serif mb-4 flex items-center gap-4 text-[#111111]"><BookOpen className="w-8 h-8 text-[#FB6D39]" /> Flagship Dept.</h3>
-              <p className="text-[#6B6B6B] leading-relaxed font-sans">
-                The Computer Science & Engineering department currently boasts an annual intake of 900 undergraduate scholars.
-              </p>
+      <section className="relative pt-32 pb-24 px-6 lg:px-16 overflow-hidden bg-white border-b border-gray-100">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#FB6D39]/5 to-transparent pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10 text-center lg:text-left">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20">
+            <div className="flex-grow">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center gap-3 mb-8 justify-center lg:justify-start"
+              >
+                <div className="w-10 h-[2px] bg-[#FB6D39] rounded-full" />
+                <span className="text-sm font-bold uppercase tracking-[0.3em] text-[#FB6D39]">
+                  BMSIT Campus Portal
+                </span>
+              </motion.div>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-6xl md:text-8xl font-bold uppercase tracking-tight text-[#111111] leading-[0.85]"
+              >
+                Find Your <br /> Future.
+              </motion.h1>
+            </div>
+
+            {/* Search Box */}
+            <div className="w-full lg:w-[450px] relative group mx-auto lg:mx-0">
+              <div className={`flex items-center bg-[#F4F4F4] rounded-full px-8 py-5 transition-all duration-300 border-2 shadow-2xl shadow-black/5 ${showResults ? 'border-[#111111] bg-white' : 'border-transparent hover:border-gray-200'}`}>
+                <Search className="w-6 h-6 text-[#A3A3A3]" />
+                <input
+                  type="text"
+                  placeholder="Search departments..."
+                  value={searchQuery}
+                  onFocus={() => setShowResults(true)}
+                  onBlur={() => setTimeout(() => setShowResults(false), 200)}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-transparent outline-none px-4 text-lg font-medium text-[#111111] placeholder:text-[#A3A3A3]"
+                />
+              </div>
+
+              {/* Dropdown Results */}
+              <AnimatePresence>
+                {showResults && searchQuery && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute top-full left-0 right-0 mt-3 bg-white rounded-[32px] shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-gray-100 overflow-hidden z-50 p-2 text-left"
+                  >
+                    {filteredItems.length > 0 ? (
+                      filteredItems.map((dept) => (
+                        <button
+                          key={dept.slug}
+                          onClick={() => navigate(`/departments/${dept.slug}`)}
+                          className="w-full flex items-center justify-between p-5 hover:bg-[#F8F9FA] rounded-[24px] transition-all group"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: dept.color }} />
+                            <span className="text-lg font-bold text-[#111111]">{dept.name}</span>
+                          </div>
+                          <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[#111111] transition-all" />
+                        </button>
+                      ))
+                    ) : (
+                      <div className="p-8 text-center text-gray-400 font-medium italic">No matches found</div>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Department Highlights */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-16 -mt-16 relative z-20 mb-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {highlights.map((item, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ y: 20, opacity: 0 }} 
-              whileInView={{ y: 0, opacity: 1 }} 
-              viewport={{ once:true }} 
-              transition={{ delay: idx * 0.1 }} 
-              className={`rounded-[32px] p-8 shadow-2xl flex flex-col items-center text-center ${idx === 1 ? 'bg-[#111111] text-white' : 'bg-white/60 backdrop-blur-2xl border border-white/80 text-[#111111]'}`}
-            >
-                <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 ${idx === 1 ? 'bg-white/10 text-[#FB6D39]' : 'bg-white/80 text-[#FB6D39] border border-gray-100'}`}>
-                    {item.icon}
+      {/* Grid Section - 3 COLUMNS */}
+      <section className="max-w-[1400px] mx-auto px-6 lg:px-16 mt-20 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {allDepartments.map((dept) => {
+            const data = departmentData[dept.slug];
+            const primaryProgram = data.programs[0];
+
+            return (
+              <ProgramCard
+                key={dept.slug}
+                level={primaryProgram.level}
+                duration={primaryProgram.duration}
+                title={data.fullName}
+                description={data.tagline}
+                intake={primaryProgram.intake}
+                color={dept.color}
+                onClick={() => navigate(`/departments/${dept.slug}`)}
+              />
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Program Stats - Restored Dark Section */}
+      <section className="py-24 bg-[#111111] mx-6 lg:mx-16 rounded-[60px] mb-32 overflow-hidden relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_#FB6D39_0%,_transparent_70%)] opacity-[0.03]" />
+
+        <div className="max-w-7xl mx-auto px-12 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {programStats.map((prog, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="flex flex-col gap-4 text-center items-center group"
+              >
+                <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#FB6D39] group-hover:bg-[#FB6D39] group-hover:text-white transition-all duration-500">
+                  {prog.icon}
                 </div>
-                <h4 className="text-2xl font-serif font-bold mb-4">{item.title}</h4>
-                <p className={`text-sm leading-relaxed ${idx === 1 ? 'text-white/80' : 'text-[#6B6B6B]'}`}>{item.desc}</p>
+                <span className="text-3xl font-bold text-white tracking-tight">{prog.count}</span>
+                <div className="w-8 h-[2px] bg-[#FB6D39]" />
+                <span className="text-sm font-bold uppercase tracking-widest text-white/40">{prog.name}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Highlights Grid - Restored Section */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-16 mb-40">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {highlights.map((h, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group bg-white rounded-[40px] p-10 border border-gray-100 hover:border-[#FB6D39]/20 transition-all duration-500 shadow-sm"
+            >
+              <div className="w-16 h-16 rounded-2xl bg-[#F4F4F4] flex items-center justify-center text-[#111111] mb-8 group-hover:bg-[#111111] group-hover:text-white transition-all duration-500">
+                {h.icon}
+              </div>
+              <h3 className="text-2xl font-bold uppercase tracking-tight text-[#111111] mb-4">
+                {h.title}
+              </h3>
+              <p className="text-[#6B6B6B] leading-relaxed font-medium">
+                {h.desc}
+              </p>
             </motion.div>
           ))}
-        </div>
-      </section>
-
-      {/* Program Offerings */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-16 w-full relative z-10">
-            <div className="mb-16">
-                <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#111111] mb-6 uppercase tracking-tight">Academic Programs</h2>
-                <p className="text-sm font-bold text-[#FB6D39] uppercase tracking-widest border-l-4 border-[#FB6D39] pl-6 max-w-2xl">
-                    Comprehensive undergraduate and postgraduate programs designed with strict industry alignment.
-                </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {programs.map((prog, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="group bg-white/60 backdrop-blur-3xl rounded-[40px] p-8 md:p-12 shadow-sm hover:bg-white hover:border-[#FB6D39] transition-all duration-500 border border-white/80"
-                >
-                  <div className="flex justify-between items-start mb-6">
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#FB6D39] group-hover:text-[#111111] transition-colors">{prog.level}</span>
-                    <span className="bg-[#111111] text-white text-xs font-bold px-4 py-2 rounded-full shadow-sm">{prog.duration}</span>
-                  </div>
-                  <h3 className="text-3xl font-serif font-bold leading-tight mb-6 text-[#111111]">{prog.degree}</h3>
-                  <p className="text-[#6B6B6B] group-hover:text-[#111111]/80 transition-colors leading-relaxed mb-10 h-20">
-                    {prog.description}
-                  </p>
-                  
-                  <div className="flex justify-between items-end border-t border-gray-200 group-hover:border-[#FB6D39]/20 pt-6 transition-colors">
-                    <div>
-                      <span className="text-xs font-bold uppercase tracking-widest text-gray-400 group-hover:text-[#111111]/50 block mb-1">Approved Intake</span>
-                      <span className="text-3xl font-serif font-bold py-1 inline-block text-[#111111]">{prog.intake} Seats</span>
-                    </div>
-                    <button className="w-12 h-12 rounded-full border border-gray-300 group-hover:border-[#111111] flex items-center justify-center group-hover:bg-[#111111] text-[#111111] group-hover:text-white transition-colors">
-                      <ChevronRight className="w-6 h-6" />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-        </div>
-      </section>
-
-      {/* Facilities & Contact */}
-      <section className="py-24 relative overflow-hidden text-[#111111] border-t border-white/40">
-        <div className="max-w-7xl mx-auto px-6 lg:px-16 w-full flex flex-col lg:flex-row gap-16 relative z-10">
-          
-          {/* Research & Facilities */}
-          <div className="lg:w-[55%]">
-            <h2 className="text-4xl font-serif font-bold mb-12 uppercase tracking-tight text-[#111111]">Research & Facilities</h2>
-            <div className="space-y-6">
-                {facilities.map((fac, idx) => (
-                    <motion.div 
-                        key={idx}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: idx * 0.05 }}
-                        className="flex items-start gap-5 p-6 bg-white/60 backdrop-blur-2xl rounded-[24px] border border-white/80 hover:shadow-xl hover:border-[#FB6D39] transition-colors"
-                    >
-                        <CheckCircle2 className="w-6 h-6 text-[#FB6D39] flex-shrink-0 mt-0.5" />
-                        <p className="text-lg font-medium text-[#111111] leading-relaxed">{fac}</p>
-                    </motion.div>
-                ))}
-            </div>
-          </div>
-
-          {/* Contact & Enquiry */}
-          <div className="lg:w-[45%]">
-            <div className="bg-[#111111] p-10 md:p-14 rounded-[40px] shadow-[0_12px_40px_-10px_rgba(0,0,0,0.2)] sticky top-32 text-white">
-              <h2 className="text-3xl font-serif font-bold mb-10 uppercase tracking-tight text-white">Admissions Enquiry</h2>
-              
-              <div className="space-y-8">
-                  <div className="flex items-start gap-5 group">
-                      <div className="p-3 bg-white/10 rounded-full group-hover:bg-[#FB6D39] transition-all">
-                          <Mail className="w-6 h-6 text-[#FB6D39] group-hover:text-white" />
-                      </div>
-                      <div className="flex flex-col gap-1 pt-1.5">
-                          <a href="mailto:principal@bmsit.in" className="text-lg font-medium text-white hover:text-[#FB6D39] transition-colors">principal@bmsit.in</a>
-                      </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-5 group">
-                      <div className="p-3 bg-white/10 rounded-full group-hover:bg-[#FB6D39] transition-all">
-                          <Phone className="w-6 h-6 text-[#FB6D39] group-hover:text-white" />
-                      </div>
-                      <div className="flex flex-col gap-1 pt-1.5">
-                          <span className="text-lg font-medium text-white">080-68730444 (Office)</span>
-                      </div>
-                  </div>
-
-                  <div className="flex items-start gap-5 group">
-                      <div className="p-3 bg-white/10 rounded-full group-hover:bg-[#FB6D39] transition-all">
-                          <MapPin className="w-6 h-6 text-[#FB6D39] group-hover:text-white" />
-                      </div>
-                      <p className="text-lg font-medium text-white leading-relaxed pt-1.5">
-                          BMS Institute of Technology & Management,<br/>
-                          Doddaballapur Main Road,<br/>
-                          Avalahalli, Yelahanka,<br/>
-                          Bengaluru - 560119.
-                      </p>
-                  </div>
-              </div>
-              
-            </div>
-          </div>
-          
         </div>
       </section>
 

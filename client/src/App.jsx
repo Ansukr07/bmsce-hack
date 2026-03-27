@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Placements from './pages/Placements';
 import Admissions from './pages/Admissions';
 import Departments from './pages/Departments';
+import DepartmentPage from './pages/DepartmentPage';
 import Academics from './pages/Academics';
 import TeacherDashboard from './pages/teacher-dashboard/TeacherDashboard';
 
@@ -39,6 +40,7 @@ function App() {
           <Route path="/placement" element={<Placements />} />
           <Route path="/admissions" element={<Admissions />} />
           <Route path="/departments" element={<Departments />} />
+          <Route path="/departments/:slug" element={<DepartmentPage />} />
           <Route path="/academics" element={<Academics />} />
 
           {/* Teacher Portal Routes */}
