@@ -110,6 +110,86 @@ const getLocalReadyAnswer = (message) => {
   };
 };
 
+const PAGE_GUIDES = [
+  {
+    patterns: [/admission|eligibility|apply|cet|pgcet|fee|fees|tuition|scholarship/i],
+    pageName: 'Admissions',
+    path: '/admissions',
+    image: graduationImage,
+    suggestions: ['Admission criteria for engineering', 'How to contact the admissions office'],
+  },
+  {
+    patterns: [/department|cse|ise|ece|mechanical|civil|branch|program|course|academics/i],
+    pageName: 'Academics / Departments',
+    path: '/academics',
+    image: classroomImage,
+    suggestions: ['Top departments and specializations', 'Academic departments'],
+  },
+  {
+    patterns: [/placement|placements|internship|recruiter|career|job/i],
+    pageName: 'Placements',
+    path: '/placement',
+    image: graduationImage,
+    suggestions: ['Placement support and recruiters', 'Placements stats'],
+  },
+  {
+    patterns: [/tour|3d|virtual|campus tour/i],
+    pageName: '3D Campus Tour',
+    path: '/campus-tour',
+    image: campusImage,
+    suggestions: ['Campus life', 'Campus facilities and clubs'],
+  },
+  {
+    patterns: [/campus life|club|clubs|facility|facilities|hostel|library|sports|fest/i],
+    pageName: 'Campus Life',
+    path: '/campus-life',
+    image: facilitiesImage,
+    suggestions: ['Campus facilities and clubs', 'Library details'],
+  },
+  {
+    patterns: [/research|paper|publication|innovation|idea lab|ip cell|bicep|e studio/i],
+    pageName: 'Research',
+    path: '/research',
+    image: classroomImage,
+    suggestions: ['Research centers', 'Innovation programs'],
+  },
+  {
+    patterns: [/about|history|vision|mission|management|contact|phone|email|address/i],
+    pageName: 'About',
+    path: '/about',
+    image: campusImage,
+    suggestions: ['How to contact the admissions office', 'About the institute'],
+  },
+  {
+    patterns: [/student portal|portal|attendance|marks|timetable|tasks|resources|forum|notices|profile/i],
+    pageName: 'Student Portal',
+    path: '/portal',
+    image: classroomImage,
+    suggestions: ['Student portal help', 'Academic departments'],
+  },
+];
+
+const getPageGuidanceFallback = (message) => {
+  const matched = PAGE_GUIDES.find((guide) =>
+    guide.patterns.some((pattern) => pattern.test(message))
+  );
+
+  if (!matched) {
+    return {
+      content:
+        'I could not find an exact answer yet. Please head to the About page (/about) or Academics page (/academics) to continue, and you can also try one of the suggested queries.',
+      images: [campusImage],
+      suggestions: FALLBACK_SUGGESTIONS,
+    };
+  }
+
+  return {
+    content: `I could not find an exact answer yet. Please head to the ${matched.pageName} page (${matched.path}) for detailed information.`,
+    images: matched.image ? [matched.image] : [],
+    suggestions: matched.suggestions,
+  };
+};
+
 const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
@@ -172,14 +252,17 @@ const ChatbotWidget = () => {
         setSuggestions(response.suggestions);
       }
     } catch (error) {
+      const pageGuide = getPageGuidanceFallback(trimmed);
       setMessages((prev) => [
         ...prev,
         {
           id: `assistant-error-${Date.now()}`,
           role: 'assistant',
-          content: 'I could not reach the college assistant service right now. Please try again in a moment.',
+          content: pageGuide.content,
+          images: pageGuide.images,
         },
       ]);
+      setSuggestions(pageGuide.suggestions);
     } finally {
       setIsTyping(false);
     }
