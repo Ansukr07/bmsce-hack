@@ -96,8 +96,118 @@ viewer.add(panorama_main_gate,panorama_cf_middle,panorama_canal_gate, panorama_c
   panorama_ce_labs,
   panorama_cf_first_floor)
 
+// === Dynamic Sidebar Generation ===
+const groupedLocations = [
+  {
+    category: "Entrances & Exteriors",
+    items: [
+      { name: "Main Campus Entrance", pano: panorama_main_gate },
+      { name: "Dental Campus Entrance", pano: panorama_canal_gate },
+      { name: "Girls Hostel", pano: panorama_girls_hostel },
+      { name: "Dental Front", pano: panorama_Dental_Front_Tech_Side }
+    ]
+  },
+  {
+    category: "Core Faculty Block",
+    items: [
+      { name: "CFL Outside", pano: panorama_cf_outside },
+      { name: "CFL Middle", pano: panorama_cf_middle },
+      { name: "CFL Back Side", pano: panorama_CF_back_side },
+      { name: "CFL First Floor", pano: panorama_cf_first_floor }
+    ]
+  },
+  {
+    category: "Student Amenities",
+    items: [
+      { name: "Front Canteen", pano: panorama_front_canteen },
+      { name: "Front Library", pano: panorama_front_library },
+      { name: "Front Narayan Bhavan", pano: panorama_front_narayan_bhavan },
+      { name: "Infront Seminar Hall", pano: panorama_infront_seminar_hall },
+      { name: "Seminar Hall", pano: panorama_seminar_hall }
+    ]
+  },
+  {
+    category: "Civil Engineering",
+    items: [
+      { name: "CE Dept Area", pano: panorama_ce_dept_from_library },
+      { name: "CE Dept Steps", pano: panorama_CE_dept_steps },
+      { name: "CE HOD Office", pano: panorama_ce_hod_office },
+      { name: "CE Labs", pano: panorama_ce_labs },
+      { name: "CE Lab 5", pano: panorama_ce_lab5 },
+      { name: "Infront CE Lab 5", pano: panorama_infront_ce_lab5 },
+      { name: "Down CE Labs", pano: panorama_down_ce_labs },
+      { name: "CE Lab 5 Garden", pano: panorama_ce_lab5_garden },
+      { name: "CE Lab 8", pano: panorama_ce_lab8 }
+    ]
+  },
+  {
+    category: "Electronics",
+    items: [
+      { name: "EC Dept Steps", pano: panorama_EC_dept_steps },
+      { name: "EC NVC Lab", pano: panorama_EC_nvc_lab_first }
+    ]
+  },
+  {
+    category: "Chemistry",
+    items: [
+      { name: "CH Lab", pano: panorama_CH_lab }
+    ]
+  }
+];
 
+document.addEventListener("DOMContentLoaded", () => {
+    const sidebar = document.querySelector('.tour-sidebar');
+    if (!sidebar) return;
+    
+    // Keep only the back button if present
+    const backBtn = sidebar.querySelector('.glass-btn');
+    sidebar.innerHTML = '';
+    if (backBtn) sidebar.appendChild(backBtn);
+    
+    // Generate accordion menu items dynamically
+    groupedLocations.forEach((group, index) => {
+      // Create Category Header
+      const header = document.createElement('div');
+      header.className = 'tour-category-header';
+      header.innerHTML = `<span style="text-transform: uppercase;">${group.category}</span> <span class="arrow">❯</span>`;
+      
+      // Create Category Items Container
+      const itemsContainer = document.createElement('div');
+      itemsContainer.className = 'tour-category-items';
+      
+      // Open the first group by default
+      if (index === 0) {
+        header.classList.add('open');
+        itemsContainer.classList.add('open');
+      }
 
+      // Add click listener to toggle dropdown
+      header.onclick = () => {
+        const isOpen = header.classList.contains('open');
+        // Close all other groups (accordion behavior)
+        document.querySelectorAll('.tour-category-header').forEach(h => h.classList.remove('open'));
+        document.querySelectorAll('.tour-category-items').forEach(c => c.classList.remove('open'));
+        
+        // Open this one if it wasn't already open
+        if (!isOpen) {
+          header.classList.add('open');
+          itemsContainer.classList.add('open');
+        }
+      };
 
+      // Populate Sub-items
+      group.items.forEach(loc => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'tour-nav-item';
+        itemDiv.innerHTML = `<span>${loc.name}</span> <span class="arrow">›</span>`;
+        itemDiv.onclick = (e) => {
+          e.stopPropagation(); // Prevent header toggle
+          viewer.setPanorama(loc.pano);
+        };
+        itemsContainer.appendChild(itemDiv);
+      });
 
-
+      sidebar.appendChild(header);
+      sidebar.appendChild(itemsContainer);
+    });
+});
