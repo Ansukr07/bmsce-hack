@@ -91,12 +91,7 @@ const FacultySection = () => {
           ))}
         </div>
 
-        {/* Mobile button */}
-        <div className="mt-16 md:hidden text-center">
-          <button className="px-8 py-3.5 bg-[#111111] text-white rounded-full hover:bg-[#222222] transition-colors shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 uppercase tracking-widest text-[11px] font-bold duration-300 w-full">
-            Meet the Faculty
-          </button>
-        </div>
+
       </div>
     </section>
   );

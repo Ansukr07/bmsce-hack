@@ -1,5 +1,6 @@
 import Hero from '../components/Hero';
 import About from '../components/About';
+import TourSection from '../components/TourSection';
 import Programs from '../components/Programs';
 import FacultySection from '../components/FacultySection';
 import Stats from '../components/Stats';
@@ -14,6 +15,7 @@ const Home = () => {
     <>
       <Hero />
       <About />
+      <TourSection />
       <Programs />
       <FacultySection />
       <Stats />

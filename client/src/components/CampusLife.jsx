@@ -60,7 +60,7 @@ const CampusLife = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="hidden md:block"
+              className="mt-0 lg:mt-0"
             >
               <div className="rounded-[40px] overflow-hidden aspect-[4/5] shadow-xl relative group bg-gray-100">
                 <img

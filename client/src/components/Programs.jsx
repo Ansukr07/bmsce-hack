@@ -175,7 +175,7 @@ const Programs = () => {
           ) : (
             <motion.div 
               layout
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8"
             >
               <AnimatePresence mode="popLayout">
                 {filteredPrograms.map((program, idx) => (
@@ -186,13 +186,13 @@ const Programs = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.4, delay: idx * 0.05 }}
-                    className="group rounded-[24px] md:rounded-[40px] p-6 md:p-10 flex flex-col min-h-[320px] md:min-h-[420px] transition-all duration-500 bg-white border border-gray-100 hover:border-[#111111] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] hover:-translate-y-2 z-0 hover:z-10"
+                    className="group rounded-[16px] md:rounded-[40px] p-4 md:p-10 flex flex-col min-h-[180px] md:min-h-[420px] transition-all duration-500 bg-white border border-gray-100 hover:border-[#111111] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] hover:-translate-y-2 z-0 hover:z-10 flex"
                   >
-                    <h3 className="text-xl md:text-2xl lg:text-3xl font-serif leading-tight mb-4 md:mb-6 group-hover:text-[#111111] transition-colors duration-300">
+                    <h3 className="text-sm md:text-2xl lg:text-3xl font-serif leading-tight mb-2 md:mb-6 group-hover:text-[#111111] transition-colors duration-300">
                       {program.name || program.title}
                     </h3>
                     
-                    <p className="text-[#6B6B6B] font-sans text-xs sm:text-sm md:text-base leading-relaxed mb-6 md:mb-8 transition-colors duration-300 line-clamp-4">
+                    <p className="text-[#6B6B6B] font-sans text-[10px] md:text-base leading-relaxed mb-3 md:mb-8 transition-colors duration-300 line-clamp-3">
                       {program.description}
                     </p>
                     
@@ -202,7 +202,7 @@ const Programs = () => {
                       </span>
                       <button 
                         onClick={() => handleOpenModal(program)}
-                        className="p-4 rounded-full border border-gray-200 text-[#FB6D39] group-hover:border-[#111111] group-hover:text-[#111111] hover:!bg-[#111111] hover:!text-white transition-all duration-300"
+                        className="p-2 md:p-4 rounded-full border border-gray-200 text-[#FB6D39] group-hover:border-[#111111] group-hover:text-[#111111] hover:!bg-[#111111] hover:!text-white transition-all duration-300"
                       >
                         <ArrowRight className="h-5 w-5 md:h-6 md:w-6 transform -rotate-45" />
                       </button>
