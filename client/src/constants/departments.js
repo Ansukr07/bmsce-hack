@@ -37,7 +37,14 @@ export const departmentData = {
       'Industry Supported Lab for Deep Learning',
       'Collaborative Research Centre for Intelligent Systems',
     ],
-    hod: { name: 'Dr. Bharathi Malakreddy A', email: 'hod_aiml@bmsit.in', phone: '080-68730429' },
+    faculty: [
+      { name: 'Dr. Anupama H S', designation: 'Professor & HOD', email: 'hod_aiml@bmsit.in' },
+      { name: 'Dr. Sanjay H A', designation: 'Professor & Principal', email: 'principal@bmsit.in' },
+      { name: 'Dr. Bharathi M A', designation: 'Professor', email: 'bharathima@bmsit.in' },
+      { name: 'Dr. Pradeep K R', designation: 'Associate Professor', email: 'pradeepkr@bmsit.in' },
+      { name: 'Dr. Hemamalini B H', designation: 'Associate Professor', email: 'hemamalinibh@bmsit.in' },
+    ],
+    hod: { name: 'Dr. Anupama H S', email: 'hod_aiml@bmsit.in', phone: '080-68730429' },
   },
 
   cse: {
@@ -67,6 +74,13 @@ export const departmentData = {
       'High-Performance Computing Laboratory',
       'Wipro and Mindtree Training Partnership Hub',
     ],
+    faculty: [
+      { name: 'Dr. Satish Kumar T', designation: 'Professor & HOD', email: 'hod_cse@bmsit.in' },
+      { name: 'Dr. Anil G N', designation: 'Professor', email: 'anilgn@bmsit.in' },
+      { name: 'Dr. Surekha K B', designation: 'Professor', email: 'surekhakb@bmsit.in' },
+      { name: 'Dr. Mahesh G', designation: 'Professor', email: 'maheshg@bmsit.in' },
+      { name: 'Dr. N Rakesh', designation: 'Associate Professor', email: 'nrakesh@bmsit.in' },
+    ],
     hod: { name: 'Dr. Satish Kumar T', email: 'hod_cse@bmsit.in', phone: '080-68730429' },
   },
 
@@ -95,7 +109,14 @@ export const departmentData = {
       'Business Analytics and Computing Lab',
       'Collaborative Project Workspaces',
     ],
-    hod: { name: 'Dr. [HOD Name]', email: 'hod_csbs@bmsit.in', phone: '080-68730429' },
+    faculty: [
+      { name: 'Dr. Vishwa Kiran S', designation: 'Professor & HOD', email: 'hod_csbs@bmsit.in' },
+      { name: 'Dr. Archana R A', designation: 'Associate Professor', email: 'archanara@bmsit.in' },
+      { name: 'Prof. Pradeep Kumar G M', designation: 'Assistant Professor', email: 'pradeepkumargm@bmsit.in' },
+      { name: 'Prof. Udayaprasad P K', designation: 'Assistant Professor', email: 'udayaprasadpk@bmsit.in' },
+      { name: 'Dr. R Jennie Bharathi', designation: 'Assistant Professor', email: 'rjenniebharathi@bmsit.in' },
+    ],
+    hod: { name: 'Dr. Vishwa Kiran S', email: 'hod_csbs@bmsit.in', phone: '080-68730429' },
   },
 
   ece: {
@@ -123,6 +144,13 @@ export const departmentData = {
       'Texas Instruments Center of Excellence',
       'VLSI Design and Simulation Lab (Cadence/Mentor Graphics)',
       'Communication and Networking Laboratory',
+    ],
+    faculty: [
+      { name: 'Dr. Jayadeva G S', designation: 'Professor & HOD', email: 'hod_ece@bmsit.in' },
+      { name: 'Dr. Shobharani A', designation: 'Professor', email: 'shobharania@bmsit.in' },
+      { name: 'Dr. M C Hanumantharaju', designation: 'Professor', email: 'mchanumantharaju@bmsit.in' },
+      { name: 'Dr. Ambika R', designation: 'Professor', email: 'ambikar@bmsit.in' },
+      { name: 'Dr. Seema Singh', designation: 'Professor', email: 'seemasingh@bmsit.in' },
     ],
     hod: { name: 'Dr. Jayadeva G S', email: 'hod_ece@bmsit.in', phone: '080-68730429' },
   },
@@ -152,6 +180,13 @@ export const departmentData = {
       'Power Electronics and Drive Systems Lab',
       'High Voltage and Relay Testing Laboratory',
     ],
+    faculty: [
+      { name: 'Dr. Rajesh Gopinath', designation: 'Professor & HOD', email: 'hod_eee@bmsit.in' },
+      { name: 'Dr. Prashant Athavale', designation: 'Professor', email: 'prashantai@bmsit.in' },
+      { name: 'Dr. G Raghavendra', designation: 'Associate Professor', email: 'graghavendra@bmsit.in' },
+      { name: 'Dr. Narapareddy Ramarao', designation: 'Associate Professor', email: 'nramarao@bmsit.in' },
+      { name: 'Dr. Suma Umesh', designation: 'Associate Professor', email: 'sumaumesh@bmsit.in' },
+    ],
     hod: { name: 'Dr. Rajesh Gopinath', email: 'hod_eee@bmsit.in', phone: '080-68730429' },
   },
 
@@ -179,6 +214,13 @@ export const departmentData = {
       'Advanced Manufacturing and Robotics Lab',
       'Thermal Engineering and Heat Transfer Lab',
       'CAD/CAM/CAE Computational Center',
+    ],
+    faculty: [
+      { name: 'Dr. K M Sathish Kumar', designation: 'Professor & HOD', email: 'hod_mech@bmsit.in' },
+      { name: 'Dr. Madhu M C', designation: 'Associate Professor', email: 'madhumc@bmsit.in' },
+      { name: 'Prof. Praveen Kumar T N', designation: 'Assistant Professor', email: 'praveenkumartn@bmsit.in' },
+      { name: 'Dr. G L Anantha Krishna', designation: 'Associate Professor', email: 'glananthakrishna@bmsit.in' },
+      { name: 'Dr. Shripad Diwakar', designation: 'Associate Professor', email: 'shripaddiwakar@bmsit.in' },
     ],
     hod: { name: 'Dr. K M Sathish Kumar', email: 'hod_mech@bmsit.in', phone: '080-68730429' },
   },
@@ -209,7 +251,14 @@ export const departmentData = {
       'Surveying and Geotechnical Engineering Lab',
       'Sustainable Concrete Technology Centre',
     ],
-    hod: { name: 'Dr. Rajesh Gopinath', email: 'hod_civil@bmsit.in', phone: '080-68730429' },
+    faculty: [
+      { name: 'Dr. Rajakumara H N', designation: 'Professor & HOD', email: 'hod_civil@bmsit.in' },
+      { name: 'Dr. G Aruna', designation: 'Professor', email: 'arung@bmsit.in' },
+      { name: 'Dr. Rajesh Gopinath', designation: 'Associate Professor', email: 'rajeshgopinath@bmsit.in' },
+      { name: 'Prof. Shobha R', designation: 'Assistant Professor', email: 'shobhar@bmsit.in' },
+      { name: 'Prof. Archana K', designation: 'Assistant Professor', email: 'archanak@bmsit.in' },
+    ],
+    hod: { name: 'Dr. Rajakumara H N', email: 'hod_civil@bmsit.in', phone: '080-68730429' },
   },
 
   mba: {
@@ -237,7 +286,14 @@ export const departmentData = {
       'Corporate Interaction and Placement Cell',
       'Entrepreneurship Development Hub',
     ],
-    hod: { name: 'Dr. Jyothi E Singh', email: 'hod_mba@bmsit.in', phone: '080-68730429' },
+    faculty: [
+      { name: 'Dr. Balabhadra Kishore', designation: 'Professor & HoD', email: 'hod_mba@bmsit.in' },
+      { name: 'Dr. Jyothi E Singh', designation: 'Associate Professor', email: 'jyothiesingh@bmsit.in' },
+      { name: 'Dr. Nethravathi N', designation: 'Associate Professor', email: 'nethravathin@bmsit.in' },
+      { name: 'Dr. Vinay H V', designation: 'Associate Professor', email: 'vinayhv@bmsit.in' },
+      { name: 'Dr. Vishwanatha M R', designation: 'Associate Professor', email: 'vishwanathamr@bmsit.in' },
+    ],
+    hod: { name: 'Dr. Balabhadra Kishore', email: 'hod_mba@bmsit.in', phone: '080-68730429' },
   },
 
   mca: {
@@ -265,6 +321,13 @@ export const departmentData = {
       'Cloud Computing and Virtualization Center',
       'Mobile Application Development Lab',
     ],
-    hod: { name: 'Dr. Aparna K', email: 'hod_mca@bmsit.in', phone: '080-68730429' },
+    faculty: [
+      { name: 'Dr. M Sridevi', designation: 'Assistant Professor & HOD', email: 'hod_mca@bmsit.in' },
+      { name: 'Dr. P Ganesh', designation: 'Professor', email: 'ganeshp@bmsit.in' },
+      { name: 'Dr. Aparna K', designation: 'Professor', email: 'aparnak@bmsit.in' },
+      { name: 'Dr. G Drakshaveni', designation: 'Associate Professor', email: 'drakshavenig@bmsit.in' },
+      { name: 'Prof. Dwarakanath G V', designation: 'Assistant Professor', email: 'dwarakanathgv@bmsit.in' },
+    ],
+    hod: { name: 'Dr. M Sridevi', email: 'hod_mca@bmsit.in', phone: '080-68730429' },
   },
 };

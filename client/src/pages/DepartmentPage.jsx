@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft, GraduationCap, Users, CheckCircle2,
-  ChevronRight, Mail, Phone, MapPin, BookOpen, Layers
+  ChevronRight, Mail, Phone, MapPin, BookOpen, Layers, User
 } from 'lucide-react';
 import { allDepartments, departmentData } from '../constants/departments';
 
@@ -189,6 +189,58 @@ const DepartmentPage = () => {
                   <button className="w-11 h-11 rounded-full border border-gray-100 flex items-center justify-center group-hover:bg-[#111111] group-hover:border-[#111111] text-[#111111] group-hover:text-white transition-all shadow-sm">
                     <ChevronRight className="w-5 h-5" />
                   </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Department Faculty Section */}
+      <section className="py-24 bg-[#F8FAFC]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
+          <div className="mb-16 text-center lg:text-left">
+            <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tight text-[#111111] mb-4">
+              Expert Faculty
+            </h2>
+            <div className="flex items-center gap-3 justify-center lg:justify-start">
+              <div className="w-10 h-[2px]" style={{ backgroundColor: accent }} />
+              <p className="text-sm font-bold uppercase tracking-widest text-[#6B6B6B]">
+                Learning from industry veterans
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {data.faculty.map((member, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white rounded-[32px] p-8 border border-gray-100 hover:shadow-xl hover:border-transparent transition-all duration-500 group"
+              >
+                <div className="flex items-center gap-5 mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-[#F4F4F4] flex items-center justify-center text-[#A3A3A3] group-hover:bg-[#111111] group-hover:text-white transition-all duration-500">
+                    <User className="w-7 h-7" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-[#111111] leading-tight mb-1">{member.name}</h3>
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#FB6D39]" style={{ color: accent }}>
+                      {member.designation}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="pt-6 border-t border-gray-100">
+                  <a 
+                    href={`mailto:${member.email}`}
+                    className="flex items-center gap-3 text-sm font-medium text-[#6B6B6B] hover:text-[#111111] transition-colors"
+                  >
+                    <Mail className="w-4 h-4" />
+                    {member.email}
+                  </a>
                 </div>
               </motion.div>
             ))}
