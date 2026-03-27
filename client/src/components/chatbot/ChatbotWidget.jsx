@@ -2,6 +2,12 @@ import { useMemo, useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, MessageCircle, Send, X, Sparkles, GraduationCap } from 'lucide-react';
 import { askChatbot } from '../../services/api';
+import campusImage from '../../assets/images/campus.png';
+import classroomImage from '../../assets/images/classroom.png';
+import clubImage from '../../assets/images/club.png';
+import facilitiesImage from '../../assets/images/facilities.png';
+import graduationImage from '../../assets/images/graduation.png';
+import libraryImage from '../../assets/images/library.png';
 import './ChatbotWidget.css';
 
 const INITIAL_MESSAGE = {
@@ -23,21 +29,69 @@ const LOCAL_READY_ANSWERS = [
     patterns: [/admission criteria for engineering/i, /admissions eligibility for ug and pg/i, /admission criteria/i],
     content:
       'Admissions at BMSIT&M (quick guide):\n- UG (B.E.): 12th/PUC with Physics and Mathematics plus one optional science subject; typical minimum around 45%.\n- PG (M.Tech): B.E./B.Tech (or equivalent) with at least 50% aggregate in relevant subjects.\n- PG (MCA): Graduate degree with at least 50% (45% for SC/ST) with applicable background.\n- Final eligibility/cutoffs may vary each cycle; verify with admissions office.',
+    images: [graduationImage, classroomImage],
+    suggestions: ['Top departments and specializations', 'Placement support and recruiters'],
   },
   {
     patterns: [/top departments and specializations/i, /top departments and programs/i, /academic departments/i],
     content:
       'Top departments and programs (overview):\n- Computer Science & Engineering (CSE)\n- Information Science & Engineering (ISE)\n- Electronics & Communication Engineering (ECE)\n- Mechanical Engineering\n- Civil Engineering\n- AI/ML and emerging technology tracks (as offered in current cycle).',
+    images: [classroomImage],
+    suggestions: ['Placement support and recruiters', 'Campus facilities and clubs'],
   },
   {
     patterns: [/placement support and recruiters/i, /placement and internship details/i, /placements stats/i],
     content:
       'Placement and internship support:\n- Training for aptitude, coding, communication, and interviews.\n- Internship support through industry tie-ups and department guidance.\n- Recruiter participation varies by year and branch.\n- Check latest official placement report for current statistics.',
+    images: [graduationImage],
+    suggestions: ['Top departments and specializations', 'Campus facilities and clubs'],
   },
   {
     patterns: [/campus facilities and clubs/i, /campus facilities and student clubs/i, /campus life/i],
     content:
       'Campus facilities and student life:\n- Library with digital access and circulation/reference services.\n- Department labs and project spaces.\n- Technical, cultural, and social clubs.\n- Sports and college-level events throughout the semester.',
+    images: [facilitiesImage, clubImage, libraryImage],
+    suggestions: ['Admission criteria for engineering', 'How to contact the admissions office'],
+  },
+  {
+    patterns: [/how to contact the admissions office/i, /contact|phone|email|address|location|reach/i],
+    content:
+      'Contact details:\n- BMS Institute of Technology & Management, Doddaballapur Main Road, Avalahalli, Yelahanka, Bengaluru - 560119\n- Main office phone: 080-68730444\n- Principal email: principal@bmsit.in',
+    images: [campusImage],
+    suggestions: ['Admission criteria for engineering', 'Campus facilities and clubs'],
+  },
+  {
+    patterns: [/hi|hello|hey|good morning|good evening/i],
+    content:
+      'Hi! I am your BMSIT&M guide. I can answer admissions, departments, placements, facilities, and contact questions. Try the suggested messages to get instant details.',
+    images: [campusImage],
+    suggestions: FALLBACK_SUGGESTIONS,
+  },
+  {
+    patterns: [/thanks|thank you/i],
+    content: 'You are welcome. Ask me anything about BMSIT&M admissions, campus life, or placements.',
+    suggestions: FALLBACK_SUGGESTIONS,
+  },
+  {
+    patterns: [/fee|fees|tuition|cost/i],
+    content:
+      'Fee guidance (indicative):\n- UG management quota fee can vary by branch and year.\n- PG fee slabs vary by program.\n- Please confirm exact current fee structure from official admissions office before payment.',
+    images: [graduationImage],
+    suggestions: ['Admission criteria for engineering', 'How to contact the admissions office'],
+  },
+  {
+    patterns: [/hostel|accommodation|stay/i],
+    content:
+      'Hostel and stay overview:\n- On-campus/near-campus accommodation options are typically available for students.\n- Facilities and seat availability can vary each year.\n- Contact admissions for current hostel availability and fee details.',
+    images: [facilitiesImage],
+    suggestions: ['Campus facilities and clubs', 'How to contact the admissions office'],
+  },
+  {
+    patterns: [/library|books|digital library/i],
+    content:
+      'Library highlights:\n- Library with circulation/reference support and digital resources.\n- Students can access textbooks, journals, and digital content for academics and projects.',
+    images: [libraryImage],
+    suggestions: ['Campus facilities and clubs', 'Top departments and specializations'],
   },
 ];
 
@@ -45,7 +99,15 @@ const getLocalReadyAnswer = (message) => {
   const matched = LOCAL_READY_ANSWERS.find((entry) =>
     entry.patterns.some((pattern) => pattern.test(message))
   );
-  return matched ? matched.content : null;
+  if (!matched) {
+    return null;
+  }
+
+  return {
+    content: matched.content,
+    images: matched.images || [],
+    suggestions: matched.suggestions || FALLBACK_SUGGESTIONS,
+  };
 };
 
 const ChatbotWidget = () => {
@@ -86,10 +148,11 @@ const ChatbotWidget = () => {
         {
           id: `assistant-local-${Date.now()}`,
           role: 'assistant',
-          content: localAnswer,
+          content: localAnswer.content,
+          images: localAnswer.images,
         },
       ]);
-      setSuggestions(FALLBACK_SUGGESTIONS);
+      setSuggestions(localAnswer.suggestions);
       return;
     }
 
@@ -102,6 +165,7 @@ const ChatbotWidget = () => {
         role: 'assistant',
         content: response.reply,
         sources: response.sources || [],
+        images: response.images || [],
       };
       setMessages((prev) => [...prev, botMessage]);
       if (response.suggestions?.length) {
@@ -227,6 +291,19 @@ const ChatbotWidget = () => {
                         : 'bg-white/80 border border-white text-[#111111] rounded-bl-sm'
                     }`}>
                       <p className="whitespace-pre-wrap">{message.content}</p>
+                      {message.images?.length ? (
+                        <div className="mt-3 grid grid-cols-2 gap-2">
+                          {message.images.slice(0, 4).map((image, idx) => (
+                            <img
+                              key={`${message.id}-img-${idx}`}
+                              src={image}
+                              alt="BMSIT context"
+                              className="w-full h-24 object-cover rounded-xl border border-black/10"
+                              loading="lazy"
+                            />
+                          ))}
+                        </div>
+                      ) : null}
                     </div>
                     {message.sources?.length ? (
                       <div className="text-[10px] text-gray-500 mt-2 mx-2 px-3 py-1.5 bg-white/40 border border-white/60 rounded-full inline-block">
